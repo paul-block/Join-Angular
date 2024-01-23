@@ -1,0 +1,354 @@
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+#headline h1 {
+    margin: 0;
+    padding: 0;
+}
+
+#loginSection {
+    display: flex;
+    padding: 48px 115px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    border-radius: 30px;
+    background: var(--white, #FFF);
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+#loginSection h1 {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+#loginSection form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+#loginSection form input {
+    display: flex;
+    width: 422px;
+    padding: 12px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--lightgray, #D1D1D1);
+    cursor: pointer;
+ }
+
+input[type="email"] {
+    background: url(../../assets/img/email_icon.png) no-repeat;
+    background-position: 97%;
+}
+
+input[type="password"] {
+    background: url(../../assets/img/password_icon.png) no-repeat;
+    background-position: 97%;
+}
+
+input[type="name"] {
+    background: url(../../assets/img/name_icon.png) no-repeat;
+    background-position: 97%;
+}
+
+input[type="checkbox"] {
+    padding: 0;
+    width: unset !important;
+}
+
+#wrongLogin {
+    color: #ff0000;
+}
+
+.privacyPolicyContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 0 0 39px;
+}
+
+.checkmarkContainer {
+    display: flex;
+    gap: 8px;
+}
+
+#loginBtnContainer {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+}
+
+#legal {
+    display: flex;
+    position: absolute;
+    bottom: 5rem;
+    gap: 25px;
+    cursor: pointer;
+}
+
+#legal a {
+    text-decoration: none;
+    color: var(--darkgray);
+
+}
+
+#legal a:hover {
+    font-weight: 700;
+    color: var(--lightblue);
+}
+
+#logoSignUpBar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    padding: 32px 32px;
+}
+
+#signUpContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    gap: 35px;
+}
+
+#signUpContainer span {
+    font-size: 18px;
+}
+
+#signUpContainer button {
+    height: unset;
+    text-decoration: none;
+}
+
+#logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: LogoDesktopAnimation 2s forwards; 
+    height: 100px;
+    width: 120px;
+}
+
+// #fixedLogo {
+//     position: absolute;
+//     top: 30px;
+//     left: 40px;
+//     height: 100px;
+//     width: 120px;
+// }
+
+#msgBox {
+    position: absolute;
+    bottom: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2A3647;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    height: 4%;
+    font-size: 24px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    color: white;
+    z-index: 999;
+}
+
+@keyframes LogoDesktopAnimation {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+    }
+    25% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+    }
+    50% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+    }    
+    100% {
+        top: 30px;
+        left: 40px;
+        transform: translate(0, 0);
+    }
+}
+
+@media (max-width: 750px) {
+    #logo {
+        height: 75px;
+        width: 100px;
+    }
+
+    @keyframes LogoDesktopAnimation {
+        to {
+            top: 20px;
+            left: 10px;
+            transform: translate(0, 0); 
+        }
+    }
+
+    #loginSection {
+        padding: 48px 35px;
+    }
+
+    #signUpContainer {
+        top: 30px;
+        right: 50px;
+    }
+
+    #signUpContainer span {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    #logo, #fixedLogo {
+        height: 80px;
+        width: 100px;
+        left: 15px;
+        top: 15px;
+    }
+
+    @keyframes LogoMobileAnimation {
+        0% {
+            opacity: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); 
+        }
+        25% {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); 
+        }
+        100% {
+            top: 30px;
+            left: 30px;
+            transform: translate(0, 0);
+        }
+    }
+
+    #signUpContainer {
+        top: unset;
+        bottom: 70px;
+        right: unset;
+    }
+
+    #signUpContainer a {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+
+    #loginSection {
+        width: 80%;
+    }
+
+    #loginSection h1 {
+        font-size: 48px;
+    }
+
+    #loginBtnContainer {
+        flex-direction: column;
+    }
+
+    #loginBtnContainer button {
+        font-size: 18px;
+    }
+
+    #loginSection form {
+        width: 100%;
+    }
+
+    #loginSection form input {
+        width: unset;
+    }
+
+    #legal {
+        bottom: 20px;
+    }
+
+    #headline h1 {
+        font-size: 48px;
+    }
+}
+
+@media (max-height: 750px) and (max-width: 500px) {
+
+    #logo {
+        height: 60px;
+        width: 80px;
+    }
+ 
+    #loginSection {
+        gap: 20px;
+        padding: 25px 35px;
+    }
+
+    #loginSection form {
+        gap: 20px;
+    }
+
+    #loginBtnContainer {
+        gap: 10px;
+    }
+
+    #signUpContainer {
+        bottom: 50px;
+    }
+
+    #legal {
+        bottom: 10px;
+    }
+}
+
+@media (max-height: 800px) and (min-width: 500px) {
+
+    #logo, #fixedLogo {
+        height: 80px;
+        width: 100px;
+    }
+            
+    #loginSection h1 {
+        font-size: 48px;
+    }
+
+    #signUpContainer button{
+        padding: 10px 20px;
+    }
+
+    #loginSection {
+        padding: 30px 115px;
+    }
+
+    #legal {
+        bottom: 2rem;
+    }
+}

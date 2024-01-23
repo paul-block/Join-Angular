@@ -1,0 +1,68 @@
+#upper-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 300px);
+
+        div {
+            display: flex;
+            gap: 32px;
+        }
+
+        input {
+            width: 312px;
+            height: 48px;
+            border-radius: 10px;
+            border: 1px solid #a8a8a8;
+            padding: 8px 16px;
+            gap: 10px;
+            box-sizing: border-box;
+            background: url('../../assets/img/search-icon.png') no-repeat 97%;
+        }    
+}
+
+#board-container {
+    display: flex;
+    width: calc(100% - 200px);
+    gap: 24px;
+
+        .board-column {
+            display: flex;
+            flex-direction: column;
+            flex: 25%;
+
+            .task-status {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                    .add-icon {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 24px;
+                        height: 24px;
+                        width: 24px;
+                        border: 2px solid black;
+                        padding: 3px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                    }
+            }
+
+            .task-container {
+                display: flex;
+                flex-direction: column;
+
+                .no-task-placeholder {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #E7E7E7;
+                    color:#a8a8a8;
+                    padding: 15px;
+                    border-radius: 10px;
+                }
+            }
+        }
+}

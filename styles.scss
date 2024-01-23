@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --darkblue: #2A3647;
+    --lightblue: #29ABE2;
+    --darkgray: #A8A8A8;
+    --lightgray: #D1D1D1;
+    --white: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter';
+    overflow: hidden;
+}
+
+.container {
+    background-color: #F6F7F8;
+    height: calc(100vh - 90px);
+    width: calc(100vw - 271px);
+    padding: 100px 150px 50px 100px;
+}
+
+.buttonGlobalDark {
+    color: white;
+    font-weight: 700;
+    font-size: 21px;
+    height: 51px;
+    background: #2A3647;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 125ms;
+    padding: 15px 24px;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonGlobalWhite {
+    color: #2A3647;
+    border: 1px solid #2A3647;
+    font-size: 20px;
+    height: 51px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 125ms;
+    padding: 15px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+}
+
+.buttonGlobalDark:hover {
+    background-color: #29ABE2;
+    border-color: #29ABE2;
+    transition: 125ms;
+}
+
+.buttonGlobalWhite:hover {
+    border: 1px solid #29ABE2;
+    color: #29ABE2;
+    transition: 125ms;
+}
+
+.d-none {
+    display: none !important;
+}
+
+@media (max-width: 1500px) {
+    .container {
+        padding: 10px;
+    }
+}

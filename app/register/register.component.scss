@@ -1,0 +1,265 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#fixedLogo {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    height: 100px;
+    width: 120px;
+}
+
+#signUpSection{
+    position: relative;
+    display: flex;
+    padding: 48px 88px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    border-radius: 30px;
+    background: var(--white, #FFF);
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+#backBtn {
+    position: absolute;
+    top: 70px;
+    left: 90px;
+}
+
+#backBtn img {
+    height: 22px;
+    width: 22px;
+}
+
+#headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+#headline h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 61px;
+}
+
+#signUpSection form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signUpSection form input {
+    display: flex;
+    width: 422px;
+    padding: 12px 21px;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--lightgray, #D1D1D1);
+    cursor: pointer;
+ }
+
+ .formError {
+    color: #ff0000;
+    max-width: 500px;
+    text-align: center;
+    margin-bottom: 20px;
+ }
+
+ #privacyContainer{
+    padding: unset;
+ }
+
+#acceptPrivacyPolicyInput {
+    max-width: 20px;
+}
+
+.checkmarkContainer {
+    display: flex;
+    gap: 8px;
+}
+
+.textHighlight {
+    text-decoration: none;
+    color: var(--lightblue);
+    cursor: pointer;
+}
+
+#mobileLogoContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--darkblue);
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+    animation: OpacityLogoMobileContainer 3s forwards; 
+}
+
+#mobileLogo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    height: 85px;
+    width: 75px;
+    animation: LogoMobileAnimation 2s forwards; 
+    z-index: 1000;
+}
+
+.privacyPolicyContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 0 0 39px;
+}
+
+#legal {
+    display: flex;
+    position: absolute;
+    bottom: 5rem;
+    gap: 25px;
+    cursor: pointer;
+}
+
+#legal a {
+    text-decoration: none;
+    color: var(--darkgray);
+
+}
+
+#legal a:hover {
+    font-weight: 700;
+    color: var(--lightblue);
+}
+
+@keyframes OpacityLogoMobileContainer {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.9;
+    }   
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes LogoMobileAnimation {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+    }
+    25% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+    }
+    100% {
+        top: 30px;
+        left: 40px;
+        transform: translate(0, 0);
+    }
+}
+
+@media (max-width: 750px) {
+    #signUpSection {
+        padding: 48px 35px;
+    }
+}
+
+@media (max-width: 600px) {
+    #fixedLogo {
+        height: 80px;
+        width: 100px;
+        left: 15px;
+        top: 15px;
+    }
+
+    #signUpSection {
+        width: 80%;
+    }
+
+    #headline h1 {
+        font-size: 48px;
+    }
+
+    #backBtn {
+        left: 40px;
+    }
+
+    #backBtn img {
+        height: 18px;
+        width: 18px;
+    }
+
+    #signUpSection form {
+        width: 80%;
+    }
+
+    #signUpSection form input {
+        width: 100%;
+    }
+
+    #legal {
+        bottom: 20px;
+    }
+}
+
+@media (max-height: 750px) and (max-width: 500px) {
+    #signUpSection {
+        padding: 25px 35px;
+        gap: 20px;
+    }
+
+    #backBtn {
+        top: 50px;
+    }
+
+    #signUpSection form {
+        gap: 15px;
+    }
+
+    #legal {
+        bottom: 10px;
+    }
+}
+
+@media (max-height: 800px) and (min-width: 500px) {
+
+    #fixedLogo {
+        height: 80px;
+        width: 100px;
+    }
+
+    #backBtn {
+        top: 45px;
+    }
+
+    #signUpSection {
+        padding: 20px 85px;
+        gap: 24px;
+    }
+
+    #signUpSection h1 {
+        font-size: 48px;
+    }
+
+    #legal {
+        bottom: 2rem;
+    }
+}

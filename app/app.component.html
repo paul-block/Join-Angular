@@ -1,0 +1,6 @@
+<!-- <app-menu *ngIf="this.auth.isLoggedIn"></app-menu> -->
+<app-menu></app-menu>
+
+<div [class.content]="shouldAddContentClass()">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,47 @@
+<img id="fixedLogo" src="../../assets/img/join_logo.svg" alt="Logo" class="d-none">
+<img id="logo" src="../../assets/img/join_logo.svg" alt="Logo">
+
+<div id="container" [ngClass]="showLogin ? '' : 'd-none'">
+    <div id="signUpContainer">
+        <span>Not a Join user?</span>
+        <button [routerLink]="'/register'" class="buttonGlobalDark">Sign up</button>
+    </div>
+
+    <section id="loginSection">
+        <div id="headline">
+            <h1>Log in</h1>
+            <img src="../../assets/img/line.png" alt="blue-line">
+        </div>
+
+        <form (ngSubmit)="login()">
+            <input [(ngModel)]="email" name="email" required id="email" type="email" placeholder="Email" />
+            <input [(ngModel)]="password" name="password" required id="password" type="password"
+                placeholder="Password" />
+            <div id="wrongLogin" *ngIf="loginError">Something went wrong. Please check your login credentials</div>
+
+            <div class="checkmarkContainer">
+                <input required type="checkbox" id="rememberMe" />
+                <span>Remember me</span>
+            </div>
+
+            <div id="loginBtnContainer">
+                <button id="loginBtn" class="buttonGlobalDark" type="submit">Log in</button>
+                <button id="guestLoginBtn" class="buttonGlobalWhite" onclick="guestLogin()">Guest Log in</button>
+            </div>
+        </form>
+
+
+    </section>
+    <div id="msgBox" class="d-none">
+    </div>
+
+    <section id="legal">
+        <a href="../Datenschutz/policyPrivacyNoLogin.html">Privacy Policy</a>
+        <a href="../Datenschutz/legalNoticeNoLogin.html">Legal notice</a>
+    </section>
+
+</div>
+
+<div id="mobileLogoContainer" class="d-none">
+    <img id="mobileLogo" src="../../assets/img/mobileLogo.png" alt="">
+</div>
