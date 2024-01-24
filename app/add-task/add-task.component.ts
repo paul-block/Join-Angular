@@ -33,5 +33,6 @@ export class AddTaskComponent {
 
   addTask() {
     this.taskService.addTask(this.createTaskObject());
+    console.log('add task ')
   }
 }

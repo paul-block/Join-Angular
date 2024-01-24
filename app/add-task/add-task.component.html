@@ -1,26 +1,27 @@
 <div class="container">
     <h1>Add Task</h1>
 
-    <div id="wrapper" class="flex-row">
+    <form id="wrapper" class="flex-row" #taskForm="ngForm" (ngSubmit)="addTask()">
 
         <div id="left-side">
             <div class="flex-column">
-                <label for="title-input">Title</label>
-                <input class="input" type="text" id="title-input" [(ngModel)]="title" placeholder="Enter title">
-                <p>This field is required</p>
+                <label for="title-input">Title<span class="required">*</span></label>
+                <input required name="title" class="input" type="text" id="title-input" [(ngModel)]="title"
+                    placeholder="Enter title">
+                <p class="required" *ngIf="taskForm.form.get('title')?.invalid && taskForm.form.get('title')?.touched">
+                    This field is
+                    required</p>
             </div>
 
             <div class="flex-column">
                 <label for="description">Description</label>
-                <textarea type="text" rows="6" id="description" [(ngModel)]="description"
+                <textarea name="description" type="text" rows="6" id="description" [(ngModel)]="description"
                     placeholder="Enter description"></textarea>
-                <p>This field is required</p>
             </div>
 
             <div class="flex-column">
                 <label for="assigned-to">Assgined to</label>
-                <input type="text" [(ngModel)]="assignedUsers" id="assigned-to">
-                <p>This field is required</p>
+                <input name="assigned-to" type="text" [(ngModel)]="assignedUsers" id="assigned-to">
             </div>
         </div>
 
@@ -28,35 +29,43 @@
 
         <div id="right-side">
             <div class="flex-column">
-                <label for="due-date">Due date</label>
-                <input type="date" [(ngModel)]="dueDate" id="due-date">
+                <label for="due-date">Due date<span class="required">*</span></label>
+                <input required name="due-date" type="date" [(ngModel)]="dueDate" id="due-date">
+                <p class="required"
+                    *ngIf="taskForm.form.get('due-date')?.invalid && taskForm.form.get('due-date')?.touched">This field
+                    is required</p>
             </div>
 
             <div class="flex-column">
                 <label>Prio</label>
-                <div class="flex-row">
-                    <!-- <button [(ngModel)]="prio">Urgent</button>
-                    <button [(ngModel)]="prio">Medium</button>
-                    <button [(ngModel)]="prio">Low</button> -->
+                <div class="flex-row prio-btns">
+                    <button class="buttonGlobalWhite">Urgent<img src="../../assets/img/prioUrgent.svg" alt="">
+                    </button>
+                    <button class="buttonGlobalWhite">Medium<img src="../../assets/img/prioMedium.svg" alt=""></button>
+                    <button class="buttonGlobalWhite">Low<img src="../../assets/img/prioLow.svg" alt=""></button>
                 </div>
             </div>
 
             <div class="flex-column">
-                <label for="category">Category</label>
-                <input type="text" [(ngModel)]="category" id="category">
+                <label for="category">Category<span class="required">*</span></label>
+                <input required name="category" type="text" [(ngModel)]="category" id="category">
+                <p class="required"
+                    *ngIf="taskForm.form.get('category')?.invalid && taskForm.form.get('category')?.touched">This field
+                    is required</p>
             </div>
 
 
             <div class="flex-column">
                 <label for="subtasks">Subtasks</label>
-                <input type="text" [(ngModel)]="subtasks" id="subtasks">
+                <input name="subtasks" type="text" [(ngModel)]="subtasks" id="subtasks">
             </div>
         </div>
-    </div>
+    </form>
 
     <div id="btn-container" class="flex-row">
         <button class="buttonGlobalWhite">Clear</button>
-        <button class="buttonGlobalDark" (click)="addTask()">Create Task</button>
+        <button class="buttonGlobalDark" type="submit" [class.disabled]="taskForm.invalid"
+            [disabled]="taskForm.invalid">Create Task</button>
 
     </div>
 
