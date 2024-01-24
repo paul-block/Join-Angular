@@ -7,10 +7,11 @@ import { TaskService } from 'src/services/task.service';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-constructor(private taskService: TaskService) {}
+constructor(public taskService: TaskService) {}
 
-ngOnInit() {
-
+async ngOnInit() {
+  await this.taskService.getAllTasksForCurrentUser();
+  this.taskService.filterTasks();
 }
 
 }

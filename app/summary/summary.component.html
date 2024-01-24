@@ -11,7 +11,7 @@
                 <div class="first-row-child">
                     <img src="../../../assets/img/Group 7.png" alt="pencil">
                     <div>
-                        <span class="amount">{{todoAmount}}</span>
+                        <span class="amount">{{this.taskService.todo.length}}</span>
                         <span class="status">Todo</span>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                     <img src="../../../assets/img/Group 7.png" alt="pencil">
 
                     <div>
-                        <span class="amount">{{doneAmount}}</span>
+                        <span class="amount">{{this.taskService.done.length}}</span>
                         <span class="status">Done</span>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
             <div class="second-row">
                 <img src="../../../assets/img/urgent-button.png" alt="urgent-button">
                 <div>
-                    <span class="amount">{{urgentAmount}}</span>
+                    <span class="amount">{{this.taskService.urgentTasks}}</span>
                     <span>Urgent</span>
                 </div>
                 <img src="../../../assets/img/parting-line.png">
@@ -38,15 +38,15 @@
             </div>
             <div class="third-row">
                 <div class="third-row-child">
-                    <span class="amount">{{tasksTotalAmount}}</span>
+                    <span class="amount">{{this.taskService.tasks.length}}</span>
                     <span class="status">Tasks in Board</span>
                 </div>
                 <div class="third-row-child">
-                    <span class="amount">{{tasksInProgressAmount}}</span>
+                    <span class="amount">{{this.taskService.inProgress.length}}</span>
                     <span class="status">Tasks in Progress</span>
                 </div>
                 <div class="third-row-child">
-                    <span class="amount">{{feedbackAmount}}</span>
+                    <span class="amount">{{this.taskService.feedback.length}}</span>
                     <span class="status">Awaiting Feedback</span>
                 </div>
             </div>
@@ -54,6 +54,6 @@
     </div>
     <div id="greeting-container">
         <span>Good morning,</span>
-        <span id="username">{{username}}</span>
+        <span id="username">{{this.auth.userData.name}}</span>
     </div>
 </div>

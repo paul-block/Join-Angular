@@ -20,14 +20,16 @@ export class AuthenticationService {
 
 
   constructor(private router: Router) {
+    this.checkLocalStorageUserData();
+  }
+
+  checkLocalStorageUserData(){
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData && storedUserData !== 'null') {
       this.userData = JSON.parse(storedUserData);
       console.log('User data',this.userData);
       this.isLoggedIn = true;
     }
-
-
   }
 
   signIn(email: string, password: string) {
@@ -39,7 +41,7 @@ export class AuthenticationService {
         localStorage.setItem('userData', JSON.stringify(this.userData)); 
         this.isLoggedIn = true;
         this.router.navigate(['/summary']);
-        this.getUserTasks(this.uid);
+        // this.getUserTasks(this.uid);
       })
       .catch(error => {
         console.error('SignIn Failed:', error);
@@ -69,7 +71,7 @@ export class AuthenticationService {
       this.userData = null;
       localStorage.setItem('userData', 'null');
       this.isLoggedIn = false;
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     });
   }
   
@@ -91,23 +93,35 @@ export class AuthenticationService {
     }
   }
 
-  getUserTasks(userId: string) {
-    const q = query(this.getTasksRef(), where('assignedUsers', '==', userId));
+  getUsernameByUserId(id: string) {
+    const q = query(this.getUsersRef(), where('uid', '==', id))
+    
+    onSnapshot(q, doc => {
+      doc.forEach( user => {
+       const userData = user.data();
+        return userData["name"]
+      })
+    })
   
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      if (!querySnapshot.empty) {
-        const tasks = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log('Aufgaben gefunden:', tasks);
-      } else {
-        console.log('Keine Aufgaben gefunden!');
-      }
-    }, (error) => {
-      console.error('Fehler beim Abrufen der Aufgaben: ', error);
-    });
-  
-    // Optional: Rückgabe der Unsubscribe-Funktion, um das Abhören zu beenden
-    return unsubscribe;
   }
+
+  // getUserTasks(userId: string) {
+  //   const q = query(this.getTasksRef(), where('assignedUsers', '==', userId));
+  
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //     if (!querySnapshot.empty) {
+  //       const tasks = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  //       console.log('Aufgaben gefunden:', tasks);
+  //     } else {
+  //       console.log('Keine Aufgaben gefunden!');
+  //     }
+  //   }, (error) => {
+  //     console.error('Fehler beim Abrufen der Aufgaben: ', error);
+  //   });
+  // 
+  //   // Optional: Rückgabe der Unsubscribe-Funktion, um das Abhören zu beenden
+  //   return unsubscribe;
+  // }
   
   
   addUserToFirestore(data:any) {

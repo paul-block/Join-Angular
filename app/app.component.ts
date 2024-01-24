@@ -18,7 +18,7 @@ export class AppComponent {
     else this.auth.isLoggedIn = false;
   }
 
-  shouldAddContentClass() {
+  userLoggedIn() {
     const currentRoute = this.router.url;
     return currentRoute !== '/' && currentRoute !== '/register';
   }

@@ -22,6 +22,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
