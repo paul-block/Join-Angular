@@ -70,6 +70,7 @@ export class TaskService {
       category: task.category,
       description: task.description,
       dueDate: task.dueDate,
+      prio: task.prio,
       status: task.status,
       subtasks: task.subtasks,
       title: task.title,

@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// Direktive
 
 // Firebase-Importe
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -32,8 +33,7 @@ import { ContactsComponent } from './contacts/contacts.component';
     MenuComponent,
     AddTaskComponent,
     BoardComponent,
-    ContactsComponent
-  ],
+    ContactsComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -11,17 +11,34 @@ export class AuthenticationService {
   currentUser:any;
   uid: string | undefined;
   userData: any;
-  unsubTaskList: any;
+  // unsubTaskList: any;
 
   private auth: Auth = inject(Auth);
   private firestore: Firestore = inject(Firestore);
 
   isLoggedIn = false;
 
+  contacts = [
+    {
+      name: 'Birgit Salesch',
+      marked: false
+    },
+    {
+      name: 'Renate Branch',
+      marked: false
+    },
+    {
+      name: 'John Smith',
+      marked: false
+    }
+  ]
+
 
   constructor(private router: Router) {
     this.checkLocalStorageUserData();
   }
+
+
 
   checkLocalStorageUserData(){
     const storedUserData = localStorage.getItem('userData');

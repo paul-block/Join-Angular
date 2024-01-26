@@ -8,6 +8,8 @@ import { TaskService } from 'src/services/task.service';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent implements OnInit {
+
+  greetingPhrase: string | undefined = this.getGreetingPhrase();
   
   constructor(public auth: AuthenticationService, public taskService: TaskService) {}
 
@@ -18,4 +20,15 @@ export class SummaryComponent implements OnInit {
       console.log(this.taskService.tasks)
     }
   }
+
+  getGreetingPhrase() {
+    let date = new Date();
+    let currentHour = date.getHours();
+    if (currentHour < 12 && currentHour > 0 ) return "Good Morning"
+    if (currentHour >= 12 && currentHour < 18) return "Good Afternoon"
+    if (currentHour >= 18 && currentHour <= 24 ) return "Good Evening"
+    else return "Good day"
+  }
+
+
 }

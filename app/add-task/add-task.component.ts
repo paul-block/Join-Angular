@@ -10,29 +10,122 @@ import { TaskService } from 'src/services/task.service';
 export class AddTaskComponent {
   title: string = '';
   description: string = '';
-  assignedUsers: string[] = [];
+  contactInput: string = '';
+  assignableUsers: any[] = this.getContacts();
   dueDate: string = '';
   prio: string = '';
   category: string = '';
-  subtasks: string[] = [];
+  subtask: string = '';
 
-  constructor(private taskService: TaskService, private authService: AuthenticationService){}
+  showAssignDropDown:boolean = false;
+  showCategoryDropDown:boolean = false;
+  subtaskFocused:boolean = false;
+
+  selectableCategories: string[] = ['Technical Task', 'User Story']
+  selectedContacts: any[] = [];
+  addedSubtasks: any[] = [];
+
+  editedSubtask: string = '';
+ 
+  constructor(private taskService: TaskService, public authService: AuthenticationService){}
 
   createTaskObject() {
     const task = {
-      assignedUsers: this.assignedUsers,
+      assignedUsers: this.selectedContacts,
       category: this.category,
       description: this.description,
       dueDate: this.dueDate,
-      status: this.prio,
-      subtasks: this.subtasks,
+      prio: this.prio,
+      status: 'todo',
+      subtasks: this.addedSubtasks,
       title: this.title,
     }
     return task;
   }
 
+  setPriority(priority:string) {
+    this.prio = '';
+    this.prio = priority;
+  }
+
   addTask() {
-    this.taskService.addTask(this.createTaskObject());
-    console.log('add task ')
+      this.taskService.addTask(this.createTaskObject());
+      console.log('add task ')
+  }
+  
+  addSubtask() {
+    let subtask = {
+      name: this.subtask.trim(),
+      editMode: false
+    }
+    if (this.subtask.trim() != '' && this.addedSubtasks.length < 2) {
+      this.addedSubtasks.push(subtask)
+      this.subtask = '';
+      console.log(this.addedSubtasks)
+    }
+  }
+
+  deleteSubtask(subtask:string) {
+    let index = this.addedSubtasks.indexOf((subtask))
+    this.addedSubtasks.splice(index, 1);
+  }
+
+  openEditInput(subtask: any){
+  let index = this.addedSubtasks.indexOf(subtask);
+  this.addedSubtasks[index].editMode = true;
+  this.editedSubtask = subtask.name;
+  }
+
+  updateSubtask(subtask:any, updatedSubtask: string){
+    let index = this.addedSubtasks.findIndex(task => task.name === subtask.name);
+    this.addedSubtasks[index].name = updatedSubtask;
+    this.addedSubtasks[index].editMode = false;
+    console.log(this.addedSubtasks);
+  }
+
+  clearSubtaskInput() {
+    this.subtaskFocused = false;
+    this.subtask = '';
+  }
+
+  toggleDropdown(dropDownName: string) {
+    if (dropDownName === 'assign') this.showAssignDropDown =! this.showAssignDropDown;
+    if (dropDownName === 'category') this.showCategoryDropDown =! this.showCategoryDropDown;
+  }
+
+  selectContact(event:any, selectedContact:any) {
+    if (event.target.checked) {
+      selectedContact.marked = true;
+      this.selectedContacts.push(selectedContact);
+    }
+    else {
+      let index = this.selectedContacts.findIndex(contact => contact.name === selectedContact.name)
+      this.selectedContacts[index].marked = false;
+      this.selectedContacts.splice(index, 1)
+    }
+  }
+
+  selectCategory(category:string) {
+    this.category = category;
+    this.showCategoryDropDown = false;
+  }
+  
+  getInitials(name: string) {
+    let initials = name.split(' ').map(word => word.charAt(0)).join('');
+    return initials
+  }
+
+  getContacts() {
+    return this.authService.contacts;
+  }
+
+  filterContacts(name: string) {
+    if (name.trim() !== '') {
+      let filteredContacts = this.assignableUsers.filter(contact => contact.name.toLowerCase().startsWith(name.trim().toLowerCase()));
+      this.assignableUsers = filteredContacts;
+      console.log(filteredContacts)
+      console.log('filtered contacts')
+    }
+    else this.assignableUsers = this.authService.contacts;
   }
 }

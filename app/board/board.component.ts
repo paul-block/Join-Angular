@@ -14,5 +14,10 @@ async ngOnInit() {
   this.taskService.filterTasks();
 }
 
+getInitials(name: string) {
+  let initials = name.split(' ').map(word => word.charAt(0)).join('');
+  return initials
+}
+
 }
 
