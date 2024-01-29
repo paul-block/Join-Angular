@@ -1,0 +1,166 @@
+#container {
+    background-color: #F6F7F8;
+    height: calc(100vh - 90px);
+    width: calc(100vw - 271px);
+    position: relative;
+
+    #right-side {
+        position: absolute;
+        left: 30%;
+        top: 0px;
+        width: 70%;
+        height: calc(100vh - 90px);
+        padding: 15px 100px;
+
+            .relative {
+                position: relative;
+    
+
+            #headline {
+                display: flex;
+                align-items: center;
+                gap: 25px;
+                margin-bottom: 25px;
+
+                    h1 {
+                        font-size: 64px;
+                    }
+
+                    #parting-line {
+                        height: 50px;
+                        background-color: #29ABE2;
+                        width: 2px;
+                    }
+
+                    p {
+                        font-size: 24px;
+                    }
+            }
+
+            .contact-details {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+
+                    .first-row {
+                        display: flex;
+                        gap: 50px;
+
+                            .initials-details {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 50%;
+                                width: 120px;
+                                height: 120px;
+                                padding: 25px;
+                                box-sizing: border-box;
+                                border: 5px solid #fff;
+                                background-color: orange;
+                                font-size: 48px;
+                            }
+
+                            .flex-column {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 10px;
+
+                                .name-details {
+                                    font-size: 48px;
+                                }
+
+                                .flex-row {
+                                    display: flex;
+                                    gap: 25px;
+                                }
+
+                                .icons-wrapper {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 10px;
+
+                                        img {
+                                            display: flex;
+                                            border-radius: 25%;
+                                            padding: 10px;
+                                            cursor: pointer;
+
+                                            &:hover {
+                                                background-color: lightgray;
+
+                                            }
+                                        }
+                                }
+                            }
+                    }
+            }
+    }
+
+    .email {
+        color: #29ABE2
+    }
+}
+        
+
+
+#left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 30%;
+    background-color: #fff;
+    height: calc(100vh - 90px);
+    padding: 32px 48px;
+    box-sizing: border-box;
+
+    #add-contact-btn {
+        gap: 15px;
+        height: 34px;
+
+            &:hover {
+                background-color: #29ABE2;
+            }
+    }
+
+    #contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;  
+
+            .contact {
+                display: flex;
+                align-items: center;
+                padding: 15px 24px;
+                gap: 35px;
+                height: 75px;
+                box-sizing: border-box;
+                border-radius: 10px;
+
+                &:hover {
+                    background-color: lightgray;
+
+                }
+            
+                .initials {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    padding: 10px;
+                    background-color: orange;
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    .name {
+                        font-size: 22px;
+                    }
+                }
+            }
+    }
+}
+}
