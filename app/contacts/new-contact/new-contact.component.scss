@@ -1,0 +1,91 @@
+#pop-up-container {
+    display: flex;
+    border-radius: 10px;
+    width: 1100px;
+    height: 450px;
+    // position: absolute;
+    // top: 0;
+    z-index: 9999;
+    // transform: translate(50%, 50%);
+
+        #left-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2A3647;
+            width: 40%;
+            height: 100%;
+            padding: 20px;
+            border-radius: 10px 0px 0px 10px;
+
+
+            #headline {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                color: #fff;
+
+                    img {
+                        height: 50px;
+                        width: 50px;
+                    }       
+            }
+        }
+
+        #right-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            width: 60%;
+            padding: 20px;
+            position: relative;
+            border-radius: 0px 10px 10px 0px;
+
+
+                #profile {
+                    position: absolute;
+                    left: 65px;
+                    background-color: lightgray;
+                    border-radius: 50%;
+                    width: 100px;
+                    height: 100px;
+                }
+
+                .flex-column {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 50px;
+                    margin-left: 200px;
+
+                        input {
+                            box-sizing: border-box;
+                            width: 440px;
+                            padding: 12px;
+                            border-radius: 10px;
+                            border: 1px solid #d1d1d1;                
+                        }
+
+                        #name-input {
+                            background: url(../../../assets/img/person.png) no-repeat;
+                            background-position: 97%;
+                        }
+
+                        #mail-input {
+                            background: url(../../../assets/img/mail.png) no-repeat;
+                            background-position: 97%;
+                        }
+
+                        #phone-input {
+                            background: url(../../../assets/img/call.png) no-repeat;
+                            background-position: 97%;
+                        }
+
+                        #button-container {
+                            display: flex;
+                            justify-self: flex-end;
+                            gap: 20px;
+                        }
+                }
+        }
+}

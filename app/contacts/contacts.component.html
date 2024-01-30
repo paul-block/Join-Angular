@@ -1,18 +1,18 @@
 <div id="container">
 
     <div id="left-side">
-        <div class="buttonGlobalDark" id="add-contact-btn">
+        <div class="buttonGlobalDark" id="add-contact-btn" (click)="openAddNewContactDialog()">
             <span>Add new contact</span>
             <img src="../../assets/img/add-contact.png" alt="">
         </div>
 
         <div id="contact-list">
 
-            <div class="contact">
-                <div class="initials">AM</div>
+            <div class="contact" *ngFor="let contact of currentUserContacts" (click)="showContactDetails(contact)">
+                <div class="initials">{{getInitials(contact.name)}}</div>
                 <div>
-                    <div class="name">Anton Mayer</div>
-                    <div class="email">antonseineemail</div>
+                    <div class="name">{{contact.name}}</div>
+                    <div class="email">{{contact.email}}</div>
                 </div>
             </div>
 
@@ -29,20 +29,22 @@
                 <p>Better with a team</p>
             </div>
 
-            <div class="contact-details">
+            <div class="contact-details" *ngIf="showDetails">
 
                 <div class="first-row">
-                    <div class="initials-details">AM</div>
+                    <div class="initials-details">{{getInitials(this.contactService.selectedContact.name)}}</div>
                     <div class="flex-column">
-                        <span class="name-details">Anton Mayer</span>
+                        <span class="name-details">{{this.contactService.selectedContact.name}}</span>
                         <div class="flex-row">
                             <div class="icons-wrapper">
-                                <img src="../../assets/img/edit.png" alt="">
+                                <img (click)="openEditContactDialog(this.contactService.selectedContact)"
+                                    src="../../assets/img/edit.png" alt="">
                                 <span>Edit</span>
                             </div>
 
                             <div class="icons-wrapper">
-                                <img src="../../assets/img/delete.png" alt="">
+                                <img (click)="deleteContact(this.contactService.selectedContact)"
+                                    src="../../assets/img/delete.png" alt="">
                                 <span>Delete</span>
                             </div>
                         </div>
@@ -54,16 +56,15 @@
 
                 <div class="email-container">
                     <h2>Email</h2>
-                    <span class="email">antonseineemail</span>
+                    <span class="email">{{this.contactService.selectedContact.email}}</span>
                 </div>
 
                 <div class="phone-container">
                     <h2>Phone</h2>
-                    <span>123455657</span>
+                    <span>{{this.contactService.selectedContact.phone}}</span>
                 </div>
             </div>
 
         </div>
     </div>
-
 </div>
