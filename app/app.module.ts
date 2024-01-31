@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// Direktive
 
 // Firebase-Importe
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -22,6 +21,10 @@ import { MenuComponent } from './menu/menu.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { NewContactComponent } from './contacts/new-contact/new-contact.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditContactComponent } from './contacts/edit-contact/edit-contact.component';
 
 
 @NgModule({
@@ -33,15 +36,19 @@ import { ContactsComponent } from './contacts/contacts.component';
     MenuComponent,
     AddTaskComponent,
     BoardComponent,
-    ContactsComponent  ],
+    ContactsComponent,
+    NewContactComponent,
+    EditContactComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule
   ],
   providers: [
     AuthenticationService

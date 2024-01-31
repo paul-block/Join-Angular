@@ -13,9 +13,9 @@ export class EditContactComponent implements OnInit {
   email:string = '';
   phone?:number;
 
-  currentDetailsBeforeEdit: Contact = this.saveCurrentContactDetailsLocal();
+  currentDetailsBeforeEdit: Contact = this.saveCurrentContactDetails();
 
-  currentContactArrayFirestore:any[] = [];
+  currentContactArray:any[] = [];
   
   constructor(private dialog: MatDialog,
               private contactService: ContactService,
@@ -24,11 +24,11 @@ export class EditContactComponent implements OnInit {
   ngOnInit() {
     this.setDataIntoInputs();
     this.saveCurrentContactArrayLocal();
-    this.saveCurrentContactDetailsLocal()
+    this.saveCurrentContactDetails()
     console.log(this.currentDetailsBeforeEdit)
   }
 
-  saveCurrentContactDetailsLocal() {
+  saveCurrentContactDetails() {
     return {
       name: this.contactData.name,
       email: this.contactData.email,
@@ -37,7 +37,7 @@ export class EditContactComponent implements OnInit {
   }
 
   saveCurrentContactArrayLocal(){
-    this.currentContactArrayFirestore = this.contactData.currentContactArrayFirestore;
+    this.currentContactArray = this.contactData.currentUserContacts;
   }
 
   setDataIntoInputs(){
@@ -57,14 +57,12 @@ export class EditContactComponent implements OnInit {
       phone: this.phone
     }
 
-    let index = this.currentContactArrayFirestore.findIndex(contact => this.currentDetailsBeforeEdit.email === contact.email);
-    this.currentContactArrayFirestore[index] = editedContact;
-
-
+    let index = this.currentContactArray.findIndex(contact => this.currentDetailsBeforeEdit.email === contact.email);
+    this.currentContactArray[index] = editedContact;
 
     console.log(editedContact);
     console.log(this.currentDetailsBeforeEdit)
-    this.contactService.editContact(this.currentContactArrayFirestore)
+    this.contactService.editContact(this.currentContactArray)
     this.contactService.selectedContact = editedContact;
     this.closeDialog()
   }

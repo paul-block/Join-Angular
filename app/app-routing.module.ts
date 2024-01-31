@@ -7,6 +7,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { NewContactComponent } from './contacts/new-contact/new-contact.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent},

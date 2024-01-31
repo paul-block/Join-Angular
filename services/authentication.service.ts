@@ -112,14 +112,12 @@ export class AuthenticationService {
 
   getUsernameByUserId(id: string) {
     const q = query(this.getUsersRef(), where('uid', '==', id))
-    
     onSnapshot(q, doc => {
       doc.forEach( user => {
        const userData = user.data();
         return userData["name"]
       })
     })
-  
   }
 
   // getUserTasks(userId: string) {

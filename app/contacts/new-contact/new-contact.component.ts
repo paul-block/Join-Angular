@@ -29,6 +29,7 @@ export class NewContactComponent {
       phone: this.phone
     }
      this.contactService.addContact(contact);
+     this.closeDialog();
   }
 
 

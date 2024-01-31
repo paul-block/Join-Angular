@@ -48,7 +48,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
       name: contact.name,
       email:contact.email,
       phone:contact.phone,
-      currentContactArrayFirestore: this.currentUserContacts
+      currentUserContacts: this.currentUserContacts
     }
     this.dialog.closeAll();
     this.dialog.open(EditContactComponent, dialogConfig);

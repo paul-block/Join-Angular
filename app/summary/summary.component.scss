@@ -26,6 +26,15 @@
     gap: 25px;
     margin-top: 50px;
 
+        .box-hover {
+            &:hover {
+                background-color: #2A3647 !important;
+                color: #fff;
+                scale: 1.1;
+                cursor: pointer;
+            }
+        }
+
         .first-row {
             display: flex;
             justify-content: space-between;
@@ -42,10 +51,38 @@
                     border-radius: 30px;
                     gap: 18px;
                     box-sizing: border-box;
+
+                    .img-circle {
+                        background-color: #2A3647;
+                        border-radius: 50%;
+                        padding: 15px;
+
+                    }
+
+                    &:hover {
+                        #pencil path {
+                            fill: black;
+                        }
+
+                        #checkmark path {
+                            stroke: black;
+                        }
+
+                        .img-circle {
+                            background-color: #fff;
+                        }
+                    }
+                     
+                   
+                  
+                    
                     
                     img {
-                        height: 69px;
-                        width: 69px;
+                        background-color: #2A3647;
+                        border-radius: 50%;
+                        height: 32px;
+                        width: 32px;
+                        padding: 14px;
                     }
 
                     div {
