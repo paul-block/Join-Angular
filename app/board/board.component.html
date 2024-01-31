@@ -17,16 +17,32 @@
             <div class="task-container">
                 <div class="task-card" *ngFor="let todo of this.taskService.todo">
                     <div class="category">{{todo.category}}</div>
-                    <p class="title">{{todo.title}}</p>
-                    <p class="description">{{todo.description}}</p>
+                    <div class="text-container">
+                        <p class="title">{{todo.title}}</p>
+                        <p class="description">{{todo.description}}</p>
+                    </div>
                     <div class="subtasks" *ngIf="todo.subtasks.length != 0">
-                        <div id="progress-bar"></div>
-                        <div>{{todo.subtasks.length}}</div>
+                        <div id="progress-bar-container">
+                            <div id="current-progress"
+                                [ngStyle]="{'width': todo.subtasks.length === 0 ? '0%' : todo.subtasks.length === 1 ? '50%' : '100%'}">
+                            </div>
+                        </div>
+                        <div>{{todo.subtasks.length}}/2 Subtasks</div>
+
+
                     </div>
                     <div class="flex-row">
-                        <div class="assignedUsers" *ngFor="let user of todo.assignedUsers">
-                            {{getInitials(user.name)}}</div>
-                        <div class="prio">{{todo.prio}}</div>
+                        <div id="assigned-users-wrapper">
+                            <!-- ngStyle noch dynmaisch machen mit color aus user objekt -->
+                            <div [ngStyle]="{'background-color': 'green'}" class="assignedUsers"
+                                *ngFor="let user of todo.assignedUsers; let i = index"
+                                [style.margin-left.px]="i > 0 ? -5 : 0">
+                                {{getInitials(user.name)}}</div>
+                        </div>
+
+                        <img class="prio"
+                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '..assets/img/prioMedium.svg' : '..assets/img/prioLow.svg'"
+                            alt="">
                     </div>
                 </div>
                 <div *ngIf="this.taskService.todo.length < 1" class="no-task-placeholder">No tasks to do</div>
@@ -88,12 +104,15 @@
                     <div class="category">{{todo.category}}</div>
                     <p class="title">{{todo.title}}</p>
                     <p class="description">{{todo.description}}</p>
-                    <div class="subtasks" *ngIf="todo.subtasks.length != 0">
+                    <!-- <div class="subtasks" *ngIf="todo.subtasks.length != 0"> -->
+                    <div class="subtasks">
                         <div id="progress-bar"></div>
                         <div>{{todo.subtasks.length}}</div>
                     </div>
                     <div class="flex-row">
-                        <div class="assignedUsers">{{todo.assignedUsers}}</div>
+                        <div id="assigned-users-wrapper">
+                            <div class="assignedUsers">{{todo.assignedUsers}}</div>
+                        </div>
                         <div class="prio">{{todo.prio}}</div>
                     </div>
                 </div>
