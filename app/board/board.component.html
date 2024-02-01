@@ -34,7 +34,7 @@
                     <div class="flex-row">
                         <div id="assigned-users-wrapper">
                             <!-- ngStyle noch dynmaisch machen mit color aus user objekt -->
-                            <div [ngStyle]="{'background-color': 'green'}" class="assignedUsers"
+                            <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
                                 *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
                                 {{getInitials(user.name)}}</div>
