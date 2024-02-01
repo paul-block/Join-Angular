@@ -25,6 +25,7 @@ import { NewContactComponent } from './contacts/new-contact/new-contact.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditContactComponent } from './contacts/edit-contact/edit-contact.component';
+import { TaskDetailsComponent } from './board/task-details/task-details.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EditContactComponent } from './contacts/edit-contact/edit-contact.compo
     BoardComponent,
     ContactsComponent,
     NewContactComponent,
-    EditContactComponent  ],
+    EditContactComponent,
+    TaskDetailsComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

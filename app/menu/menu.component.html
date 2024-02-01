@@ -28,28 +28,28 @@
     <img class="d-none-mobile" src="../../assets/img/Capa 1.svg">
 
     <div class="menu">
-        <a id="side-menu-link0" routerLink="/summary">
+        <a id="side-menu-link0" routerLink="/summary" routerLinkActive="active-link">
             <div class="menu-links">
                 <img class="side-menu-img" src="../../assets/img/uit_web-grid.svg">
                 <div class="side-bar-text">Summary</div>
             </div>
         </a>
 
-        <a id="side-menu-link1" routerLink="/board">
+        <a id="side-menu-link1" routerLink="/board" routerLinkActive="active-link">
             <div class="menu-links">
                 <img class="side-menu-img" src="../../assets/img/Vector (1).svg">
                 <div class="side-bar-text">Board</div>
             </div>
         </a>
 
-        <a id="side-menu-link2" routerLink="/add-task">
+        <a id="side-menu-link2" routerLink="/add-task" routerLinkActive="active-link">
             <div class="menu-links">
                 <img class="side-menu-img" src="../../assets/img/Write task icon.svg">
                 <div class="side-bar-text">Add Task</div>
             </div>
         </a>
 
-        <a id="side-menu-link3" routerLink="/contacts">
+        <a id="side-menu-link3" routerLink="/contacts" routerLinkActive="active-link">
             <div class="menu-links">
                 <img class="side-menu-img" src="../../assets/img/Vector (3).svg">
                 <div class="side-bar-text">Contacts</div>
@@ -57,8 +57,8 @@
         </a>
     </div>
 </div>
-
-<div id="mobileDropDown" class="d-none">
+<!-- Auf angular umstellen -->
+<div id="mobileDropDown" class="d-none ">
     <a href="../Datenschutz/policyPrivacyLogin.html">Privacy Policy</a>
     <a href="../Datenschutz/legalNoticeLogin.html">Legal notice</a>
     <a onclick="logout()">Logout</a>

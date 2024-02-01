@@ -4,7 +4,7 @@
 
         <div>
             <input type="text" placeholder="find task">
-            <button class="buttonGlobalDark">Add task +</button>
+            <button class="buttonGlobalDark" (click)="openAddTaskDialog()">Add task +</button>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
                 <div class="add-icon">+</div>
             </div>
             <div class="task-container">
-                <div class="task-card" *ngFor="let todo of this.taskService.todo">
+                <div class="task-card" *ngFor="let todo of this.taskService.todo" (click)="openTaskDetailsDialog(todo)">
                     <div class="category">{{todo.category}}</div>
                     <div class="text-container">
                         <p class="title">{{todo.title}}</p>

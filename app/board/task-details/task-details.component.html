@@ -1,1 +1,35 @@
-<p>task-details works!</p>
+<div id="details-wrapper">
+    <div class="flex-row">
+        <div id="category">{{taskData.category}}</div>
+        <div id="close-btn">x</div>
+    </div>
+
+    <div id="title">Kochwelt Page&Recipe Recommender</div>
+    <div id="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, iure.</div>
+    <div class="flex-gap25">
+        <span>Due Date:</span>
+        <span>24/10/24</span>
+    </div>
+    <div class="flex-gap25">
+        <span>Priority:</span>
+        <span>{{taskData.prio}} <img src="../../../assets/img/prioMedium.svg" alt=""></span>
+    </div>
+    <div id="assigned-to-wrapper">
+        <span>Assigned To:</span>
+        <div class="assigned-user flex-gap25">
+            <div class="initials">EM</div>
+            <div class="name">Emmanuel Mauer</div>
+        </div>
+    </div>
+    <div id="subtasks-wrapper">
+        <span>Subtasks</span>
+        <div class="subtask">
+            <input type="checkbox">
+            <span>Implement Recipe Recommendation</span>
+        </div>
+    </div>
+    <div id="button-wrapper">
+        <button><img src="../../../assets/img/delete.png" alt="">Delete</button>
+        <button><img src="../../../assets/img/edit.png" alt="">Edit</button>
+    </div>
+</div>

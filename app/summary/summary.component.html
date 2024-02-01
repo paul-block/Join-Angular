@@ -8,7 +8,7 @@
 
         <div class="summary-wrapper">
             <div class="first-row">
-                <div class="first-row-child box-hover">
+                <div class="first-row-child box-hover" [routerLink]="['/board']">
                     <div class="img-circle">
                         <svg id="pencil" width="33" height="32" viewBox="0 0 33 32" fill="#000"
                             xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
                         <span class="status">Todo</span>
                     </div>
                 </div>
-                <div class="first-row-child box-hover">
+                <div class="first-row-child box-hover" [routerLink]="['/board']">
                     <div class="img-circle">
                         <svg id="checkmark" width="33" height="32" viewBox="0 0 38 30" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="second-row box-hover">
+            <div class="second-row box-hover" [routerLink]="['/board']">
                 <img src="../../../assets/img/urgent-button.png" alt="urgent-button">
                 <div>
                     <span class="amount">{{this.taskService.urgentTasks}}</span>
@@ -55,15 +55,15 @@
                 </div>
             </div>
             <div class="third-row">
-                <div class="third-row-child box-hover">
+                <div class="third-row-child box-hover" [routerLink]="['/board']">
                     <span class="amount">{{this.taskService.tasks.length}}</span>
                     <span class="status">Tasks in Board</span>
                 </div>
-                <div class="third-row-child box-hover">
+                <div class="third-row-child box-hover" [routerLink]="['/board']">
                     <span class="amount">{{this.taskService.inProgress.length}}</span>
                     <span class="status">Tasks in Progress</span>
                 </div>
-                <div class="third-row-child box-hover">
+                <div class="third-row-child box-hover" [routerLink]="['/board']">
                     <span class="amount">{{this.taskService.feedback.length}}</span>
                     <span class="status">Awaiting Feedback</span>
                 </div>

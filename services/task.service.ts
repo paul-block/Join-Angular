@@ -17,6 +17,8 @@ export class TaskService {
   feedback:any[] = [];
   done:any[] = [];
 
+  selectedTask: any;
+
 
   constructor(private authService: AuthenticationService) {}
 
