@@ -4,28 +4,30 @@
         <div id="close-btn">x</div>
     </div>
 
-    <div id="title">Kochwelt Page&Recipe Recommender</div>
-    <div id="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, iure.</div>
+    <div id="title">{{taskData.title}}</div>
+    <div id="description">{{taskData.description}}</div>
     <div class="flex-gap25">
         <span>Due Date:</span>
-        <span>24/10/24</span>
+        <span>{{taskData.dueDate}}</span>
     </div>
     <div class="flex-gap25">
         <span>Priority:</span>
-        <span>{{taskData.prio}} <img src="../../../assets/img/prioMedium.svg" alt=""></span>
+        <span>{{taskData.prio.charAt(0).toUpperCase()}}{{taskData.prio.slice(1)}}
+            <img [src]="taskData.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : taskData.prio == 'medium' ? '..assets/img/prioMedium.svg' : '..assets/img/prioLow.svg'"
+                alt=""></span>
     </div>
     <div id="assigned-to-wrapper">
         <span>Assigned To:</span>
-        <div class="assigned-user flex-gap25">
-            <div class="initials">EM</div>
-            <div class="name">Emmanuel Mauer</div>
+        <div class="assigned-user flex-gap25" *ngFor="let user of taskData.assignedUsers">
+            <div class="initials" [ngStyle]="{'background-color': user.color}">{{getInitials(user.name)}}</div>
+            <div class="name">{{user.name}}</div>
         </div>
     </div>
     <div id="subtasks-wrapper">
         <span>Subtasks</span>
-        <div class="subtask">
+        <div class="subtask" *ngFor="let subtask of taskData.subtasks">
             <input type="checkbox">
-            <span>Implement Recipe Recommendation</span>
+            <span>{{subtask.name}}</span>
         </div>
     </div>
     <div id="button-wrapper">

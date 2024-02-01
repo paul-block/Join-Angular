@@ -9,19 +9,18 @@ import { TaskService } from 'src/services/task.service';
   styleUrls: ['./task-details.component.scss']
 })
 export class TaskDetailsComponent implements OnInit {
-  task:any;
 
   constructor(private dialog: MatDialog,
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public taskData: any){
-      this.task = this.taskData;
     }
 
-    ngOnInit() {
-     console.log(this.task)
-   
-    }
+    ngOnInit() {}
 
+    getInitials(name: string) {
+      let initials = name.split(' ').map(word => word.charAt(0)).join('');
+      return initials
+    }
   
 }
 
