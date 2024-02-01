@@ -28,8 +28,16 @@
                 </div>
                 <!-- DROPDOWN -->
                 <div *ngIf="showAssignDropDown" class="dropdown" #assignDropDown>
-                    <div class="selectable-user" *ngFor="let contact of this.assignableUsers">
-                        <div class="initials">
+                    <div class="selectable-user">
+                        <div class="initials" [ngStyle]="{'background-color': this.authService.userData.color}">
+                            {{getInitials(this.authService.userData.name)}}
+                        </div>
+                        <span>{{this.authService.userData.name}} (You)</span>
+                        <input type="checkbox" [checked]="this.authService.userData.marked === true"
+                            (change)="selectContact($event, this.authService.userData)">
+                    </div>
+                    <div class="selectable-user" *ngFor="let contact of this.currentUserContacts">
+                        <div class="initials" [ngStyle]="{'background-color': contact.color}">
                             {{getInitials(contact.name)}}
                         </div>
                         <span>{{contact.name}}</span>
@@ -39,7 +47,8 @@
                 </div>
                 <!-- SELECTED USERS -->
                 <div id="selected-contacts">
-                    <div class="initials" *ngFor="let contact of this.selectedContacts">
+                    <div class="initials" [ngStyle]="{'background-color': contact.color}"
+                        *ngFor="let contact of this.selectedContacts">
                         {{getInitials(contact.name)}}
                     </div>
                 </div>
@@ -125,7 +134,7 @@
             </div>
         </div>
         <div id="btn-container" class="flex-row">
-            <button class="buttonGlobalWhite">Clear</button>
+            <button class="buttonGlobalWhite" (click)="clearTask()" type="button">Clear</button>
             <button class="buttonGlobalDark" type="submit" [class.disabled]="taskForm.invalid"
                 [disabled]="taskForm.invalid">Create Task</button>
 

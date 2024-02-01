@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/services/authentication.service';
+import { ContactService } from 'src/services/contact.service';
 import { TaskService } from 'src/services/task.service';
 
 @Component({
@@ -26,11 +28,25 @@ export class AddTaskComponent {
   addedSubtasks: any[] = [];
 
   editedSubtask: string = '';
+
+  currentUserContacts:any;
+  contactsSubscription: Subscription | null = null;
  
-  constructor(private taskService: TaskService, public authService: AuthenticationService){}
+  constructor(private taskService: TaskService, public authService: AuthenticationService, public contactService: ContactService){
+
+  }
+
+  ngOnInit(){
+    this.contactsSubscription = this.contactService.getContactsForCurrentUser()
+    .subscribe((contacts) =>{
+      this.currentUserContacts = contacts;
+    })
+  }
 
   createTaskObject() {
+    let selectedUsersId = this.selectedContacts.map((contact) => contact.uid);
     const task = {
+      assignedUserIDs: selectedUsersId,
       assignedUsers: this.selectedContacts,
       category: this.category,
       description: this.description,
@@ -48,9 +64,20 @@ export class AddTaskComponent {
     this.prio = priority;
   }
 
-  addTask() {
-      this.taskService.addTask(this.createTaskObject());
+  async addTask() {
+     await this.taskService.addTask(this.createTaskObject());
       console.log('add task ')
+      this.clearTask();
+  }
+
+  clearTask() {
+    this.title = '';
+    this.description= '';
+    this.contactInput= '';
+    this.dueDate= '';
+    this.prio= '';
+    this.category = '';
+    this.subtask= '';
   }
   
   addSubtask() {

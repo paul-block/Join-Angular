@@ -25,7 +25,7 @@
     display: flex;
     box-sizing: border-box;
     width: calc(100% - 200px);
-    gap: 250px;
+    gap: 200px;
 
         .board-column {
             display: flex;
@@ -54,6 +54,8 @@
             .task-container {
                 display: flex;
                 flex-direction: column;
+                gap: 10px;
+
 
                 .task-card {
                     display: flex;

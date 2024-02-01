@@ -14,7 +14,7 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 export class ContactsComponent implements OnInit, OnDestroy {
 
   authService: any;
-  currentUserContacts: any[] = [];
+  currentUserContacts:any;
   contactsSubscription: Subscription | null = null;
 
   showDetails:boolean = false
@@ -23,7 +23,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   constructor(private dialog: MatDialog, public contactService: ContactService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;

@@ -26,12 +26,40 @@ export class NewContactComponent {
     const contact: Contact = {
       name: this.name,
       email: this.email,
-      phone: this.phone
+      phone: this.phone,
+      uid: this.generateRandomId(),
+      color: this.getRandomColorHex()
     }
      this.contactService.addContact(contact);
      this.closeDialog();
   }
 
+   generateRandomId(): string {
+    const length = 28;
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomId = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomId += characters.charAt(randomIndex);
+    }
+    return randomId;
+  }
 
-
+   getRandomColorHex(): string {
+    const colors = [
+      '#3498db', 
+      '#e74c3c', 
+      '#f39c12', 
+      '#2ecc71',
+      '#f1c40f',
+      '#9b59b6',
+      '#1abc9c', 
+      '#e5e8df'  
+    ];
+  
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  }
+  
+  
 }

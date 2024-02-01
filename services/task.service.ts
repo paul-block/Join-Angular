@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { onSnapshot, query, where, addDoc } from '@angular/fire/firestore';
-import { collection } from 'rxfire/firestore';
 
 
 @Injectable({
@@ -24,7 +23,7 @@ export class TaskService {
 
   async getAllTasksForCurrentUser() {
     return new Promise<void>((resolve, reject) => {
-      const q = query(this.authService.getTasksRef(), where('assignedUsers', 'array-contains', this.authService.userData.uid));
+      const q = query(this.authService.getTasksRef(), where('assignedUserIDs', 'array-contains', this.authService.userData.uid));
       onSnapshot(q, doc => {
         console.log('onSnapshot wurde aufgerufen');
         this.tasks = [];
@@ -69,6 +68,7 @@ export class TaskService {
   async addTask(task: any) {
     const docRef = await addDoc(this.authService.getTasksRef(), {
       assignedUsers: task.assignedUsers,
+      assignedUserIDs: task.assignedUserIDs,
       category: task.category,
       description: task.description,
       dueDate: task.dueDate,

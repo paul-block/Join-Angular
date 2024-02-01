@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ContactService {
   currentUserDocId: string ='';
   selectedContact!: Contact;
-  // currentUserContacts: any[] = [];
+  // currentUserContacts = this.getContactsForCurrentUser();
 
   constructor(private auth: AuthenticationService) { }
 
@@ -73,6 +73,9 @@ export class ContactService {
       });
     });
   }
+
+
+  
 
   async deleteContact(contact: Contact) {
     console.log('delete contact service ausgeführt')

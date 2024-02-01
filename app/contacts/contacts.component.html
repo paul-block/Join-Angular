@@ -9,7 +9,8 @@
         <div id="contact-list">
 
             <div class="contact" *ngFor="let contact of currentUserContacts" (click)="showContactDetails(contact)">
-                <div class="initials">{{getInitials(contact.name)}}</div>
+                <div class="initials" [ngStyle]="{'background-color': contact.color}">{{getInitials(contact.name)}}
+                </div>
                 <div>
                     <div class="name">{{contact.name}}</div>
                     <div class="email">{{contact.email}}</div>
@@ -32,7 +33,9 @@
             <div class="contact-details" *ngIf="showDetails">
 
                 <div class="first-row">
-                    <div class="initials-details">{{getInitials(this.contactService.selectedContact.name)}}</div>
+                    <div class="initials-details"
+                        [ngStyle]="{'background-color': this.contactService.selectedContact.color}">
+                        {{getInitials(this.contactService.selectedContact.name)}}</div>
                     <div class="flex-column">
                         <span class="name-details">{{this.contactService.selectedContact.name}}</span>
                         <div class="flex-row">

@@ -32,7 +32,9 @@ export class EditContactComponent implements OnInit {
     return {
       name: this.contactData.name,
       email: this.contactData.email,
-      phone: this.contactData.phone
+      phone: this.contactData.phone,
+      uid: this.contactData.id,
+      color: this.contactData.color
     }
   }
 
@@ -54,7 +56,9 @@ export class EditContactComponent implements OnInit {
     let editedContact: Contact = {
       name: this.name,
       email: this.email,
-      phone: this.phone
+      phone: this.phone,
+      uid: this.contactData.id,
+      color: this.contactData.color
     }
 
     let index = this.currentContactArray.findIndex(contact => this.currentDetailsBeforeEdit.email === contact.email);
