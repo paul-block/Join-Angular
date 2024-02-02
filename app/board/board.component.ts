@@ -4,6 +4,7 @@ import { TaskService } from 'src/services/task.service';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { Task } from '../interfaces/task';
 import { AddTaskComponent } from '../add-task/add-task.component';
+import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -12,12 +13,26 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 })
 export class BoardComponent implements OnInit {
 
-
 constructor(public taskService: TaskService, private dialog: MatDialog) {}
 
 async ngOnInit() {
   await this.taskService.getAllTasksForCurrentUser();
   this.taskService.filterTasks();
+}
+
+drop(event: CdkDragDrop<Task[]>) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    console.log(this.taskService.inProgress)
+    console.log(this.taskService.todo)
+  }
 }
 
 getInitials(name: string) {
@@ -28,7 +43,7 @@ getInitials(name: string) {
 openAddTaskDialog(){
   const dialogConfig = new MatDialogConfig();
   dialogConfig.panelClass ='dialog-style';
-  dialogConfig.width = '700px';
+  dialogConfig.width = '500px';
   dialogConfig.height = '700px';
   this.dialog.closeAll();
   this.dialog.open(AddTaskComponent, dialogConfig);

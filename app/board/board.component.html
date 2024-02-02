@@ -7,15 +7,16 @@
             <button class="buttonGlobalDark" (click)="openAddTaskDialog()">Add task +</button>
         </div>
     </div>
-
     <div id="board-container">
         <div class="board-column">
             <div class="task-status">
                 <h2>To do</h2>
                 <div class="add-icon">+</div>
             </div>
-            <div class="task-container">
-                <div class="task-card" *ngFor="let todo of this.taskService.todo" (click)="openTaskDetailsDialog(todo)">
+            <div class="task-container" cdkDropList #todoList="cdkDropList" [cdkDropListData]="this.taskService.todo"
+                [cdkDropListConnectedTo]="[inProgressList]" (cdkDropListDropped)="drop($event)">
+                <div class="task-card" *ngFor="let todo of this.taskService.todo" cdkDrag
+                    (click)="openTaskDetailsDialog(todo)">
                     <div class="category">{{todo.category}}</div>
                     <div class="text-container">
                         <p class="title">{{todo.title}}</p>
@@ -54,8 +55,10 @@
                 <h2>In progress</h2>
                 <div class="add-icon">+</div>
             </div>
-            <div class="task-container">
-                <div class="task-card" *ngFor="let todo of this.taskService.inProgress">
+            <div class="task-container" cdkDropList #inProgressList="cdkDropList"
+                [cdkDropListData]="this.taskService.inProgress" [cdkDropListConnectedTo]="[todoList]"
+                (cdkDropListDropped)="drop($event)">
+                <div class="task-card" *ngFor="let todo of this.taskService.inProgress" cdkDrag>
                     <div class="category">{{todo.category}}</div>
                     <p class="title">{{todo.title}}</p>
                     <p class="description">{{todo.description}}</p>
@@ -77,7 +80,7 @@
                 <h2>Await feedback</h2>
                 <div class="add-icon">+</div>
             </div>
-            <div class="task-container">
+            <div class="task-container" cdkDropList>
                 <div class="task-card" *ngFor="let todo of this.taskService.feedback">
                     <div class="category">{{todo.category}}</div>
                     <p class="title">{{todo.title}}</p>
@@ -99,7 +102,7 @@
             <div class="task-status">
                 <h2>Done</h2>
             </div>
-            <div class="task-container">
+            <div class="task-container" cdkDropList>
                 <div class="task-card" *ngFor="let todo of this.taskService.done">
                     <div class="category">{{todo.category}}</div>
                     <p class="title">{{todo.title}}</p>
@@ -120,4 +123,5 @@
             </div>
         </div>
     </div>
+
 </div>

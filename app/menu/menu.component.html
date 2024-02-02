@@ -4,7 +4,8 @@
     <div class="headerImg">
         <a href="../Datenschutz/help.html"><img class="d-none-mobile" id="questionMark"
                 src="../../assets/img/Vector.svg"></a>
-        <div id="initials" (click)="toggleDropdown()"></div>
+        <div id="initials" (click)="toggleDropdown()">
+            {{getInitials()}}</div>
         <div id="logout" [class.d-none]="!showDropdown" (click)="signOut()">
             <span>Logout</span>
         </div>

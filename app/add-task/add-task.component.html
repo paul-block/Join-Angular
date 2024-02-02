@@ -1,143 +1,151 @@
 <div class="container">
     <h1>Add Task</h1>
 
-    <form name="task-form" id="wrapper" class="flex-row" #taskForm="ngForm" (ngSubmit)="addTask()">
+    <form name="task-form" id="wrapper" #taskForm="ngForm" (ngSubmit)="addTask()">
 
-        <div id="left-side">
-            <div class="flex-column">
-                <label for="title-input">Title<span class="required">*</span></label>
-                <input required name="title-input" class="input" type="text" id="title-input" [(ngModel)]="title"
-                    placeholder="Enter title">
-                <p class="required" *ngIf="taskForm.form.get('title')?.invalid && taskForm.form.get('title')?.touched">
-                    This field is
-                    required</p>
-            </div>
-
-            <div class="flex-column">
-                <label for="description">Description</label>
-                <textarea name="description" type="text" rows="6" id="description" [(ngModel)]="description"
-                    placeholder="Enter description"></textarea>
-            </div>
-
-            <div class="flex-column">
-                <label for="assigned-to">Assgined to</label>
-                <div class="input-wrapper" #assignInput (click)="toggleDropdown('assign')">
-                    <input name="assigned-to" placeholder="Select contacts to assign" type="text"
-                        [(ngModel)]="contactInput" id="assigned-to" (input)="filterContacts(contactInput)">
-                    <img src="../../assets/img/arrowDown.png" alt="">
+        <div class="flex-row">
+            <div id="left-side">
+                <div class="flex-column">
+                    <label for="title-input">Title<span class="required">*</span></label>
+                    <input required name="title-input" class="input" type="text" id="title-input" [(ngModel)]="title"
+                        placeholder="Enter title">
+                    <p class="required"
+                        *ngIf="taskForm.form.get('title')?.invalid && taskForm.form.get('title')?.touched">
+                        This field is
+                        required</p>
                 </div>
-                <!-- DROPDOWN -->
-                <div *ngIf="showAssignDropDown" class="dropdown" #assignDropDown>
-                    <div class="selectable-user">
-                        <div class="initials" [ngStyle]="{'background-color': this.authService.userData.color}">
-                            {{getInitials(this.authService.userData.name)}}
-                        </div>
-                        <span>{{this.authService.userData.name}} (You)</span>
-                        <input type="checkbox" [checked]="this.authService.userData.marked === true"
-                            (change)="selectContact($event, this.authService.userData)">
+
+                <div class="flex-column">
+                    <label for="description">Description</label>
+                    <textarea name="description" type="text" rows="6" id="description" [(ngModel)]="description"
+                        placeholder="Enter description"></textarea>
+                </div>
+
+                <div class="flex-column">
+                    <label for="assigned-to">Assgined to</label>
+                    <div class="input-wrapper" #assignInput (click)="toggleDropdown('assign')">
+                        <input name="assigned-to" placeholder="Select contacts to assign" type="text"
+                            [(ngModel)]="contactInput" id="assigned-to" (input)="filterContacts(contactInput)">
+                        <img src="../../assets/img/arrowDown.png" alt="">
                     </div>
-                    <div class="selectable-user" *ngFor="let contact of this.currentUserContacts">
-                        <div class="initials" [ngStyle]="{'background-color': contact.color}">
+                    <!-- DROPDOWN -->
+                    <div *ngIf="showAssignDropDown" class="dropdown" #assignDropDown>
+                        <div class="selectable-user">
+                            <div class="initials" [ngStyle]="{'background-color': this.authService.userData.color}">
+                                {{getInitials(this.authService.userData.name)}}
+                            </div>
+                            <span>{{this.authService.userData.name}} (You)</span>
+                            <input type="checkbox" [checked]="this.authService.userData.marked === true"
+                                (change)="selectContact($event, this.authService.userData)">
+                        </div>
+                        <div class="selectable-user" *ngFor="let contact of this.currentUserContacts">
+                            <div class="initials" [ngStyle]="{'background-color': contact.color}">
+                                {{getInitials(contact.name)}}
+                            </div>
+                            <span>{{contact.name}}</span>
+                            <input type="checkbox" [checked]="contact.marked === true"
+                                (change)="selectContact($event, contact)">
+                        </div>
+                    </div>
+                    <!-- SELECTED USERS -->
+                    <div id="selected-contacts">
+                        <div class="initials" [ngStyle]="{'background-color': contact.color}"
+                            *ngFor="let contact of this.selectedContacts">
                             {{getInitials(contact.name)}}
                         </div>
-                        <span>{{contact.name}}</span>
-                        <input type="checkbox" [checked]="contact.marked === true"
-                            (change)="selectContact($event, contact)">
-                    </div>
-                </div>
-                <!-- SELECTED USERS -->
-                <div id="selected-contacts">
-                    <div class="initials" [ngStyle]="{'background-color': contact.color}"
-                        *ngFor="let contact of this.selectedContacts">
-                        {{getInitials(contact.name)}}
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="middle-line"></div>
+            <div id="middle-line"></div>
 
-        <div id="right-side">
-            <div class="flex-column">
-                <label for="due-date">Due date<span class="required">*</span></label>
-                <input required name="due-date" type="date" [(ngModel)]="dueDate" id="due-date">
-                <p class="required"
-                    *ngIf="taskForm.form.get('due-date')?.invalid && taskForm.form.get('due-date')?.touched">This field
-                    is required</p>
-            </div>
-
-            <div class="flex-column">
-                <span>Prio</span>
-                <div class="flex-row prio-btns">
-                    <button id="urgent-btn" (click)="setPriority('urgent')" [class.urgent]="this.prio === 'urgent'"
-                        type="button" class="buttonGlobalWhite">Urgent<img src="../../assets/img/prioUrgent.svg" alt="">
-                    </button>
-                    <button id="medium-btn" (click)="setPriority('medium')" [class.medium]="this.prio === 'medium'"
-                        type="button" class="buttonGlobalWhite">Medium<img src="../../assets/img/prioMedium.svg"
-                            alt=""></button>
-                    <button id="low-btn" (click)="setPriority('low')" [class.medium]="this.prio === 'low'" type="button"
-                        class="buttonGlobalWhite">Low<img src="../../assets/img/prioLow.svg" alt=""></button>
+            <div id="right-side">
+                <div class="flex-column">
+                    <label for="due-date">Due date<span class="required">*</span></label>
+                    <input required name="due-date" type="date" [(ngModel)]="dueDate" id="due-date">
+                    <p class="required"
+                        *ngIf="taskForm.form.get('due-date')?.invalid && taskForm.form.get('due-date')?.touched">This
+                        field
+                        is required</p>
                 </div>
-            </div>
 
-            <div class="flex-column">
-                <label for="category">Category<span class="required">*</span></label>
-                <div class="input-wrapper" (click)="toggleDropdown('category')">
-                    <input required name="category" type="text" [(ngModel)]="category" id="category">
-                    <img src="../../assets/img/arrowDown.png" alt="">
-                </div>
-                <!-- Category DROPDOWN -->
-                <div *ngIf="showCategoryDropDown" class="dropdown">
-                    <div class="selectable-user" *ngFor="let category of selectableCategories">
-                        <span (click)="selectCategory(category)">{{category}}</span>
+                <div class="flex-column">
+                    <span>Prio</span>
+                    <div class="flex-row prio-btns">
+                        <button id="urgent-btn" (click)="setPriority('urgent')" [class.urgent]="this.prio === 'urgent'"
+                            type="button" class="buttonGlobalWhite">Urgent<img src="../../assets/img/prioUrgent.svg"
+                                alt="">
+                        </button>
+                        <button id="medium-btn" (click)="setPriority('medium')" [class.medium]="this.prio === 'medium'"
+                            type="button" class="buttonGlobalWhite">Medium<img src="../../assets/img/prioMedium.svg"
+                                alt=""></button>
+                        <button id="low-btn" (click)="setPriority('low')" [class.medium]="this.prio === 'low'"
+                            type="button" class="buttonGlobalWhite">Low<img src="../../assets/img/prioLow.svg"
+                                alt=""></button>
                     </div>
                 </div>
-                <p class="required"
-                    *ngIf="taskForm.form.get('category')?.invalid && taskForm.form.get('category')?.touched">This field
-                    is required</p>
-            </div>
 
-
-            <div class="flex-column">
-                <label for="subtasks">Subtasks</label>
-                <div class="input-wrapper">
-                    <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text"
-                        [(ngModel)]="subtask" id="subtasks">
-                    <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="../../assets/img/add.png" alt="">
-                    <div class="icons-wrapper" *ngIf="subtaskFocused">
-                        <img (click)="clearSubtaskInput()" src="../../assets/img/x.png" alt="">
-                        <div class="middle-line"></div>
-                        <img (click)="addSubtask()" src="../../assets/img/check.svg" alt="">
+                <div class="flex-column">
+                    <label for="category">Category<span class="required">*</span></label>
+                    <div class="input-wrapper" (click)="toggleDropdown('category')">
+                        <input required name="category" type="text" [(ngModel)]="category" id="category">
+                        <img src="../../assets/img/arrowDown.png" alt="">
                     </div>
+                    <!-- Category DROPDOWN -->
+                    <div *ngIf="showCategoryDropDown" class="dropdown">
+                        <div class="selectable-user" *ngFor="let category of selectableCategories">
+                            <span (click)="selectCategory(category)">{{category}}</span>
+                        </div>
+                    </div>
+                    <p class="required"
+                        *ngIf="taskForm.form.get('category')?.invalid && taskForm.form.get('category')?.touched">This
+                        field
+                        is required</p>
                 </div>
-                <div id="subtask-wrapper" *ngIf="addedSubtasks.length > 0">
-                    <ul>
-                        <li *ngFor="let subtask of addedSubtasks">{{subtask.name}}
-                            <div id="edit-delete-wrapper">
-                                <img (click)="deleteSubtask(subtask)" src="../../assets/img/delete.png" alt="">
-                                <div class="middle-line"></div>
-                                <img (click)="openEditInput(subtask)" src="../../assets/img/edit.png" alt="">
-                            </div>
-                            <div id="edit-input-wrapper" *ngIf="subtask.editMode === true">
-                                <input name="editSubtask" id="edit-input" type="text" [(ngModel)]="editedSubtask">
-                                <div class="icons-wrapper">
-                                    <img (click)="subtask.editMode = false" src="../../assets/img/x.png" alt="">
+
+
+                <div class="flex-column">
+                    <label for="subtasks">Subtasks</label>
+                    <div class="input-wrapper">
+                        <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text"
+                            [(ngModel)]="subtask" id="subtasks">
+                        <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="../../assets/img/add.png"
+                            alt="">
+                        <div class="icons-wrapper" *ngIf="subtaskFocused">
+                            <img (click)="clearSubtaskInput()" src="../../assets/img/x.png" alt="">
+                            <div class="middle-line"></div>
+                            <img (click)="addSubtask()" src="../../assets/img/check.svg" alt="">
+                        </div>
+                    </div>
+                    <div id="subtask-wrapper" *ngIf="addedSubtasks.length > 0">
+                        <ul>
+                            <li *ngFor="let subtask of addedSubtasks">{{subtask.name}}
+                                <div id="edit-delete-wrapper">
+                                    <img (click)="deleteSubtask(subtask)" src="../../assets/img/delete.png" alt="">
                                     <div class="middle-line"></div>
-                                    <img (click)="updateSubtask(subtask, editedSubtask)"
-                                        src="../../assets/img/check.svg" alt="">
+                                    <img (click)="openEditInput(subtask)" src="../../assets/img/edit.png" alt="">
                                 </div>
-                            </div>
+                                <div id="edit-input-wrapper" *ngIf="subtask.editMode === true">
+                                    <input name="editSubtask" id="edit-input" type="text" [(ngModel)]="editedSubtask">
+                                    <div class="icons-wrapper">
+                                        <img (click)="subtask.editMode = false" src="../../assets/img/x.png" alt="">
+                                        <div class="middle-line"></div>
+                                        <img (click)="updateSubtask(subtask, editedSubtask)"
+                                            src="../../assets/img/check.svg" alt="">
+                                    </div>
+                                </div>
 
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div id="btn-container" class="flex-row">
             <button class="buttonGlobalWhite" (click)="clearTask()" type="button">Clear</button>
             <button class="buttonGlobalDark" type="submit" [class.disabled]="taskForm.invalid"
                 [disabled]="taskForm.invalid">Create Task</button>
-
         </div>
     </form>
 

@@ -41,7 +41,10 @@
     align-items: center;
     font-weight: 700;
     color: #2aaae2;
-    background-color: transparent !important;
+
+        &:hover {
+            background-color: rgba(211, 211, 211, 0.482);
+        }
 }
 
 .sideMenu {

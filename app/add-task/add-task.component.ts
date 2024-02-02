@@ -148,11 +148,16 @@ export class AddTaskComponent {
 
   filterContacts(name: string) {
     if (name.trim() !== '') {
-      let filteredContacts = this.assignableUsers.filter(contact => contact.name.toLowerCase().startsWith(name.trim().toLowerCase()));
-      this.assignableUsers = filteredContacts;
+      let filteredContacts = this.currentUserContacts.filter((contact: { name: string; }) => contact.name.toLowerCase().startsWith(name.trim().toLowerCase()));
+      this.currentUserContacts = filteredContacts;
       console.log(filteredContacts)
       console.log('filtered contacts')
     }
-    else this.assignableUsers = this.authService.contacts;
-  }
+    else {
+     this.contactService.getContactsForCurrentUser()
+      .subscribe((contacts) =>{
+        this.currentUserContacts = contacts;
+      })
+    }   
+}
 }

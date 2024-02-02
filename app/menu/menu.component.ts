@@ -9,8 +9,13 @@ import { AuthenticationService } from 'src/services/authentication.service';
 export class MenuComponent {
   showDropdown: boolean = false;
 
-  constructor( private auth: AuthenticationService ) {
+  constructor(public auth: AuthenticationService) {}
 
+
+
+  getInitials() {
+    let initials = this.auth.userData.name.split(' ').map((word: string) => word.charAt(0)).join('');
+    return initials
   }
 
   toggleDropdown() {

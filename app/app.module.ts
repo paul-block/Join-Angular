@@ -26,6 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditContactComponent } from './contacts/edit-contact/edit-contact.component';
 import { TaskDetailsComponent } from './board/task-details/task-details.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { TaskDetailsComponent } from './board/task-details/task-details.componen
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    DragDropModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
