@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TaskService } from 'src/services/task.service';
 import { TaskDetailsComponent } from './task-details/task-details.component';
@@ -11,9 +11,15 @@ import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angul
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
 
-constructor(public taskService: TaskService, private dialog: MatDialog) {}
+constructor(public taskService: TaskService, private dialog: MatDialog) {
+}
+
+async ngOnInit() {
+  await this.taskService.getAllTasksForCurrentUser();
+  this.taskService.filterTasks();
+}
 
 drop(event: CdkDragDrop<Task[]>) {
   if (event.previousContainer === event.container) {

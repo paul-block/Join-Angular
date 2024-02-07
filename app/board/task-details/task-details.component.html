@@ -1,7 +1,7 @@
 <div id="details-wrapper">
     <div class="flex-row" [ngClass]="{'justify-flex-end': showEditMode}">
         <div id="category" *ngIf="!showEditMode">{{taskObject.category}}</div>
-        <div id="close-btn">x</div>
+        <div id="close-btn" (click)="close()">x</div>
     </div>
 
     <div id="title" *ngIf="!showEditMode">{{taskObject.title}}</div>
@@ -120,10 +120,10 @@
         </div>
     </div>
     <div id="button-wrapper" *ngIf="!showEditMode">
-        <button><img src="../../../assets/img/delete.png" alt="">Delete</button>
+        <button (click)="deleteTask()"><img src="../../../assets/img/delete.png" alt="">Delete</button>
         <button (click)="activateEditMode()"><img src="../../../assets/img/edit.png" alt="">Edit</button>
     </div>
     <div id="button-wrapper-edit" *ngIf="showEditMode">
-        <button (click)="saveChanges()">Ok</button>
+        <button (click)="saveChanges()">Ok <img src="../../../assets/img/checkmark.svg" alt=""></button>
     </div>
 </div>

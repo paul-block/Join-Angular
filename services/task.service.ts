@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
-import { onSnapshot, query, where, addDoc, updateDoc, arrayUnion, QuerySnapshot } from '@angular/fire/firestore';
+import { onSnapshot, query, where, addDoc, updateDoc, deleteDoc, QuerySnapshot } from '@angular/fire/firestore';
 import { Task } from 'src/app/interfaces/task';
 import { Observable, Subject } from 'rxjs';
 
@@ -124,6 +124,11 @@ export class TaskService {
         id: task.id
       })
     }
+
+    async deleteTask(task: Task) {
+      await deleteDoc(this.authService.getSingleRefDoc('tasks', task.id))
+    }
+
   }
   
 

@@ -452,6 +452,36 @@
             }
         }
 
+        #button-wrapper-edit{
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                display: flex;
+                background-color: #2A3647;
+                height: 50px;
+                border-radius: 10px;
+                padding: 16px;
+                box-sizing: border-box;
+                gap: 4px;
+                color: #fff;
+                font-weight: 700;
+                font-size: 20px;
+                align-items: center;
+
+                img {
+                    height: 20px;
+                    width: 20px;
+                }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+          
+            }
+        }
+
 
         .justify-flex-end {
             justify-content: flex-end !important;

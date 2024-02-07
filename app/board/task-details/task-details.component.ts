@@ -38,9 +38,13 @@ export class TaskDetailsComponent implements OnInit {
       console.log(this.taskObject);
     }
 
+    // Noch nicht funktionsfähig
     checkSubtask(subtask:any){
       subtask.done != subtask.done;
-      
+    }
+
+    close(){
+      this.dialog.closeAll();
     }
 
     setPriority(priority:string) {
@@ -123,11 +127,13 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   saveChanges() {
-    // let index = this.taskService.tasks.findIndex((task: { id: string; }) => task.id === this.taskObject.id);
-    // console.log(this.taskService.tasks[index]);
-    // this.taskService.tasks[index] = this.taskObject;
     this.taskService.updateTask(this.taskObject);
-    // console.log(this.taskService.tasks[index]);
+    this.dialog.closeAll();
+  }
+
+  deleteTask() {
+    this.taskService.deleteTask(this.taskObject);
+    this.dialog.closeAll();
   }
   
 }
