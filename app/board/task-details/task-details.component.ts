@@ -27,7 +27,7 @@ export class TaskDetailsComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
     private taskService: TaskService,
-    private contactService: ContactService,
+    public contactService: ContactService,
     public authService: AuthenticationService,
     @Inject(MAT_DIALOG_DATA) public taskData: any){
      
@@ -80,6 +80,8 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   selectContact(event:any, selectedContact:any) {
+    console.log(this.taskObject.assignedUsers);
+    console.log(this.contactService.currentUserContacts)
     if (event.target.checked) {
       selectedContact.marked = true;
       this.taskData.push(selectedContact);
@@ -89,6 +91,11 @@ export class TaskDetailsComponent implements OnInit {
       this.taskData.assignedUsers[index].marked = false;
       this.taskData.assignedUsers.splice(index, 1)
     }
+  }
+
+  contactIsAssigned(contact:any) {
+   if(this.taskObject.assignedUsers.includes((user: { uid: string; }) => user.uid == contact.uid)) return true;
+   else return false;
   }
 
   deleteSubtask(subtask:string) {

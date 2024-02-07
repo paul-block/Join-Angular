@@ -37,6 +37,7 @@
                 type="button" class="buttonGlobalWhite">Low<img src="../../assets/img/prioLow.svg" alt=""></button>
         </div>
     </div>
+    <!-- assigned to -->
     <div id="assigned-to-wrapper" *ngIf="!showEditMode">
         <span>Assigned to:</span>
         <div class="assigned-user flex-gap25" *ngFor="let user of taskObject.assignedUsers">
@@ -58,15 +59,16 @@
                     {{getInitials(this.authService.userData.name)}}
                 </div>
                 <span>{{this.authService.userData.name}} (You)</span>
-                <input type="checkbox" [checked]="this.authService.userData.marked === true"
-                    (change)="selectContact($event, this.authService.userData)">
+                <!-- <input type="checkbox" [checked]="this.authService.userData.marked === true"
+                    (change)="selectContact($event, this.authService.userData)"> -->
+                <input type="checkbox" checked disabled>
             </div>
             <div class="selectable-user" *ngFor="let contact of taskObject.assignedUsers">
                 <div class="initials" [ngStyle]="{'background-color': contact.color}">
                     {{getInitials(contact.name)}}
                 </div>
                 <span>{{contact.name}}</span>
-                <input type="checkbox" [checked]="contact.marked === true" (change)="selectContact($event, contact)">
+                <input type="checkbox" [checked]="contact.marked == true" (change)="selectContact($event, contact)">
             </div>
         </div>
         <!-- SELECTED USERS -->

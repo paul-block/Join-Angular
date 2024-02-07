@@ -13,12 +13,14 @@ import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angul
 })
 export class BoardComponent implements OnInit {
 
+ filterInput: string = '';
+
 constructor(public taskService: TaskService, private dialog: MatDialog) {
 }
 
 async ngOnInit() {
   await this.taskService.getAllTasksForCurrentUser();
-  this.taskService.filterTasks();
+  this.taskService.filterTasksByCategory();
 }
 
 drop(event: CdkDragDrop<Task[]>) {
@@ -34,6 +36,10 @@ drop(event: CdkDragDrop<Task[]>) {
     console.log(this.taskService.inProgress)
     console.log(this.taskService.todo)
   }
+}
+
+filterBoard(value:string) {
+  this.taskService.filterTasksByCharacters(value);
 }
 
 getInitials(name: string) {

@@ -16,7 +16,7 @@ export class SummaryComponent implements OnInit {
   async ngOnInit() {
     if (this.auth.isLoggedIn) {
       await this.taskService.getAllTasksForCurrentUser();
-      this.taskService.filterTasks();
+      this.taskService.filterTasksByCategory();
       console.log(this.taskService.tasks)
     }
   }
