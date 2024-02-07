@@ -54,7 +54,7 @@ export class TaskService {
       const tasks: { [x: string]: any; }[] = [];
       querySnapshot.forEach(doc => {
         tasks.push({...doc.data()});
-        this.filterTasks();
+        this.filterTasksByCategory();
         console.log(tasks)
       });
       this.tasksSubject.next(tasks);
@@ -78,7 +78,7 @@ export class TaskService {
     this.countUrgentTasks();
   }
 
-  filterTasks() {
+  filterTasksByCategory() {
     this.clearBoard()
     this.tasks.filter((task) => {
       if (task.status === 'todo') this.todo.push(task);
@@ -88,6 +88,16 @@ export class TaskService {
     })
     console.log(this.todo)
 }
+
+  filterTasksByCharacters(value: string) {
+    this.clearBoard()
+    this.tasks.filter((task) => {
+      if (task.status === 'todo' && task.title.includes(value) || task.status === 'todo' && task.description.includes(value)) this.todo.push(task);
+      if (task.status === 'done' && task.title.includes(value) || task.status === 'done' && task.description.includes(value)) this.done.push(task);
+      if (task.status === 'in progress' && task.title.includes(value) || task.status === 'in progress' && task.description.includes(value)) this.inProgress.push(task);
+      if (task.status === 'feedback' && task.title.includes(value) || task.status === 'feedback' && task.description.includes(value)) this.feedback.push(task);
+    })
+  }
 
   async addTask(task: any) {
     const docRef = await addDoc(this.authService.getTasksRef(), {

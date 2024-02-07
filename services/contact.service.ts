@@ -10,9 +10,15 @@ import { Observable } from 'rxjs';
 export class ContactService {
   currentUserDocId: string ='';
   selectedContact!: Contact;
-  // currentUserContacts = this.getContactsForCurrentUser();
+  currentUserContacts:any;
+  contactsSubscription: any;
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService) { 
+    this.contactsSubscription = this.getContactsForCurrentUser()
+    .subscribe((contacts) =>{
+      this.currentUserContacts = contacts;
+    })
+  }
 
   getDocId() {
       return new Promise<void>((resolve, reject) => {
