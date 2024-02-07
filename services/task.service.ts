@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
-import { onSnapshot, query, where, addDoc, updateDoc, arrayUnion } from '@angular/fire/firestore';
+import { onSnapshot, query, where, addDoc, updateDoc, arrayUnion, QuerySnapshot } from '@angular/fire/firestore';
 import { Task } from 'src/app/interfaces/task';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -18,25 +19,47 @@ export class TaskService {
   done:any[] = [];
 
   selectedTask: any;
+  private tasksSubject: Subject<any[]> = new Subject<any[]>();
+  public tasks$: Observable<any[]> = this.tasksSubject.asObservable();
 
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService) {
+    this.getAllTasksForCurrentUser();
+    this.tasks$.subscribe(tasks => {
+      this.tasks = tasks; 
+    });
+  }
+
+  // async getAllTasksForCurrentUser() {
+  //   return new Promise<void>((resolve, reject) => {
+  //     const q = query(this.authService.getTasksRef(), where('assignedUserIDs', 'array-contains', this.authService.userData.uid));
+  //     onSnapshot(q, doc => {
+  //       console.log('onSnapshot wurde aufgerufen');
+  //       this.tasks = [];
+  //       doc.forEach(doc => {
+  //         this.tasks.push({...doc.data()});
+  //       });
+  //       console.log(this.tasks);
+  //       resolve();
+  //     }, error => {
+  //       console.error('Fehler beim Abrufen der Aufgaben: ', error);
+  //       reject(error);
+  //     });
+  //   });
+  // }
 
   async getAllTasksForCurrentUser() {
-    return new Promise<void>((resolve, reject) => {
-      const q = query(this.authService.getTasksRef(), where('assignedUserIDs', 'array-contains', this.authService.userData.uid));
-      onSnapshot(q, doc => {
-        console.log('onSnapshot wurde aufgerufen');
-        this.tasks = [];
-        doc.forEach(doc => {
-          this.tasks.push({...doc.data()});
-        });
-        console.log(this.tasks);
-        resolve();
-      }, error => {
-        console.error('Fehler beim Abrufen der Aufgaben: ', error);
-        reject(error);
+    const q = query(this.authService.getTasksRef(), where('assignedUserIDs', 'array-contains', this.authService.userData.uid));
+    onSnapshot(q, (querySnapshot: QuerySnapshot) => {
+      const tasks: { [x: string]: any; }[] = [];
+      querySnapshot.forEach(doc => {
+        tasks.push({...doc.data()});
+        this.filterTasks();
+        console.log(tasks)
       });
+      this.tasksSubject.next(tasks);
+    }, error => {
+      console.error('Fehler beim Abrufen der Aufgaben: ', error);
     });
   }
 
