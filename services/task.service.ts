@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
-import { onSnapshot, query, where, addDoc } from '@angular/fire/firestore';
+import { onSnapshot, query, where, addDoc, updateDoc, arrayUnion } from '@angular/fire/firestore';
+import { Task } from 'src/app/interfaces/task';
 
 
 @Injectable({
@@ -77,8 +78,29 @@ export class TaskService {
       subtasks: task.subtasks,
       title: task.title,
     }) 
+    await updateDoc(docRef, {
+      id: docRef.id
+    });
     console.log(docRef.id)
+  }
+
+  async updateTask(task: Task){
+      console.log('task infos updated');
+      console.log(task.assignedUserIDs)
+  
+      await updateDoc(this.authService.getSingleRefDoc('tasks', task.id), {
+        assignedUsers: task.assignedUsers,
+        assignedUserIDs: task.assignedUserIDs,
+        category: task.category,
+        description: task.description,
+        dueDate: task.dueDate,
+        prio: task.prio,
+        status: task.status,
+        subtasks: task.subtasks,
+        title: task.title,
+        id: task.id
+      })
+    }
   }
   
 
-}

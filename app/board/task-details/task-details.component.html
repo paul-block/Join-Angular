@@ -1,37 +1,129 @@
 <div id="details-wrapper">
-    <div class="flex-row">
-        <div id="category">{{taskData.category}}</div>
+    <div class="flex-row" [ngClass]="{'justify-flex-end': showEditMode}">
+        <div id="category" *ngIf="!showEditMode">{{taskObject.category}}</div>
         <div id="close-btn">x</div>
     </div>
 
-    <div id="title">{{taskData.title}}</div>
-    <div id="description">{{taskData.description}}</div>
-    <div class="flex-gap25">
+    <div id="title" *ngIf="!showEditMode">{{taskObject.title}}</div>
+    <div id="title-edit-wrapper" *ngIf="showEditMode">
+        <span>Title</span>
+        <input type="text" [(ngModel)]="taskObject.title">
+    </div>
+
+
+    <div id="description" *ngIf="!showEditMode">{{taskObject.description}}</div>
+    <div id="description-edit-wrapper" *ngIf="showEditMode">
+        <span>Description</span>
+        <textarea cols="30" rows="10" [(ngModel)]="taskObject.description"></textarea>
+    </div>
+    <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
         <span>Due Date:</span>
-        <span>{{taskData.dueDate}}</span>
+        <span *ngIf="!showEditMode">{{taskObject.dueDate}}</span>
+        <input type="date" [(ngModel)]="taskObject.dueDate" *ngIf="showEditMode">
     </div>
-    <div class="flex-gap25">
+    <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
         <span>Priority:</span>
-        <span>{{taskData.prio.charAt(0).toUpperCase()}}{{taskData.prio.slice(1)}}
-            <img [src]="taskData.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : taskData.prio == 'medium' ? '..assets/img/prioMedium.svg' : '..assets/img/prioLow.svg'"
+        <span *ngIf="!showEditMode">{{taskObject.prio.charAt(0).toUpperCase()}}{{taskObject.prio.slice(1)}}
+            <img [src]="taskObject.prio == 'urgent' ? '../../assets/img/prioUrgent.svg' : taskObject.prio == 'medium' ? '../../assets/img/prioMedium.svg' : '../../assets/img/prioLow.svg'"
                 alt=""></span>
+        <div class="flex-row prio-btns" *ngIf="showEditMode">
+            <button id="urgent-btn" (click)="setPriority('urgent')" [class.urgent]="this.taskObject.prio === 'urgent'"
+                type="button" class="buttonGlobalWhite">Urgent<img src="../../assets/img/prioUrgent.svg" alt="">
+            </button>
+            <button id="medium-btn" (click)="setPriority('medium')" [class.medium]="this.taskObject.prio === 'medium'"
+                type="button" class="buttonGlobalWhite">Medium<img src="../../assets/img/prioMedium.svg"
+                    alt=""></button>
+            <button id="low-btn" (click)="setPriority('low')" [class.medium]="this.taskObject.prio === 'low'"
+                type="button" class="buttonGlobalWhite">Low<img src="../../assets/img/prioLow.svg" alt=""></button>
+        </div>
     </div>
-    <div id="assigned-to-wrapper">
-        <span>Assigned To:</span>
-        <div class="assigned-user flex-gap25" *ngFor="let user of taskData.assignedUsers">
+    <div id="assigned-to-wrapper" *ngIf="!showEditMode">
+        <span>Assigned to:</span>
+        <div class="assigned-user flex-gap25" *ngFor="let user of taskObject.assignedUsers">
             <div class="initials" [ngStyle]="{'background-color': user.color}">{{getInitials(user.name)}}</div>
             <div class="name">{{user.name}}</div>
         </div>
     </div>
-    <div id="subtasks-wrapper">
+    <div id="assigned-to-edit-wrapper" *ngIf="showEditMode">
+        <span>Assigned to</span>
+        <div class="input-wrapper" (click)="toggleDropdown('assign')">
+            <input name="assigned-to" placeholder="Select contacts to assign" type="text" [(ngModel)]="contactInput"
+                id="assigned-to" (input)="filterContacts(contactInput)">
+            <img src="../../assets/img/arrowDown.png" alt="">
+        </div>
+        <!-- DROPDOWN -->
+        <div *ngIf="showAssignDropDown" class="dropdown">
+            <div class="selectable-user">
+                <div class="initials" [ngStyle]="{'background-color': this.authService.userData.color}">
+                    {{getInitials(this.authService.userData.name)}}
+                </div>
+                <span>{{this.authService.userData.name}} (You)</span>
+                <input type="checkbox" [checked]="this.authService.userData.marked === true"
+                    (change)="selectContact($event, this.authService.userData)">
+            </div>
+            <div class="selectable-user" *ngFor="let contact of taskObject.assignedUsers">
+                <div class="initials" [ngStyle]="{'background-color': contact.color}">
+                    {{getInitials(contact.name)}}
+                </div>
+                <span>{{contact.name}}</span>
+                <input type="checkbox" [checked]="contact.marked === true" (change)="selectContact($event, contact)">
+            </div>
+        </div>
+        <!-- SELECTED USERS -->
+        <div id="selected-contacts">
+            <div class="initials" [ngStyle]="{'background-color': contact.color}"
+                *ngFor="let contact of taskObject.assignedUsers">
+                {{getInitials(contact.name)}}
+            </div>
+        </div>
+    </div>
+    <div id="subtasks-wrapper" *ngIf="!showEditMode">
         <span>Subtasks</span>
-        <div class="subtask" *ngFor="let subtask of taskData.subtasks">
-            <input type="checkbox">
+        <div class="subtask" *ngFor="let subtask of taskObject.subtasks">
+            <input [checked]="subtask.done" type="checkbox" (click)="checkSubtask(subtask)">
             <span>{{subtask.name}}</span>
         </div>
     </div>
-    <div id="button-wrapper">
+    <div id="subtasks-edit-mode-wrapper" *ngIf="showEditMode">
+        <div class="input-wrapper">
+            <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text" [(ngModel)]="subtask"
+                id="subtasks">
+            <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="../../assets/img/add.png" alt="">
+            <div class="icons-wrapper" *ngIf="subtaskFocused">
+                <img (click)="clearSubtaskInput()" src="../../assets/img/x.png" alt="">
+                <div class="middle-line"></div>
+                <img (click)="addSubtask()" src="../../assets/img/check.svg" alt="">
+            </div>
+        </div>
+        <div id="subtask-wrapper" *ngIf="taskObject.subtasks.length > 0">
+            <ul>
+                <li *ngFor="let subtask of taskObject.subtasks" (mouseover)="showSubtaskIcons = true"
+                    (mouseleave)="showSubtaskIcons = false">
+                    {{subtask.name}}
+                    <div id="edit-delete-wrapper" *ngIf="showSubtaskIcons">
+                        <img (click)="deleteSubtask(subtask)" src="../../assets/img/delete.png" alt="">
+                        <div class="middle-line"></div>
+                        <img (click)="openEditInput(subtask)" src="../../assets/img/edit.png" alt="">
+                    </div>
+                    <div id="edit-input-wrapper" *ngIf="subtask.editMode === true">
+                        <input name="editSubtask" id="edit-input" type="text" [(ngModel)]="editedSubtask">
+                        <div class="icons-wrapper">
+                            <img (click)="subtask.editMode = false" src="../../assets/img/x.png" alt="">
+                            <div class="middle-line"></div>
+                            <img (click)="updateSubtask(subtask, editedSubtask)" src="../../assets/img/check.svg"
+                                alt="">
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="button-wrapper" *ngIf="!showEditMode">
         <button><img src="../../../assets/img/delete.png" alt="">Delete</button>
-        <button><img src="../../../assets/img/edit.png" alt="">Edit</button>
+        <button (click)="activateEditMode()"><img src="../../../assets/img/edit.png" alt="">Edit</button>
+    </div>
+    <div id="button-wrapper-edit" *ngIf="showEditMode">
+        <button (click)="saveChanges()">Ok</button>
     </div>
 </div>

@@ -7,4 +7,6 @@ export interface Task {
     prio: string;
     status: string;
     subtasks: [];
+    id: string;
+    assignedUserIDs: [];
 }

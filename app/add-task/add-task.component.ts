@@ -59,6 +59,17 @@ export class AddTaskComponent {
     return task;
   }
 
+  // generateRandomId(): string {
+  //   const length = 28;
+  //   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  //   let randomId = '';
+  //   for (let i = 0; i < length; i++) {
+  //     const randomIndex = Math.floor(Math.random() * characters.length);
+  //     randomId += characters.charAt(randomIndex);
+  //   }
+  //   return randomId;
+  // }
+
   setPriority(priority:string) {
     this.prio = '';
     this.prio = priority;
@@ -66,7 +77,7 @@ export class AddTaskComponent {
 
   async addTask() {
      await this.taskService.addTask(this.createTaskObject());
-      console.log('add task ')
+      console.log('add task')
       this.clearTask();
   }
 
@@ -83,7 +94,8 @@ export class AddTaskComponent {
   addSubtask() {
     let subtask = {
       name: this.subtask.trim(),
-      editMode: false
+      editMode: false,
+      done: false
     }
     if (this.subtask.trim() != '' && this.addedSubtasks.length < 2) {
       this.addedSubtasks.push(subtask)
