@@ -81,15 +81,17 @@ export class TaskDetailsComponent implements OnInit {
 
   selectContact(event:any, selectedContact:any) {
     console.log(this.taskObject.assignedUsers);
-    console.log(this.contactService.currentUserContacts)
+    // console.log(this.contactService.currentUserContacts)
     if (event.target.checked) {
-      selectedContact.marked = true;
-      this.taskData.push(selectedContact);
+      let index = this.taskData.assignedUsers.findIndex((contact: { name: string; }) => contact.name === selectedContact.name)
+      this.taskData.assignedUsers[index].marked = true;
+      // selectedContact.marked = true;
+      // this.taskObject.assignedUsers.push(selectedContact);
     }
     else {
       let index = this.taskData.assignedUsers.findIndex((contact: { name: string; }) => contact.name === selectedContact.name)
       this.taskData.assignedUsers[index].marked = false;
-      this.taskData.assignedUsers.splice(index, 1)
+      // this.taskData.assignedUsers.splice(index, 1)
     }
   }
 

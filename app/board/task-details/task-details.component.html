@@ -28,22 +28,27 @@
                 alt=""></span>
         <div class="flex-row prio-btns" *ngIf="showEditMode">
             <button id="urgent-btn" (click)="setPriority('urgent')" [class.urgent]="this.taskObject.prio === 'urgent'"
-                type="button" class="buttonGlobalWhite">Urgent<img src="../../assets/img/prioUrgent.svg" alt="">
+                type="button" class="buttonGlobalWhite">Urgent<img
+                    [src]="this.taskObject.prio === 'urgent' ? '../../assets/img/prioUrgent-white.svg' : '../../assets/img/prioUrgent.svg'">
             </button>
             <button id="medium-btn" (click)="setPriority('medium')" [class.medium]="this.taskObject.prio === 'medium'"
-                type="button" class="buttonGlobalWhite">Medium<img src="../../assets/img/prioMedium.svg"
-                    alt=""></button>
-            <button id="low-btn" (click)="setPriority('low')" [class.medium]="this.taskObject.prio === 'low'"
-                type="button" class="buttonGlobalWhite">Low<img src="../../assets/img/prioLow.svg" alt=""></button>
+                type="button" class="buttonGlobalWhite">Medium<img
+                    [src]="this.taskObject.prio === 'medium' ? '../../assets/img/prioMedium-white.svg' : '../../assets/img/prioMedium.svg'">
+            </button>
+            <button id="low-btn" (click)="setPriority('low')" [class.low]="this.taskObject.prio === 'low'" type="button"
+                class="buttonGlobalWhite">Low<img
+                    [src]="this.taskObject.prio === 'low' ? '../../assets/img/prioLow-white.svg' : '../../assets/img/prioLow.svg'"></button>
         </div>
     </div>
     <!-- assigned to -->
     <div id="assigned-to-wrapper" *ngIf="!showEditMode">
         <span>Assigned to:</span>
-        <div class="assigned-user flex-gap25" *ngFor="let user of taskObject.assignedUsers">
-            <div class="initials" [ngStyle]="{'background-color': user.color}">{{getInitials(user.name)}}</div>
-            <div class="name">{{user.name}}</div>
-        </div>
+        <ng-container *ngFor="let user of taskObject.assignedUsers">
+            <div class="assigned-user flex-gap25" *ngIf="user.uid != this.authService.userData.uid">
+                <div class="initials" [ngStyle]="{'background-color': user.color}">{{getInitials(user.name)}}</div>
+                <div class="name">{{user.name}}</div>
+            </div>
+        </ng-container>
     </div>
     <div id="assigned-to-edit-wrapper" *ngIf="showEditMode">
         <span>Assigned to</span>
@@ -63,20 +68,24 @@
                     (change)="selectContact($event, this.authService.userData)"> -->
                 <input type="checkbox" checked disabled>
             </div>
-            <div class="selectable-user" *ngFor="let contact of taskObject.assignedUsers">
-                <div class="initials" [ngStyle]="{'background-color': contact.color}">
-                    {{getInitials(contact.name)}}
+            <ng-container *ngFor="let contact of taskObject.assignedUsers">
+                <div class="selectable-user" *ngIf="contact.uid !== this.authService.userData.uid">
+                    <div class="initials" [ngStyle]="{'background-color': contact.color}">
+                        {{getInitials(contact.name)}}
+                    </div>
+                    <span>{{contact.name}}</span>
+                    <input type="checkbox" [checked]="contact.marked == true" (change)="selectContact($event, contact)">
                 </div>
-                <span>{{contact.name}}</span>
-                <input type="checkbox" [checked]="contact.marked == true" (change)="selectContact($event, contact)">
-            </div>
+            </ng-container>
         </div>
         <!-- SELECTED USERS -->
         <div id="selected-contacts">
-            <div class="initials" [ngStyle]="{'background-color': contact.color}"
-                *ngFor="let contact of taskObject.assignedUsers">
-                {{getInitials(contact.name)}}
-            </div>
+            <ng-container *ngFor="let contact of taskObject.assignedUsers">
+                <div *ngIf="contact.marked && contact.uid !== this.authService.userData.uid" class="initials"
+                    [ngStyle]="{'background-color': contact.color}">
+                    {{getInitials(contact.name)}}
+                </div>
+            </ng-container>
         </div>
     </div>
     <div id="subtasks-wrapper" *ngIf="!showEditMode">

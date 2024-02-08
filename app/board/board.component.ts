@@ -5,6 +5,7 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
 import { Task } from '../interfaces/task';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-board',
@@ -15,7 +16,7 @@ export class BoardComponent implements OnInit {
 
  filterInput: string = '';
 
-constructor(public taskService: TaskService, private dialog: MatDialog) {
+constructor(public taskService: TaskService, private dialog: MatDialog, public authService: AuthenticationService) {
 }
 
 async ngOnInit() {

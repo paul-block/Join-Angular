@@ -35,7 +35,7 @@
                                 {{getInitials(this.authService.userData.name)}}
                             </div>
                             <span>{{this.authService.userData.name}} (You)</span>
-                            <input type="checkbox" [checked]="this.authService.userData.marked === true"
+                            <input type="checkbox" checked disabled
                                 (change)="selectContact($event, this.authService.userData)">
                         </div>
                         <div class="selectable-user" *ngFor="let contact of this.currentUserContacts">
