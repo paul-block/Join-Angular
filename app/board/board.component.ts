@@ -33,6 +33,7 @@ drop(event: CdkDragDrop<Task[]>) {
       event.previousIndex,
       event.currentIndex,
     );
+    this.taskService.getAllTasksForCurrentUser();
     console.log(this.taskService.inProgress)
     console.log(this.taskService.todo)
   }

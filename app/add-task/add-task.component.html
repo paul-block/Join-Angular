@@ -73,15 +73,15 @@
                     <span>Prio</span>
                     <div class="flex-row prio-btns">
                         <button id="urgent-btn" (click)="setPriority('urgent')" [class.urgent]="this.prio === 'urgent'"
-                            type="button" class="buttonGlobalWhite">Urgent<img src="../../assets/img/prioUrgent.svg"
-                                alt="">
+                            type="button" class="buttonGlobalWhite">Urgent<img
+                                [src]="this.prio === 'urgent' ? '../../assets/img/prioUrgent-white.svg' : '../../assets/img/prioUrgent.svg'">
                         </button>
                         <button id="medium-btn" (click)="setPriority('medium')" [class.medium]="this.prio === 'medium'"
-                            type="button" class="buttonGlobalWhite">Medium<img src="../../assets/img/prioMedium.svg"
-                                alt=""></button>
-                        <button id="low-btn" (click)="setPriority('low')" [class.medium]="this.prio === 'low'"
-                            type="button" class="buttonGlobalWhite">Low<img src="../../assets/img/prioLow.svg"
-                                alt=""></button>
+                            type="button" class="buttonGlobalWhite">Medium<img
+                                [src]="this.prio === 'medium' ? '../../assets/img/prioMedium-white.svg' : '../../assets/img/prioMedium.svg'"></button>
+                        <button id="low-btn" (click)="setPriority('low')" [class.low]="this.prio === 'low'"
+                            type="button" class="buttonGlobalWhite">Low<img
+                                [src]="this.prio === 'low' ? '../../assets/img/prioLow-white.svg' : '../../assets/img/prioLow.svg'"></button>
                     </div>
                 </div>
 
