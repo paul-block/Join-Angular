@@ -25,16 +25,13 @@
                     <div class="subtasks" *ngIf="todo.subtasks.length != 0">
                         <div id="progress-bar-container">
                             <div id="current-progress"
-                                [ngStyle]="{'width': todo.subtasks.length === 0 ? '0%' : todo.subtasks.length === 1 ? '50%' : '100%'}">
+                                [ngStyle]="{'width': countDoneSubtasks(todo.subtasks) === 0 ? '0%' : countDoneSubtasks(todo.subtasks) === 1 && todo.subtasks.length != 1 ? '50%' : '100%'}">
                             </div>
                         </div>
-                        <div>{{todo.subtasks.length}}/2 Subtasks</div>
-
-
+                        <div>{{countDoneSubtasks(todo.subtasks)}}/{{todo.subtasks.length}}</div>
                     </div>
                     <div class="flex-row">
                         <div id="assigned-users-wrapper">
-                            <!-- Nur anzeige ändern dass nur marked users angezeigt werden initials(logik schon geändert) -->
                             <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
                                 <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"

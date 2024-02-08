@@ -49,10 +49,12 @@
                     </div>
                     <!-- SELECTED USERS -->
                     <div id="selected-contacts">
-                        <div class="initials" [ngStyle]="{'background-color': contact.color}"
-                            *ngFor="let contact of this.selectedContacts">
-                            {{getInitials(contact.name)}}
-                        </div>
+                        <ng-container *ngFor="let contact of this.selectedContacts">
+                            <div *ngIf="contact.uid != this.authService.userData.uid" class="initials"
+                                [ngStyle]="{'background-color': contact.color}">
+                                {{getInitials(contact.name)}}
+                            </div>
+                        </ng-container>
                     </div>
                 </div>
             </div>

@@ -77,5 +77,13 @@ openTaskDetailsDialog(task: Task){
   this.dialog.open(TaskDetailsComponent, dialogConfig);
 }
 
+  countDoneSubtasks(subtasks:any) {
+    let counter = 0;
+    subtasks.forEach((task: { done: boolean; }) => {
+      if (task.done) counter++; 
+    })
+    return counter;
+  }
+
 }
 

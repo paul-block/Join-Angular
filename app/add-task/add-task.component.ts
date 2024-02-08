@@ -59,23 +59,13 @@ export class AddTaskComponent {
     return task;
   }
 
-  // generateRandomId(): string {
-  //   const length = 28;
-  //   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //   let randomId = '';
-  //   for (let i = 0; i < length; i++) {
-  //     const randomIndex = Math.floor(Math.random() * characters.length);
-  //     randomId += characters.charAt(randomIndex);
-  //   }
-  //   return randomId;
-  // }
-
   setPriority(priority:string) {
     this.prio = '';
     this.prio = priority;
   }
 
   async addTask() {
+    this.selectedContacts.push(this.authService.userData);
      await this.taskService.addTask(this.createTaskObject());
       console.log('add task')
       this.clearTask();
@@ -89,6 +79,7 @@ export class AddTaskComponent {
     this.prio= '';
     this.category = '';
     this.subtask= '';
+    this.selectedContacts = [];
   }
   
   addSubtask() {

@@ -55,7 +55,7 @@ export class TaskService {
       querySnapshot.forEach(doc => {
         tasks.push({...doc.data()});
         this.filterTasksByCategory();
-        console.log(tasks)
+        // console.log(tasks)
       });
       this.tasksSubject.next(tasks);
     }, error => {
@@ -86,7 +86,7 @@ export class TaskService {
       if (task.status === 'in progress') this.inProgress.push(task);
       if (task.status === 'feedback') this.feedback.push(task);
     })
-    console.log(this.todo)
+    // console.log(this.todo)
 }
 
   filterTasksByCharacters(value: string) {

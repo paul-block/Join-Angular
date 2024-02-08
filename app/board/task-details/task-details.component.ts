@@ -38,9 +38,9 @@ export class TaskDetailsComponent implements OnInit {
       console.log(this.taskObject);
     }
 
-    // Noch nicht funktionsfähig
     checkSubtask(subtask:any){
-      subtask.done != subtask.done;
+      subtask.done =! subtask.done;
+      this.taskService.updateTask(this.taskObject);
     }
 
     close(){

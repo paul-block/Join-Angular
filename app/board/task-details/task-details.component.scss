@@ -137,6 +137,9 @@
         }
 
         #assigned-to-edit-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
 
             #selected-contacts {
                 display: flex;
