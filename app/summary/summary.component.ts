@@ -33,12 +33,10 @@ export class SummaryComponent implements OnInit {
     else return "Good day"
   }
 
-  //Logik für summary upcoming date
   getUpcomingDeadline(){
-   let dueDates = this.taskService.tasks.map(task => task.dueDate);
-   console.log(dueDates)
-  //  const nextDeadline = Math.min(...dueDates);
-  //  return nextDeadline.toString();
+   let dateParse = this.taskService.tasks.map(task => Date.parse(task.dueDate));
+   let nextDeadline = Math.min(...dateParse);
+   return new Date(nextDeadline).toLocaleDateString('de-DE');
   }
 
 
