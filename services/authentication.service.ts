@@ -18,20 +18,20 @@ export class AuthenticationService {
 
   isLoggedIn = false;
 
-  contacts = [
-    {
-      name: 'Birgit Salesch',
-      marked: false
-    },
-    {
-      name: 'Renate Branch',
-      marked: false
-    },
-    {
-      name: 'John Smith',
-      marked: false
-    }
-  ]
+  // contacts = [
+  //   {
+  //     name: 'Birgit Salesch',
+  //     marked: false
+  //   },
+  //   {
+  //     name: 'Renate Branch',
+  //     marked: false
+  //   },
+  //   {
+  //     name: 'John Smith',
+  //     marked: false
+  //   }
+  // ]
 
 
   constructor(private router: Router) {
@@ -51,6 +51,22 @@ export class AuthenticationService {
 
   signIn(email: string, password: string) {
     signInWithEmailAndPassword(this.auth, email, password)
+      .then(async userCredential => {
+        this.uid = userCredential.user.uid;
+        console.log(this.uid);
+        this.userData = await this.getUserData(userCredential.user.uid);
+        localStorage.setItem('userData', JSON.stringify(this.userData)); 
+        this.isLoggedIn = true;
+        this.router.navigate(['/summary']);
+        // this.getUserTasks(this.uid);
+      })
+      .catch(error => {
+        console.error('SignIn Failed:', error);
+      });
+  }
+
+  guestSignIn() {
+    signInWithEmailAndPassword(this.auth, 'guest@guest.de', 'guest123!')
       .then(async userCredential => {
         this.uid = userCredential.user.uid;
         console.log(this.uid);

@@ -29,4 +29,8 @@ export class LoginComponent {
     }
     else this.loginError = true;
   }
+
+  guestSignIn(){
+    this.authService.guestSignIn();
+  }
 }

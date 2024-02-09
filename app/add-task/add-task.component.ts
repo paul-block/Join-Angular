@@ -13,7 +13,7 @@ export class AddTaskComponent {
   title: string = '';
   description: string = '';
   contactInput: string = '';
-  assignableUsers: any[] = this.getContacts();
+  // assignableUsers: any[] = this.getContacts();
   dueDate: string = '';
   prio: string = '';
   category: string = '';
@@ -149,9 +149,9 @@ export class AddTaskComponent {
     return initials
   }
 
-  getContacts() {
-    return this.authService.contacts;
-  }
+  // getContacts() {
+  //   return this.authService.contacts;
+  // }
 
   filterContacts(name: string) {
     if (name.trim() !== '') {
