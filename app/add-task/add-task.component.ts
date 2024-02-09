@@ -31,9 +31,12 @@ export class AddTaskComponent {
 
   currentUserContacts:any;
   contactsSubscription: Subscription | null = null;
- 
-  constructor(private taskService: TaskService, public authService: AuthenticationService, public contactService: ContactService){
+  today:string;
 
+  addedTask:boolean = false;
+
+  constructor(private taskService: TaskService, public authService: AuthenticationService, public contactService: ContactService){
+    this.today = new Date().toISOString().split('T')[0];
   }
 
   ngOnInit(){
@@ -65,10 +68,11 @@ export class AddTaskComponent {
   }
 
   async addTask() {
+    this.addedTask = true;
     this.selectedContacts.push(this.authService.userData);
-     await this.taskService.addTask(this.createTaskObject());
-      console.log('add task')
-      this.clearTask();
+    await this.taskService.addTask(this.createTaskObject());
+    console.log('add task')
+    this.clearTask();
   }
 
   clearTask() {

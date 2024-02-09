@@ -7,8 +7,10 @@
         </div>
 
         <div id="contact-list">
-
-            <div class="contact" *ngFor="let contact of currentUserContacts" (click)="showContactDetails(contact)">
+            <!-- andere variable nutzen -->
+            <div class="contact" *ngFor="let contact of currentUserContacts; let i = index"
+                [ngClass]="{'active': showDetails && contact.uid == this.contactService.selectedContact.uid}"
+                (click)="showContactDetails(contact)">
                 <div class="initials" [ngStyle]="{'background-color': contact.color}">{{getInitials(contact.name)}}
                 </div>
                 <div>

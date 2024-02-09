@@ -24,13 +24,14 @@ export class TaskDetailsComponent implements OnInit {
   showSubtaskIcons:boolean = false;
 
   taskObject:any;
+  today: string;
 
   constructor(private dialog: MatDialog,
     private taskService: TaskService,
     public contactService: ContactService,
     public authService: AuthenticationService,
     @Inject(MAT_DIALOG_DATA) public taskData: any){
-     
+     this.today = new Date().toISOString().split('T')[0];
     }
 
     ngOnInit() {

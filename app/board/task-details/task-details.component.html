@@ -19,7 +19,7 @@
     <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
         <span>Due Date:</span>
         <span *ngIf="!showEditMode">{{taskObject.dueDate}}</span>
-        <input type="date" [(ngModel)]="taskObject.dueDate" *ngIf="showEditMode">
+        <input type="date" [(ngModel)]="taskObject.dueDate" *ngIf="showEditMode" min="{{today}}">
     </div>
     <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
         <span>Priority:</span>
@@ -89,7 +89,7 @@
         </div>
     </div>
     <div id="subtasks-wrapper" *ngIf="!showEditMode">
-        <span>Subtasks</span>
+        <span *ngIf="taskObject.subtasks.length > 0">Subtasks</span>
         <div class="subtask" *ngFor="let subtask of taskObject.subtasks">
             <input [checked]="subtask.done" type="checkbox" (click)="checkSubtask(subtask)">
             <span>{{subtask.name}}</span>
@@ -97,8 +97,8 @@
     </div>
     <div id="subtasks-edit-mode-wrapper" *ngIf="showEditMode">
         <div class="input-wrapper">
-            <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text" [(ngModel)]="subtask"
-                id="subtasks">
+            <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text"
+                placeholder="Add new subtask" [(ngModel)]="subtask" id="subtasks">
             <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="../../assets/img/add.png" alt="">
             <div class="icons-wrapper" *ngIf="subtaskFocused">
                 <img (click)="clearSubtaskInput()" src="../../assets/img/x.png" alt="">

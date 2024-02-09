@@ -7,8 +7,8 @@
             <div id="left-side">
                 <div class="flex-column">
                     <label for="title-input">Title<span class="required">*</span></label>
-                    <input required name="title-input" class="input" type="text" id="title-input" [(ngModel)]="title"
-                        placeholder="Enter title">
+                    <input [required]="!addedTask" name="title-input" class="input" type="text" id="title-input"
+                        [(ngModel)]="title" placeholder="Enter title">
                     <p class="required"
                         *ngIf="taskForm.form.get('title')?.invalid && taskForm.form.get('title')?.touched">
                         This field is
@@ -64,7 +64,8 @@
             <div id="right-side">
                 <div class="flex-column">
                     <label for="due-date">Due date<span class="required">*</span></label>
-                    <input required name="due-date" type="date" [(ngModel)]="dueDate" id="due-date">
+                    <input [required]="!addedTask" name="due-date" type="date" [(ngModel)]="dueDate" id="due-date"
+                        min="{{today}}">
                     <p class="required"
                         *ngIf="taskForm.form.get('due-date')?.invalid && taskForm.form.get('due-date')?.touched">This
                         field
@@ -90,7 +91,8 @@
                 <div class="flex-column">
                     <label for="category">Category<span class="required">*</span></label>
                     <div class="input-wrapper" (click)="toggleDropdown('category')">
-                        <input required name="category" type="text" [(ngModel)]="category" id="category">
+                        <input [required]="!addedTask" placeholder="Select task category" name="category" type="text"
+                            [(ngModel)]="category" id="category">
                         <img src="../../assets/img/arrowDown.png" alt="">
                     </div>
                     <!-- Category DROPDOWN -->
@@ -109,8 +111,9 @@
                 <div class="flex-column">
                     <label for="subtasks">Subtasks</label>
                     <div class="input-wrapper">
-                        <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text"
-                            [(ngModel)]="subtask" id="subtasks">
+                        <input name="subtasks" (focus)="subtaskFocused = true" (blur)="subtaskFocused = false"
+                            name="subtasks" type="text" [(ngModel)]="subtask" id="subtasks"
+                            placeholder="Add new subtask">
                         <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="../../assets/img/add.png"
                             alt="">
                         <div class="icons-wrapper" *ngIf="subtaskFocused">

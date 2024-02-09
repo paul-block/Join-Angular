@@ -139,6 +139,7 @@
 
                 &:hover {
                     background-color: lightgray;
+                    cursor: pointer;
                 }
             
                 .initials {
@@ -161,6 +162,10 @@
                         font-size: 22px;
                     }
                 }
+            }
+            .active {
+                background-color: #2A3647 !important; 
+                color: #fff;
             }
     }
 }

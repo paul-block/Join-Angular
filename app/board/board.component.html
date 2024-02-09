@@ -15,9 +15,11 @@
             </div>
             <div class="task-container" cdkDropList #todoList="cdkDropList" [cdkDropListData]="this.taskService.todo"
                 [cdkDropListConnectedTo]="[inProgressList]" (cdkDropListDropped)="drop($event)">
-                <div class="task-card" *ngFor="let todo of this.taskService.todo" cdkDrag
+                <div cdkDrag class="task-card" *ngFor="let todo of this.taskService.todo"
                     (click)="openTaskDetailsDialog(todo)">
-                    <div class="category">{{todo.category}}</div>
+                    <div class="category"
+                        [ngStyle]="{'background-color': todo.category == 'User Story' ? '#0038FF' : '#1FD7C1'}">
+                        {{todo.category}}</div>
                     <div class="text-container">
                         <p class="title">{{todo.title}}</p>
                         <p class="description">{{todo.description}}</p>
@@ -45,6 +47,7 @@
                             alt="">
                     </div>
                 </div>
+
                 <div *ngIf="this.taskService.todo.length < 1" class="no-task-placeholder">No tasks to do</div>
             </div>
         </div>

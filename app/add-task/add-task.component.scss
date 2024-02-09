@@ -123,6 +123,7 @@
             padding: 12px;
             border: 1px solid #d1d1d1;
             resize: none;
+            font-family: 'Inter';
         }
 
         p {
@@ -134,18 +135,18 @@
             background-color: white;
             border-radius: 10px;
             width: 440px;
-            padding: 12px;
             box-sizing: border-box;
 
                 .selectable-user {
                     display: flex;
                     align-items: center;
-                    padding: 5px;
+                    padding: 8px;
                     position: relative;
 
                         &:hover {
                             background-color: lightgray;
                             border-radius: 10px;
+                            cursor: pointer;
                         }
                 
                 input {
@@ -156,6 +157,7 @@
                 
                 span {
                     font-size: 18px;
+                    padding: 2px;
                 }
             }
         }
