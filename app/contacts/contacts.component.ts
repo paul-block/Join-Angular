@@ -5,6 +5,7 @@ import { ContactService } from 'src/services/contact.service';
 import { Contact } from '../interfaces/contact';
 import { Subscription } from 'rxjs';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contacts',
@@ -25,7 +26,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   contactsByFirstLetter:any;
   showConfirmation:boolean = false;
 
-  constructor(private dialog: MatDialog, public contactService: ContactService) {}
+  constructor(private dialog: MatDialog, public contactService: ContactService, private router: Router) {}
 
   async ngOnInit() {
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
@@ -37,6 +38,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.contactsSubscription?.unsubscribe();
+    if(this.router.url !== '/contacts') this.contactService.showDetails = false;
   }
 
   sortContacts() {
