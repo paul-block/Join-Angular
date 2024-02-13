@@ -17,9 +17,13 @@ export class ContactsComponent implements OnInit, OnDestroy {
   currentUserContacts:any;
   contactsSubscription: Subscription | null = null;
 
-  showDetails:boolean = false
+
   selectedContact!: Contact;
 
+  firstLetters:any[] = [];;
+  renderedLetters = new Set<string>();
+  contactsByFirstLetter:any;
+  showConfirmation:boolean = false;
 
   constructor(private dialog: MatDialog, public contactService: ContactService) {}
 
@@ -27,11 +31,18 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;
+      this.sortContacts();
     })
   }
 
   ngOnDestroy() {
     this.contactsSubscription?.unsubscribe();
+  }
+
+  sortContacts() {
+    this.currentUserContacts.sort((a: any,b: any) => {
+     return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : a.name.toUpperCase() > b.name.toUpperCase() ? 1 : 0;
+    })
   }
 
   openAddNewContactDialog(){
@@ -55,7 +66,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   }
 
   showContactDetails(contact: Contact) {
-    this.showDetails = true;
+    this.contactService.showDetails = true;
     this.contactService.selectedContact = contact;
   }
   
@@ -66,6 +77,8 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   deleteContact(contact: Contact) {
     this.contactService.deleteContact(contact);
-    this.showDetails = false;
+    this.contactService.showDetails = false;
   }
 }
+
+

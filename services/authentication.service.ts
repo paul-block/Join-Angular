@@ -18,27 +18,9 @@ export class AuthenticationService {
 
   isLoggedIn = false;
 
-  // contacts = [
-  //   {
-  //     name: 'Birgit Salesch',
-  //     marked: false
-  //   },
-  //   {
-  //     name: 'Renate Branch',
-  //     marked: false
-  //   },
-  //   {
-  //     name: 'John Smith',
-  //     marked: false
-  //   }
-  // ]
-
-
   constructor(private router: Router) {
     this.checkLocalStorageUserData();
   }
-
-
 
   checkLocalStorageUserData(){
     const storedUserData = localStorage.getItem('userData');
@@ -87,7 +69,8 @@ export class AuthenticationService {
         const userData = {
           uid: userCredential.user.uid,
           email: userCredential.user.email,
-          name: username
+          name: username,
+          color: this.getRandomColorHex()
         };
         this.userData = userData;
         this.addUserToFirestore(userData);
@@ -153,6 +136,22 @@ export class AuthenticationService {
   //   // Optional: Rückgabe der Unsubscribe-Funktion, um das Abhören zu beenden
   //   return unsubscribe;
   // }
+
+  getRandomColorHex(): string {
+    const colors = [
+      '#3498db', 
+      '#e74c3c', 
+      '#f39c12', 
+      '#2ecc71',
+      '#f1c40f',
+      '#9b59b6',
+      '#1abc9c', 
+      '#e5e8df'  
+    ];
+  
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  }
   
   
   addUserToFirestore(data:any) {

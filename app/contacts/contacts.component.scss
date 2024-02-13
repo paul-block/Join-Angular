@@ -8,7 +8,7 @@
         position: absolute;
         left: 30%;
         top: 0px;
-        width: 70%;
+        width: 75%;
         height: calc(100vh - 90px);
         padding: 15px 100px;
 
@@ -37,10 +37,20 @@
                     }
             }
 
+            @keyframes slide-in {
+                0% {
+                    transform: translate(500px);
+                }
+                100% {
+                    transform: translate(0px);
+                }
+            }
+
             .contact-details {
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
+                animation: slide-in 125ms linear;
 
                     .first-row {
                         display: flex;
@@ -78,28 +88,51 @@
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
+                                  
+                                    // border-radius: 25%;
+                                    // padding: 10px;
                                     gap: 10px;
+                            
 
-                                        img {
-                                            display: flex;
-                                            border-radius: 25%;
-                                            padding: 10px;
-                                            cursor: pointer;
-
-                                            &:hover {
-                                                background-color: lightgray;
-
+                                    &:hover {
+                                        cursor: pointer;
+                                        color: #29ABE2;
+                                       
+                                        svg {
+                                            path {
+                                                fill:#29ABE2;
                                             }
                                         }
+                                    }
+
+                                       
                                 }
                             }
                     }
             }
+
+
+        #added-contact-confirmation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: -200px;
+            height: 74px;
+            width: 326px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 4px 0px #00000026;
+            background-color: #2A3647;
+            color: #fff;
+            font-size: 20px;
+            animation: slide-in 125ms linear;
+        }
     }
 
     .email {
         color: #29ABE2
     }
+
 }
         
 
@@ -108,16 +141,14 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 30%;
+    width: 25%;
     background-color: #fff;
     height: calc(100vh - 90px);
-    padding: 32px 48px;
-    box-sizing: border-box;
 
     #add-contact-btn {
         gap: 15px;
         height: 34px;
-
+        margin: 32px 48px 0 48px;
             &:hover {
                 background-color: #29ABE2;
             }
@@ -127,6 +158,20 @@
         display: flex;
         flex-direction: column;
         gap: 20px;  
+        padding: 0px 48px 32px 48px;
+        box-sizing: border-box;
+
+        overflow-y: scroll;
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
+            .first-letter {
+                padding: 15px 24px;
+                font-size: 20px;
+                box-shadow: 0 2px 1px -1px lightgray;
+            }
 
             .contact {
                 display: flex;

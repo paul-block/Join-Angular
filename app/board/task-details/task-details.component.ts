@@ -34,6 +34,11 @@ export class TaskDetailsComponent implements OnInit {
      this.today = new Date().toISOString().split('T')[0];
     }
 
+    changeDateFormat() {
+      let date = new Date(this.taskObject.dueDate).toLocaleDateString('de-DE');
+      return date.replaceAll('.','/');
+    }
+
     ngOnInit() {
       this.taskObject = this.taskData;
       console.log(this.taskObject);

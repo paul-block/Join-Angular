@@ -46,11 +46,11 @@ export class AddTaskComponent {
     })
   }
 
-  changeDateFormat() {
-    let dueDateInMilliseconds = Date.parse(this.dueDate);
-    let dueDateInCorrectFormat = new Date(dueDateInMilliseconds).toLocaleDateString('de-DE');
-    return dueDateInCorrectFormat;
-  }
+  // changeDateFormat() {
+  //   let dueDateInMilliseconds = Date.parse(this.dueDate);
+  //   // let dueDateInCorrectFormat = new Date(dueDateInMilliseconds).toLocaleDateString('de-DE');
+  //   return dueDateInMilliseconds;
+  // }
 
   createTaskObject() {
     let selectedUsersId = this.selectedContacts.map((contact) => contact.uid);
@@ -59,7 +59,7 @@ export class AddTaskComponent {
       assignedUsers: this.selectedContacts,
       category: this.category,
       description: this.description,
-      dueDate: this.changeDateFormat(),
+      dueDate: Date.parse(this.dueDate),
       prio: this.prio,
       status: 'todo',
       subtasks: this.addedSubtasks,

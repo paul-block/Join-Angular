@@ -34,9 +34,13 @@ export class SummaryComponent implements OnInit {
   }
 
   getUpcomingDeadline(){
-   let dateParse = this.taskService.tasks.map(task => Date.parse(task.dueDate));
-   let nextDeadline = Math.min(...dateParse);
-   return new Date(nextDeadline).toLocaleDateString('de-DE');
+  //  let dateParse = this.taskService.tasks.map(task => Date.parse(task.dueDate));
+  let dueDatesInMilliseconds = this.taskService.tasks.map(task => task.dueDate);
+  console.log(dueDatesInMilliseconds);
+   let nextDeadline = Math.min(...dueDatesInMilliseconds);
+   console.log(nextDeadline)
+   let date = new Date(nextDeadline).toLocaleDateString('de-DE');
+   return date.replaceAll('.', '/');
   }
 
 

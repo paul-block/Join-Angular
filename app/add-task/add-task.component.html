@@ -26,6 +26,7 @@
                     <div class="input-wrapper" #assignInput (click)="toggleDropdown('assign')">
                         <input name="assigned-to" placeholder="Select contacts to assign" type="text"
                             [(ngModel)]="contactInput" id="assigned-to" (input)="filterContacts(contactInput)">
+                        <!-- (blur)="toggleDropdown('assign')" -->
                         <img src="../../assets/img/arrowDown.png" alt="">
                     </div>
                     <!-- DROPDOWN -->

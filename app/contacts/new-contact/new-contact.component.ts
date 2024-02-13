@@ -31,7 +31,17 @@ export class NewContactComponent {
       color: this.getRandomColorHex()
     }
      this.contactService.addContact(contact);
+     this.contactService.selectedContact = contact;
      this.closeDialog();
+     this.contactService.showDetails = true;
+     this.showContactAddedConfirmation();
+  }
+
+  showContactAddedConfirmation() {
+    this.contactService.showContactAddedConfirmation = true;
+    setTimeout(() => {
+     this.contactService.showContactAddedConfirmation = false;
+    }, 1500);
   }
 
    generateRandomId(): string {

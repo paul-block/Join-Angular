@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { onSnapshot, query, where, addDoc, updateDoc, deleteDoc, QuerySnapshot } from '@angular/fire/firestore';
 import { Task } from 'src/app/interfaces/task';
@@ -29,6 +29,18 @@ export class TaskService {
       this.tasks = tasks; 
     });
   }
+
+  // Behaviour subject unsubscriben ? 
+
+  // ngOnInit(): void {
+
+  // }
+
+  // ngOnDestroy(): void {
+  //   this.tasks$.unsubscribe();
+  // }
+
+
 
   // async getAllTasksForCurrentUser() {
   //   return new Promise<void>((resolve, reject) => {

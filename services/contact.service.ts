@@ -13,6 +13,9 @@ export class ContactService {
   currentUserContacts:any;
   contactsSubscription: any;
 
+  showContactAddedConfirmation: boolean = false;
+  showDetails:boolean = false;
+
   constructor(private auth: AuthenticationService) { 
     this.contactsSubscription = this.getContactsForCurrentUser()
     .subscribe((contacts) =>{

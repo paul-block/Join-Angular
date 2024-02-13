@@ -18,7 +18,7 @@
     </div>
     <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
         <span>Due Date:</span>
-        <span *ngIf="!showEditMode">{{taskObject.dueDate}}</span>
+        <span *ngIf="!showEditMode">{{changeDateFormat()}}</span>
         <input type="date" [(ngModel)]="taskObject.dueDate" *ngIf="showEditMode" min="{{today}}">
     </div>
     <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
