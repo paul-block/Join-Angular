@@ -39,9 +39,10 @@
             </div>
             <button class="buttonGlobalDark" type="submit">Sign up</button>
         </form>
-
-
     </section>
+
+    <div id="sign-up-confirmation" *ngIf="showConfirmation">You signed up successfully</div>
+
     <section id="legal">
         <a onclick="openPrivacyPolicy()">Privacy Policy</a>
         <a onclick="openLegalNotice()">Legal notice</a>

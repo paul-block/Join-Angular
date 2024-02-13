@@ -3,6 +3,7 @@ import { AuthenticationService } from './authentication.service';
 import { Contact } from 'src/app/interfaces/contact';
 import { arrayRemove, arrayUnion, getDoc, onSnapshot, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,12 @@ export class ContactService {
   showContactAddedConfirmation: boolean = false;
   showDetails:boolean = false;
 
-  constructor(private auth: AuthenticationService) { 
+  constructor(private auth: AuthenticationService, private router: Router) { 
     this.contactsSubscription = this.getContactsForCurrentUser()
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;
     })
+
   }
 
   getDocId() {
@@ -86,7 +88,7 @@ export class ContactService {
 
   
 
-  async deleteContact(contact: Contact) {
+  async deleteContact(contact: Contact | undefined) {
     console.log('delete contact service ausgeführt')
 
     await updateDoc(this.auth.getSingleRefDoc('users', this.currentUserDocId), {
