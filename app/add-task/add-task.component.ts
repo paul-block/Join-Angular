@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { ContactService } from 'src/services/contact.service';
 import { TaskService } from 'src/services/task.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-task',
@@ -34,8 +36,9 @@ export class AddTaskComponent {
   today:string;
 
   addedTask:boolean = false;
+  showConfirmation:boolean = false;
 
-  constructor(private taskService: TaskService, public authService: AuthenticationService, public contactService: ContactService){
+  constructor(private taskService: TaskService, private router: Router, public authService: AuthenticationService, public contactService: ContactService){
     this.today = new Date().toISOString().split('T')[0];
   }
 
@@ -44,6 +47,9 @@ export class AddTaskComponent {
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;
     })
+    setTimeout(() => {
+      this.showConfirmation = true;
+    }, 4000);
   }
 
   // changeDateFormat() {
@@ -77,8 +83,9 @@ export class AddTaskComponent {
     this.addedTask = true;
     this.selectedContacts.push(this.authService.userData);
     await this.taskService.addTask(this.createTaskObject());
-    console.log('add task')
     this.clearTask();
+    this.router.navigate(['/board']);
+
   }
 
   clearTask() {
