@@ -7,23 +7,23 @@
         </div>
 
         <div id="contact-list">
-            <ng-container *ngFor="let contact of currentUserContacts">
-                <div class="first-letter">
-
-                    {{contact.name.charAt(0).toUpperCase()}}
-
+            <ng-container *ngFor="let initial of initials; let i = index">
+                <div class="first-letter" *ngIf="i === 0 || initial !== initials[i - 1]">
+                    {{initial}}
                 </div>
-                <div class="contact"
-                    [ngClass]="{'active': contactService.showDetails && contact.uid == this.contactService.selectedContact.uid}"
-                    (click)="showContactDetails(contact)">
-                    <div class="initials" [ngStyle]="{'background-color': contact.color}">
-                        {{getInitials(contact.name)}}
+                <ng-container *ngFor="let contact of currentUserContacts[initial]">
+                    <div class="contact"
+                        [ngClass]="{'active': contactService.showDetails && contact.uid == this.contactService.selectedContact.uid}"
+                        (click)="showContactDetails(contact)">
+                        <div class="initials" [ngStyle]="{'background-color': contact.color}">
+                            {{getInitials(contact.name)}}
+                        </div>
+                        <div>
+                            <div class="name">{{contact.name}}</div>
+                            <div class="email">{{contact.email}}</div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="name">{{contact.name}}</div>
-                        <div class="email">{{contact.email}}</div>
-                    </div>
-                </div>
+                </ng-container>
             </ng-container>
         </div>
     </div>

@@ -25,6 +25,8 @@ export class ContactsComponent implements OnInit, OnDestroy {
   renderedLetters = new Set<string>();
   contactsByFirstLetter:any;
   showConfirmation:boolean = false;
+  alreadyRenderedLetters: string[] = [];
+  initials: any[] = [];
 
   constructor(private dialog: MatDialog, public contactService: ContactService, private router: Router) {}
 
@@ -32,7 +34,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;
-      this.sortContacts();
+      this.groupContactsByInitial();
     })
   }
 
@@ -41,11 +43,28 @@ export class ContactsComponent implements OnInit, OnDestroy {
     if(this.router.url !== '/contacts') this.contactService.showDetails = false;
   }
 
-  sortContacts() {
-    this.currentUserContacts.sort((a: any,b: any) => {
-     return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : a.name.toUpperCase() > b.name.toUpperCase() ? 1 : 0;
+  sortInitials(initials: string[]) {
+    initials.sort((a: string,b: string) => {
+     return a.toUpperCase() < b.toUpperCase() ? -1 : a.toUpperCase() > b.toUpperCase() ? 1 : 0;
     })
   }
+
+  groupContactsByInitial() {
+    const groupedContacts: any = [];
+    const initials: any = [];
+    this.currentUserContacts.forEach((contact: { name: string; }) => {
+        const initial = contact.name.charAt(0).toUpperCase();
+        if (groupedContacts[initial]) {
+            groupedContacts[initial].push(contact);
+        } else {
+            groupedContacts[initial] = [contact];
+            initials.push(initial);
+        }
+    });
+    this.sortInitials(initials);
+    this.initials = initials;
+    this.currentUserContacts = groupedContacts;
+}
 
   openAddNewContactDialog(){
     const dialogConfig = new MatDialogConfig();
