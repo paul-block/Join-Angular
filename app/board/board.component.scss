@@ -107,13 +107,13 @@
                             display: flex;
                             justify-content: space-between;
 
-                                #progress-bar-container {
+                                .progress-bar-container {
                                     width: 100px;
                                     height: 15px;
                                     border-radius: 10px;
                                     background-color: lightgray;
 
-                                    #current-progress {
+                                    .current-progress {
                                     height: 100%;
                                     border-radius: 10px;
                                     background-color: blue;

@@ -24,7 +24,7 @@ async ngOnInit() {
   this.taskService.filterTasksByCategory();
 }
 
-drop(event: CdkDragDrop<Task[]>) {
+drop(event: CdkDragDrop<Task[]>, listname: string) {
   if (event.previousContainer === event.container) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
   } else {
@@ -34,13 +34,38 @@ drop(event: CdkDragDrop<Task[]>) {
       event.previousIndex,
       event.currentIndex,
     );
-    this.taskService.getAllTasksForCurrentUser();
-    this.taskService.filterTasksByCategory();
-
-    console.log(this.taskService.inProgress)
-    console.log(this.taskService.todo)
+      console.log(event);
+      console.log(event.item.data)
+    this.updateTaskCategoryFirestore(event, listname)
   }
 }
+
+updateTaskCategoryFirestore(event: CdkDragDrop<Task[]>, listname: string) {
+  for (let index = 0; index < this.taskService.tasks.length; index++) {
+    const task = this.taskService.tasks[index];
+    if (task.id === event.item.data.id) {
+      if (listname === 'todo'){
+        task.status = listname;
+        this.taskService.updateTaskCategory(task)
+    } 
+    if (listname === 'inProgress'){
+      task.status = listname;
+      this.taskService.updateTaskCategory(task)
+    } 
+    if (listname === 'feedback') {
+      task.status = listname;
+      this.taskService.updateTaskCategory(task)
+    }
+    if (listname === 'done'){
+      task.status = listname;
+      this.taskService.updateTaskCategory(task)
+    }
+      this.taskService.filterTasksByCategory();
+      return
+    }
+  }
+}
+
 
 filterBoard(value:string) {
   this.taskService.filterTasksByCharacters(value);

@@ -14,9 +14,10 @@
                 <div class="add-icon">+</div>
             </div>
             <div class="task-container" cdkDropList #todoList="cdkDropList" [cdkDropListData]="this.taskService.todo"
-                [cdkDropListConnectedTo]="[inProgressList]" (cdkDropListDropped)="drop($event)">
-                <div cdkDrag class="task-card" *ngFor="let todo of this.taskService.todo"
-                    (click)="openTaskDetailsDialog(todo)">
+                [cdkDropListConnectedTo]="[inProgressList, feedbackList, doneList]"
+                (cdkDropListDropped)="drop($event,'todo')">
+                <div cdkDrag cdkDragPreviewContainer="parent" [cdkDragData]="todo" [id]="'todoList'" class="task-card"
+                    *ngFor="let todo of this.taskService.todo" (click)="openTaskDetailsDialog(todo)">
                     <div class="category"
                         [ngStyle]="{'background-color': todo.category == 'User Story' ? '#0038FF' : '#1FD7C1'}">
                         {{todo.category}}</div>
@@ -25,8 +26,8 @@
                         <p class="description">{{todo.description}}</p>
                     </div>
                     <div class="subtasks" *ngIf="todo.subtasks.length != 0">
-                        <div id="progress-bar-container">
-                            <div id="current-progress"
+                        <div class="progress-bar-container">
+                            <div class="current-progress"
                                 [ngStyle]="{'width': countDoneSubtasks(todo.subtasks) === 0 ? '0%' : countDoneSubtasks(todo.subtasks) === 1 && todo.subtasks.length != 1 ? '50%' : '100%'}">
                             </div>
                         </div>
@@ -58,22 +59,42 @@
                 <div class="add-icon">+</div>
             </div>
             <div class="task-container" cdkDropList #inProgressList="cdkDropList"
-                [cdkDropListData]="this.taskService.inProgress" [cdkDropListConnectedTo]="[todoList]"
-                (cdkDropListDropped)="drop($event)">
-                <div class="task-card" *ngFor="let todo of this.taskService.inProgress" cdkDrag>
-                    <div class="category">{{todo.category}}</div>
-                    <p class="title">{{todo.title}}</p>
-                    <p class="description">{{todo.description}}</p>
+                [cdkDropListData]="this.taskService.inProgress"
+                [cdkDropListConnectedTo]="[todoList, feedbackList, doneList]"
+                (cdkDropListDropped)="drop($event, 'inProgress')">
+                <div cdkDrag cdkDragPreviewContainer="parent" [cdkDragData]="todo" class="task-card"
+                    *ngFor="let todo of this.taskService.inProgress" (click)="openTaskDetailsDialog(todo)">
+                    <div class="category"
+                        [ngStyle]="{'background-color': todo.category == 'User Story' ? '#0038FF' : '#1FD7C1'}">
+                        {{todo.category}}</div>
+                    <div class="text-container">
+                        <p class="title">{{todo.title}}</p>
+                        <p class="description">{{todo.description}}</p>
+                    </div>
                     <div class="subtasks" *ngIf="todo.subtasks.length != 0">
-                        <div id="progress-bar"></div>
-                        <div>{{todo.subtasks.length}}</div>
+                        <div class="progress-bar-container">
+                            <div class="current-progress"
+                                [ngStyle]="{'width': countDoneSubtasks(todo.subtasks) === 0 ? '0%' : countDoneSubtasks(todo.subtasks) === 1 && todo.subtasks.length != 1 ? '50%' : '100%'}">
+                            </div>
+                        </div>
+                        <div>{{countDoneSubtasks(todo.subtasks)}}/{{todo.subtasks.length}}</div>
                     </div>
                     <div class="flex-row">
-                        <div class="assignedUsers">{{todo.assignedUsers}}</div>
-                        <div class="prio">{{todo.prio}}</div>
+                        <div id="assigned-users-wrapper">
+                            <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
+                                [style.margin-left.px]="i > 0 ? -5 : 0">
+                                <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
+                                    *ngIf="user.marked && user.uid !== this.authService.userData.uid">
+                                    {{getInitials(user.name)}}</div>
+                            </ng-container>
+                        </div>
+
+                        <img class="prio"
+                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
+                            alt="">
                     </div>
                 </div>
-                <div class="no-task-placeholder">No tasks to do</div>
+                <div *ngIf="this.taskService.inProgress.length < 1" class="no-task-placeholder">No tasks to do</div>
             </div>
         </div>
 
@@ -82,21 +103,43 @@
                 <h2>Await feedback</h2>
                 <div class="add-icon">+</div>
             </div>
-            <div class="task-container" cdkDropList>
-                <div class="task-card" *ngFor="let todo of this.taskService.feedback">
-                    <div class="category">{{todo.category}}</div>
-                    <p class="title">{{todo.title}}</p>
-                    <p class="description">{{todo.description}}</p>
+            <div class="task-container" cdkDropList #feedbackList="cdkDropList"
+                [cdkDropListData]="this.taskService.feedback"
+                [cdkDropListConnectedTo]="[todoList, inProgressList, doneList]"
+                (cdkDropListDropped)="drop($event, 'feedback')">
+                <div cdkDrag cdkDragPreviewContainer="parent" [cdkDragData]="todo" class="task-card"
+                    *ngFor="let todo of this.taskService.feedback" (click)="openTaskDetailsDialog(todo)">
+                    <div class="category"
+                        [ngStyle]="{'background-color': todo.category == 'User Story' ? '#0038FF' : '#1FD7C1'}">
+                        {{todo.category}}</div>
+                    <div class="text-container">
+                        <p class="title">{{todo.title}}</p>
+                        <p class="description">{{todo.description}}</p>
+                    </div>
                     <div class="subtasks" *ngIf="todo.subtasks.length != 0">
-                        <div id="progress-bar"></div>
-                        <div>{{todo.subtasks.length}}</div>
+                        <div class="progress-bar-container">
+                            <div class="current-progress"
+                                [ngStyle]="{'width': countDoneSubtasks(todo.subtasks) === 0 ? '0%' : countDoneSubtasks(todo.subtasks) === 1 && todo.subtasks.length != 1 ? '50%' : '100%'}">
+                            </div>
+                        </div>
+                        <div>{{countDoneSubtasks(todo.subtasks)}}/{{todo.subtasks.length}}</div>
                     </div>
                     <div class="flex-row">
-                        <div class="assignedUsers">{{todo.assignedUsers}}</div>
-                        <div class="prio">{{todo.prio}}</div>
+                        <div id="assigned-users-wrapper">
+                            <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
+                                [style.margin-left.px]="i > 0 ? -5 : 0">
+                                <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
+                                    *ngIf="user.marked && user.uid !== this.authService.userData.uid">
+                                    {{getInitials(user.name)}}</div>
+                            </ng-container>
+                        </div>
+
+                        <img class="prio"
+                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
+                            alt="">
                     </div>
                 </div>
-                <div class="no-task-placeholder">No tasks to do</div>
+                <div *ngIf="this.taskService.feedback.length < 1" class="no-task-placeholder">No tasks to do</div>
             </div>
         </div>
 
@@ -104,24 +147,42 @@
             <div class="task-status">
                 <h2>Done</h2>
             </div>
-            <div class="task-container" cdkDropList>
-                <div class="task-card" *ngFor="let todo of this.taskService.done">
-                    <div class="category">{{todo.category}}</div>
-                    <p class="title">{{todo.title}}</p>
-                    <p class="description">{{todo.description}}</p>
-                    <!-- <div class="subtasks" *ngIf="todo.subtasks.length != 0"> -->
-                    <div class="subtasks">
-                        <div id="progress-bar"></div>
-                        <div>{{todo.subtasks.length}}</div>
+            <div class="task-container" cdkDropList #doneList="cdkDropList" [cdkDropListData]="this.taskService.done"
+                [cdkDropListConnectedTo]="[todoList, inProgressList, feedbackList]"
+                (cdkDropListDropped)="drop($event, 'done')">
+                <div cdkDrag cdkDragPreviewContainer="parent" [cdkDragData]="todo" class="task-card"
+                    *ngFor="let todo of this.taskService.done" (click)="openTaskDetailsDialog(todo)">
+                    <div class="category"
+                        [ngStyle]="{'background-color': todo.category == 'User Story' ? '#0038FF' : '#1FD7C1'}">
+                        {{todo.category}}</div>
+                    <div class="text-container">
+                        <p class="title">{{todo.title}}</p>
+                        <p class="description">{{todo.description}}</p>
+                    </div>
+                    <div class="subtasks" *ngIf="todo.subtasks.length != 0">
+                        <div class="progress-bar-container">
+                            <div class="current-progress"
+                                [ngStyle]="{'width': countDoneSubtasks(todo.subtasks) === 0 ? '0%' : countDoneSubtasks(todo.subtasks) === 1 && todo.subtasks.length != 1 ? '50%' : '100%'}">
+                            </div>
+                        </div>
+                        <div>{{countDoneSubtasks(todo.subtasks)}}/{{todo.subtasks.length}}</div>
                     </div>
                     <div class="flex-row">
                         <div id="assigned-users-wrapper">
-                            <div class="assignedUsers">{{todo.assignedUsers}}</div>
+                            <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
+                                [style.margin-left.px]="i > 0 ? -5 : 0">
+                                <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
+                                    *ngIf="user.marked && user.uid !== this.authService.userData.uid">
+                                    {{getInitials(user.name)}}</div>
+                            </ng-container>
                         </div>
-                        <div class="prio">{{todo.prio}}</div>
+
+                        <img class="prio"
+                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
+                            alt="">
                     </div>
                 </div>
-                <div class="no-task-placeholder">No tasks to do</div>
+                <div *ngIf="this.taskService.done.length < 1" class="no-task-placeholder">No tasks to do</div>
             </div>
         </div>
     </div>
