@@ -282,15 +282,7 @@
                         align-items: center;
                         justify-content: space-between;
                         width: 50px;
-
-             
-    
-                            .middle-line {
-                                height: 20px;
-                                width: 1px;
-                                background-color: #d1d1d1;
-                            }
-    
+ 
                             img {
                                 position: unset;
                             }
@@ -440,18 +432,23 @@
         #button-wrapper {
             display: flex;
             justify-content: flex-end;
+            gap: 10px;
                 
-            button {
-                background-color: transparent;
-                border: none;
+            div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 5px;
+                gap: 10px;
 
                 &:hover {
                     cursor: pointer;
-                    color: lightskyblue;
+                    color: #29ABE2;
+
+                    svg {
+                        path {
+                            fill:#29ABE2
+                        }
+                    }
                 }
             }
         }
@@ -465,6 +462,7 @@
                 background-color: #2A3647;
                 height: 50px;
                 border-radius: 10px;
+                border: none;
                 padding: 16px;
                 box-sizing: border-box;
                 gap: 4px;
@@ -480,6 +478,7 @@
 
                     &:hover {
                         cursor: pointer;
+                        background-color: #29ABE2;
                     }
 
           
@@ -489,4 +488,10 @@
 
         .justify-flex-end {
             justify-content: flex-end !important;
+        }
+
+        .middle-line {
+            height: 20px;
+            width: 1px;
+            background-color: #d1d1d1;
         }

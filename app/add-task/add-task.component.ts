@@ -65,7 +65,7 @@ export class AddTaskComponent {
       assignedUsers: this.selectedContacts,
       category: this.category,
       description: this.description,
-      dueDate: Date.parse(this.dueDate),
+      dueDate: this.dueDate,
       prio: this.prio,
       status: 'todo',
       subtasks: this.addedSubtasks,

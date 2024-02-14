@@ -34,7 +34,8 @@ export class SummaryComponent implements OnInit {
 
   getUpcomingDeadline(){
   //  let dateParse = this.taskService.tasks.map(task => Date.parse(task.dueDate));
-  let dueDatesInMilliseconds = this.taskService.tasks.map(task => task.dueDate);
+  let urgentTasks = this.taskService.tasks.filter(task => task.prio === 'urgent');
+  let dueDatesInMilliseconds = urgentTasks.map(task => Date.parse(task.dueDate));
   console.log(dueDatesInMilliseconds);
    let nextDeadline = Math.min(...dueDatesInMilliseconds);
    console.log(nextDeadline)

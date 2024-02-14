@@ -35,7 +35,8 @@ export class TaskDetailsComponent implements OnInit {
     }
 
     changeDateFormat() {
-      let date = new Date(this.taskObject.dueDate).toLocaleDateString('de-DE');
+      let dueDateInMilliseconds = Date.parse(this.taskObject.dueDate);
+      let date = new Date(dueDateInMilliseconds).toLocaleDateString('de-DE');
       return date.replaceAll('.','/');
     }
 
