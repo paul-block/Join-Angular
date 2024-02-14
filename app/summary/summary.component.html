@@ -50,9 +50,9 @@
                 </div>
                 <img src="../../../assets/img/parting-line.png">
                 <div>
-                    <span *ngIf="this.taskService.urgentTasks > 0">{{getUpcomingDeadline()}}</span>
+                    <span id="deadline" *ngIf="this.taskService.urgentTasks > 0">{{getUpcomingDeadline()}}</span>
                     <span *ngIf="this.taskService.urgentTasks === 0">No urgent tasks</span>
-                    <span>Upcoming Deadline</span>
+                    <span *ngIf="this.taskService.urgentTasks > 0">Upcoming Deadline</span>
                 </div>
             </div>
             <div class="third-row">

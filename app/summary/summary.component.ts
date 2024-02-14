@@ -20,7 +20,6 @@ export class SummaryComponent implements OnInit {
       this.taskService.filterTasksByCategory();
       console.log(this.taskService.tasks)
       this.getUpcomingDeadline()
-      // this.upcomingDeadline = this.getUpcomingDeadline();
     }
   }
 
@@ -39,8 +38,12 @@ export class SummaryComponent implements OnInit {
   console.log(dueDatesInMilliseconds);
    let nextDeadline = Math.min(...dueDatesInMilliseconds);
    console.log(nextDeadline)
-   let date = new Date(nextDeadline).toLocaleDateString('de-DE');
-   return date.replaceAll('.', '/');
+   let date = new Date(nextDeadline).toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+   });
+   return date;
   }
 
 

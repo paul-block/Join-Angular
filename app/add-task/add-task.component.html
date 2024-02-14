@@ -10,7 +10,7 @@
                     <input [required]="!addedTask" name="title-input" class="input" type="text" id="title-input"
                         [(ngModel)]="title" placeholder="Enter title">
                     <p class="required"
-                        *ngIf="taskForm.form.get('title')?.invalid && taskForm.form.get('title')?.touched">
+                        *ngIf="taskForm.form.get('title-input')?.invalid && taskForm.form.get('title-input')?.touched">
                         This field is
                         required</p>
                 </div>
