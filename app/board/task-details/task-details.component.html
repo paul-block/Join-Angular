@@ -6,14 +6,14 @@
 
     <div id="title" *ngIf="!showEditMode">{{taskObject.title}}</div>
     <div id="title-edit-wrapper" *ngIf="showEditMode">
-        <span>Title</span>
+        <span>Title:</span>
         <input type="text" [(ngModel)]="taskObject.title">
     </div>
 
 
     <div id="description" *ngIf="!showEditMode">{{taskObject.description}}</div>
     <div id="description-edit-wrapper" *ngIf="showEditMode">
-        <span>Description</span>
+        <span>Description:</span>
         <textarea cols="30" rows="10" [(ngModel)]="taskObject.description"></textarea>
     </div>
     <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
@@ -51,7 +51,7 @@
         </ng-container>
     </div>
     <div id="assigned-to-edit-wrapper" *ngIf="showEditMode">
-        <span>Assigned to</span>
+        <span>Assigned to:</span>
         <div class="input-wrapper" (click)="toggleDropdown('assign')">
             <input name="assigned-to" placeholder="Select contacts to assign" type="text" [(ngModel)]="contactInput"
                 id="assigned-to" (input)="filterContacts(contactInput)">
@@ -68,20 +68,21 @@
                     (change)="selectContact($event, this.authService.userData)"> -->
                 <input type="checkbox" checked disabled>
             </div>
-            <ng-container *ngFor="let contact of taskObject.assignedUsers">
-                <div class="selectable-user" *ngIf="contact.uid !== this.authService.userData.uid">
+            <!-- <ng-container *ngFor="let contact of taskObject.assignedUsers"> -->
+            <ng-container *ngFor="let contact of contactService.currentUserContacts">
+                <div class="selectable-user" *ngIf="contact.uid !== this.authService.userData.uid ">
                     <div class="initials" [ngStyle]="{'background-color': contact.color}">
                         {{getInitials(contact.name)}}
                     </div>
                     <span>{{contact.name}}</span>
-                    <input type="checkbox" [checked]="contact.marked == true" (change)="selectContact($event, contact)">
+                    <input type="checkbox" [checked]="markUser(contact.uid)" (change)="selectContact($event, contact)">
                 </div>
             </ng-container>
         </div>
         <!-- SELECTED USERS -->
         <div id="selected-contacts">
-            <ng-container *ngFor="let contact of taskObject.assignedUsers">
-                <div *ngIf="contact.marked && contact.uid !== this.authService.userData.uid" class="initials"
+            <ng-container *ngFor="let contact of contactService.currentUserContacts">
+                <div *ngIf="markUser(contact.uid) && contact.uid !== this.authService.userData.uid" class="initials"
                     [ngStyle]="{'background-color': contact.color}">
                     {{getInitials(contact.name)}}
                 </div>

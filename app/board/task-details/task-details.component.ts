@@ -23,6 +23,8 @@ export class TaskDetailsComponent implements OnInit {
   editedSubtask:string = '';
   showSubtaskIcons:boolean = false;
 
+  allContacts:any;
+
   taskObject:any;
   today: string;
 
@@ -34,6 +36,10 @@ export class TaskDetailsComponent implements OnInit {
      this.today = new Date().toISOString().split('T')[0];
     }
 
+    markUser(uid: string){
+     return this.taskObject.assignedUsers.some((user: { uid: string; }) => user.uid === uid)
+    }
+
     changeDateFormat() {
       let dueDateInMilliseconds = Date.parse(this.taskObject.dueDate);
       let date = new Date(dueDateInMilliseconds).toLocaleDateString('de-DE');
@@ -42,7 +48,11 @@ export class TaskDetailsComponent implements OnInit {
 
     ngOnInit() {
       this.taskObject = this.taskData;
-      console.log(this.taskObject);
+      // console.log(this.taskObject);
+      this.contactService.getContactsForCurrentUser()
+      .subscribe((contacts) =>{
+        this.allContacts = contacts;
+      })
     }
 
     checkSubtask(subtask:any){
@@ -73,32 +83,25 @@ export class TaskDetailsComponent implements OnInit {
 
     filterContacts(name: string) {
       if (name.trim() !== '') {
-        let filteredContacts = this.currentUserContacts.filter((contact: { name: string; }) => contact.name.toLowerCase().startsWith(name.trim().toLowerCase()));
-        this.currentUserContacts = filteredContacts;
-        console.log(filteredContacts)
-        console.log('filtered contacts')
+        let filtered = this.allContacts.filter((contact: { name: string; }) => contact.name.trim().toLowerCase().startsWith(name.trim().toLowerCase()));
+        let newArr = filtered;
+        this.contactService.currentUserContacts = newArr;
       }
       else {
        this.contactService.getContactsForCurrentUser()
         .subscribe((contacts) =>{
-          this.currentUserContacts = contacts;
+          this.contactService.currentUserContacts = contacts;
         })
       }   
   }
 
   selectContact(event:any, selectedContact:any) {
-    console.log(this.taskObject.assignedUsers);
-    // console.log(this.contactService.currentUserContacts)
     if (event.target.checked) {
-      let index = this.taskData.assignedUsers.findIndex((contact: { name: string; }) => contact.name === selectedContact.name)
-      this.taskData.assignedUsers[index].marked = true;
-      // selectedContact.marked = true;
-      // this.taskObject.assignedUsers.push(selectedContact);
+      this.taskObject.assignedUsers.push(selectedContact);
     }
     else {
-      let index = this.taskData.assignedUsers.findIndex((contact: { name: string; }) => contact.name === selectedContact.name)
-      this.taskData.assignedUsers[index].marked = false;
-      // this.taskData.assignedUsers.splice(index, 1)
+      let index = this.taskObject.assignedUsers.findIndex((contact: { uid: string; }) => contact.uid === selectedContact.uid)
+      this.taskObject.assignedUsers.splice(index, 1);
     }
   }
 

@@ -22,7 +22,7 @@ export class ContactService {
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;
     })
-
+    console.log(this.currentUserContacts)
   }
 
   getDocId() {

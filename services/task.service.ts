@@ -104,10 +104,10 @@ export class TaskService {
   filterTasksByCharacters(value: string) {
     this.clearBoard()
     this.tasks.filter((task) => {
-      if (task.status === 'todo' && task.title.includes(value) || task.status === 'todo' && task.description.includes(value)) this.todo.push(task);
-      if (task.status === 'done' && task.title.includes(value) || task.status === 'done' && task.description.includes(value)) this.done.push(task);
-      if (task.status === 'inProgress' && task.title.includes(value) || task.status === 'inProgress' && task.description.includes(value)) this.inProgress.push(task);
-      if (task.status === 'feedback' && task.title.includes(value) || task.status === 'feedback' && task.description.includes(value)) this.feedback.push(task);
+      if (task.status === 'todo' && task.title.toLowerCase().includes(value.toLowerCase()) || task.status === 'todo' && task.description.toLowerCase().includes(value.toLowerCase())) this.todo.push(task);
+      if (task.status === 'done' && task.title.toLowerCase().includes(value.toLowerCase()) || task.status === 'done' && task.description.includes(value.toLowerCase())) this.done.push(task);
+      if (task.status === 'inProgress' && task.title.toLowerCase().includes(value.toLowerCase()) || task.status === 'inProgress' && task.description.toLowerCase().includes(value.toLowerCase())) this.inProgress.push(task);
+      if (task.status === 'feedback' && task.title.toLowerCase().includes(value.toLowerCase()) || task.status === 'feedback' && task.description.toLowerCase().includes(value.toLowerCase())) this.feedback.push(task);
     })
   }
 
@@ -129,13 +129,9 @@ export class TaskService {
     console.log(docRef.id)
   }
 
-  async updateTask(task: Task){
-      console.log('task infos updated');
-      console.log(task.assignedUserIDs)
-  
+  async updateTask(task: Task){  
       await updateDoc(this.authService.getSingleRefDoc('tasks', task.id), {
         assignedUsers: task.assignedUsers,
-        assignedUserIDs: task.assignedUserIDs,
         category: task.category,
         description: task.description,
         dueDate: task.dueDate,

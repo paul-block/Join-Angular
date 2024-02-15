@@ -123,6 +123,11 @@
 
                         #assigned-users-wrapper {
                             display: flex;
+
+                            .assigned-users-placeholder {
+                                display: flex;
+                                align-items: flex-end;
+                            }
                         }
 
                         .assignedUsers {

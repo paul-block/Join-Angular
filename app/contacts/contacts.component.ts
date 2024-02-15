@@ -21,7 +21,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   selectedContact!: Contact;
 
-  firstLetters:any[] = [];;
+  firstLetters:any[] = [];
   renderedLetters = new Set<string>();
   contactsByFirstLetter:any;
   showConfirmation:boolean = false;

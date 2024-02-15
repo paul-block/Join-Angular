@@ -59,7 +59,7 @@ export class AddTaskComponent {
   // }
 
   createTaskObject() {
-    let selectedUsersId = this.selectedContacts.map((contact) => contact.uid);
+    const selectedUsersId = this.selectedContacts.map((contact) => contact.uid);
     const task = {
       assignedUserIDs: selectedUsersId,
       assignedUsers: this.selectedContacts,
@@ -144,6 +144,7 @@ export class AddTaskComponent {
     if (event.target.checked) {
       selectedContact.marked = true;
       this.selectedContacts.push(selectedContact);
+      console.log(this.currentUserContacts)
     }
     else {
       let index = this.selectedContacts.findIndex(contact => contact.name === selectedContact.name)

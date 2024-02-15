@@ -37,8 +37,10 @@
                         <div id="assigned-users-wrapper">
                             <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
+                                <div *ngIf="i === 5" class="assigned-users-placeholder">...</div>
+                                <!-- Überprüfen der ngIf vorher user.marked noch dazu -->
                                 <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
-                                    *ngIf="user.marked && user.uid !== this.authService.userData.uid">
+                                    *ngIf="user.uid !== this.authService.userData.uid && i < 5">
                                     {{getInitials(user.name)}}</div>
                             </ng-container>
                         </div>

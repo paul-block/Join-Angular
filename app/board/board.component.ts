@@ -94,7 +94,6 @@ openTaskDetailsDialog(task: Task){
     description: task.description,
     dueDate: task.dueDate,
     assignedUsers: task.assignedUsers,
-    assignedUserIDs: task.assignedUserIDs,
     prio: task.prio,
     status: task.status,
     subtasks: task.subtasks,
