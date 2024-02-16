@@ -1,16 +1,23 @@
-#wrapper {
-    justify-content: space-between;
 
-    #middle-line {
-        width: 2px;
-        background-color: lightgray;
-    }
+
 
     form {
         display: flex;
         flex-direction: column;
+        height: fit-content;
+
+        #wrapper {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #middle-line {
+            width: 2px;
+            background-color: lightgray;
+           
+        }
     }
-}
+
 
 .urgent {
     color: #fff;
@@ -37,8 +44,6 @@
 #btn-container {
     display: flex;
     justify-content: flex-end;
-    margin-right: 480px;
-    margin-top: 50px;
 }
 
 
@@ -283,7 +288,6 @@
 #left-side, #right-side {
     display: flex;
     flex-direction: column;
-    width: calc(50% - 120px);
     box-sizing: border-box;
     padding: 20px;
     gap: 25px
