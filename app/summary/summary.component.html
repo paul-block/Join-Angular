@@ -1,9 +1,12 @@
 <div id="container">
     <div class="flex-column">
         <div id="summary-wrapper">
-            <div id="headline-container">
+            <div id="headline-container" [ngClass]="{'headline-container-mobile': mobileView}">
                 <h1>Join 360</h1>
-                <img src="../../../assets/img/Vector 5.png" alt="">
+                <!-- <img src="../../../assets/img/Vector 5.png" alt=""> -->
+                <img [src]="mobileView ? '../../../assets/img/horizontal-line.png' : '../../../assets/img/Vector 5.png'"
+                    alt="line">
+
                 <span>Key Metrics at a Glance</span>
             </div>
             <div class="first-row">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { TaskService } from 'src/services/task.service';
 
@@ -11,8 +11,17 @@ export class SummaryComponent implements OnInit {
 
   greetingPhrase: string | undefined = this.getGreetingPhrase();
   upcomingDeadline: string | undefined;
+  mobileView:boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+onResize(event: { target: { innerWidth: number; }; }) {
+  if (event.target.innerWidth < 1200) this.mobileView = true;
+  else this.mobileView = false;
+}
   
-  constructor(public auth: AuthenticationService, public taskService: TaskService) {}
+  constructor(public auth: AuthenticationService, public taskService: TaskService) {
+
+  }
 
   async ngOnInit() {
     if (this.auth.isLoggedIn) {
@@ -21,6 +30,7 @@ export class SummaryComponent implements OnInit {
       console.log(this.taskService.tasks)
       this.getUpcomingDeadline()
     }
+    if (window.innerWidth < 1200) this.mobileView = true;
   }
 
   getGreetingPhrase() {

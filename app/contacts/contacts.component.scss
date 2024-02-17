@@ -3,15 +3,15 @@
     height: calc(100vh - 90px);
     width: calc(100vw - 271px);
     position: relative;
+    display: flex;
 
     #right-side {
-        position: absolute;
-        left: 30%;
-        top: 0px;
-        width: 75%;
+        // position: absolute;
+        // left: 30%;
+        // top: 0px;
+        flex: 1;
         height: calc(100vh - 90px);
-        padding: 15px 100px;
-
+        padding: 30px 0 0 30px;
             .relative {
                 position: relative;
     
@@ -23,7 +23,8 @@
                 margin-bottom: 25px;
 
                     h1 {
-                        font-size: 64px;
+                        font-size: 48px;
+                        margin: 0;
                     }
 
                     #parting-line {
@@ -33,7 +34,7 @@
                     }
 
                     p {
-                        font-size: 24px;
+                        font-size: 22px;
                     }
             }
 
@@ -54,7 +55,7 @@
 
                     .first-row {
                         display: flex;
-                        gap: 50px;
+                        gap: 25px;
 
                             .initials-details {
                                 display: flex;
@@ -76,7 +77,7 @@
                                 gap: 10px;
 
                                 .name-details {
-                                    font-size: 48px;
+                                    font-size: 42px;
                                 }
 
                                 .flex-row {
@@ -137,14 +138,20 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 25%;
+    // flex: 0;
     background-color: #fff;
     height: calc(100vh - 90px);
+    min-width: 300px;
+    max-width: 300px;
 
     #add-contact-btn {
         gap: 15px;
         height: 34px;
-        margin: 32px 48px 0 48px;
+        margin: 20px 20px 0 20px;
+        
+            span {
+                font-size: 20px;
+            }
             &:hover {
                 background-color: #29ABE2;
             }
@@ -153,8 +160,9 @@
     #contact-list {
         display: flex;
         flex-direction: column;
-        gap: 20px;  
-        padding: 0px 48px 32px 48px;
+        gap: 15px;  
+        // padding: 0px 48px 32px 48px;
+        padding: 0 5px;
         box-sizing: border-box;
 
         overflow-y: scroll;
@@ -172,8 +180,8 @@
             .contact {
                 display: flex;
                 align-items: center;
-                padding: 15px 24px;
-                gap: 35px;
+                padding: 15px;
+                gap: 10px;
                 height: 75px;
                 box-sizing: border-box;
                 border-radius: 10px;
@@ -189,18 +197,23 @@
                     align-items: center;
                     border-radius: 50%;
                     padding: 10px;
-                    width: 30px;
-                    height: 30px;
+                    width: 25px;
+                    height: 25px;
                     color: #fff;
                 }
 
                 div {
                     display: flex;
                     flex-direction: column;
-                    gap: 10px;
+                    gap: 5px;
 
                     .name {
-                        font-size: 22px;
+                        font-size: 20px;
+                    }
+
+                    .email {
+                        font-size: 16px;
+                        color: #29ABE2;
                     }
                 }
             }

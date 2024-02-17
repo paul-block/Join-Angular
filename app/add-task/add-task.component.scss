@@ -5,6 +5,8 @@
         display: flex;
         flex-direction: column;
         height: fit-content;
+        padding: 10px;
+
 
         #wrapper {
             display: flex;
@@ -53,10 +55,14 @@
 }
 
 .prio-btns {
-    button {
-        display: flex;
-        gap: 10px;
-    }
+    width: 350px;
+    gap: 0;
+    justify-content: space-between;
+        button {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+        }
 }
 
 
@@ -65,6 +71,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-width: 250px;
 
     #selected-contacts {
         display: flex;
@@ -76,7 +83,7 @@
 
         input {
             box-sizing: border-box;
-            width: 440px;
+            width: 350px;
             padding: 12px;
             border-radius: 10px;
             border: 1px solid #d1d1d1;
@@ -86,7 +93,7 @@
             position: relative;
             display: flex;
             align-items: center;
-            width: 440px;
+            width: 350px;
 
                 input {
                     &:hover {
@@ -128,7 +135,7 @@
     }
         textarea {
             box-sizing: border-box;
-            width: 440px;
+            width: 350px;
             padding: 12px;
             border: 1px solid #d1d1d1;
             resize: none;
@@ -143,7 +150,7 @@
         .dropdown {
             background-color: white;
             border-radius: 10px;
-            width: 440px;
+            width: 350px;
             box-sizing: border-box;
 
                 .selectable-user {
@@ -186,7 +193,7 @@
         #subtask-wrapper {
             display: flex;
             flex-direction: column;
-            width: 440px;
+            width: 350px;
 
                 ul {
                     display: flex;
@@ -202,7 +209,7 @@
                         justify-content: space-between;
                         align-items: center;
                         position: relative;
-                        width: 440px;
+                        width: 350px;
                         padding: 5px;
                         box-sizing: border-box;
                         list-style: inside;
@@ -213,7 +220,7 @@
                             }
 
                         #edit-input-wrapper {
-                            width: 440px;
+                            width: 350px;
                             height: 30px;
                             position: absolute;
                             left: 0;
@@ -326,5 +333,26 @@
         transform: translateY(0px);
         left: 45%;
         transform: translateX(-45%);
+    }
+}
+
+@media (min-height: 1000px) {
+        form {
+          padding: 100px 0px 0px 150px;
+
+        }
+}
+
+@media (max-width: 1000px) {
+    #wrapper {
+        flex-direction: column;
+    }
+
+    form {
+        align-items: center;
+
+        #btn-container {
+            justify-content: center;
+        }
     }
 }

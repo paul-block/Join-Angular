@@ -2,6 +2,8 @@
     display: flex;
     gap: 200px;
     max-width: 1200px;
+    padding: 100px 0px 0px 150px;
+
 
     .flex-column {
         display: flex;
@@ -22,6 +24,10 @@
                 span {
                     font-size: 27px;
                 }
+        }
+
+        .headline-container-mobile {
+            flex-direction: column;
         }
     }
 
@@ -229,6 +235,10 @@
 
 @media (max-width: 1200px) {
 
+    #summary-wrapper {
+        scale: 0.9;
+    }
+
     #container {
         justify-content: center;
     }
@@ -245,18 +255,6 @@
 }
 
 @media (max-width: 630px) {
-    #headline-container {
-        justify-content: space-between;
-
-        h1 {
-            font-size: 36px !important;
-        }
-
-        span {
-            font-size: 20px !important; 
-        }
-    }
-
     .flex-column {
         height: 100vh !important
     }
