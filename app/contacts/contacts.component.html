@@ -28,15 +28,20 @@
         </div>
     </div>
 
-    <div id="right-side">
+    <div id="right-side"
+        [ngClass]="{'mobile-right-side': mobileView && this.contactService.selectedContact && this.contactService.showDetails}">
 
         <div class="relative">
 
-            <div id="headline">
+            <div id="headline" [ngClass]="{'headline-container-mobile': mobileView}">
                 <h1>Contacts</h1>
-                <div id="parting-line"></div>
+                <img [src]="mobileView ? '../../../assets/img/horizontal-line.png' : '../../../assets/img/Vector 5.png'"
+                    alt="line">
                 <p>Better with a team</p>
             </div>
+
+            <img (click)="this.contactService.showDetails = false" id="back-btn" *ngIf="showBackBtn"
+                src="../../assets/img/arrow-back.png" alt="back-button">
 
             <div class="contact-details" *ngIf="contactService.showDetails">
 

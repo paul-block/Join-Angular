@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, HostListener, OnInit} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewContactComponent } from './new-contact/new-contact.component';
 import { ContactService } from 'src/services/contact.service';
@@ -19,7 +19,8 @@ export class ContactsComponent implements OnInit, OnDestroy {
   contactsSubscription: Subscription | null = null;
 
 
-  selectedContact!: Contact;
+  lastSelectedContact!: Contact;
+  sameContact: boolean = false;
 
   firstLetters:any[] = [];
   renderedLetters = new Set<string>();
@@ -27,6 +28,17 @@ export class ContactsComponent implements OnInit, OnDestroy {
   showConfirmation:boolean = false;
   alreadyRenderedLetters: string[] = [];
   initials: any[] = [];
+
+  mobileView: boolean = false;
+  showBackBtn: boolean = false
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    if (event.target.innerWidth < 1200) this.mobileView = true;
+    else this.mobileView = false;
+    if (event.target.innerWidth < 1000) this.showBackBtn = true;
+    else this.showBackBtn = false;
+  }
 
   constructor(private dialog: MatDialog, public contactService: ContactService, private router: Router) {}
 
@@ -87,10 +99,10 @@ export class ContactsComponent implements OnInit, OnDestroy {
   }
 
   showContactDetails(contact: Contact) {
-    this.contactService.showDetails = true;
     this.contactService.selectedContact = contact;
+    this.contactService.showDetails = true;
   }
-  
+
   getInitials(name: string) {
     let initials = name.split(' ').map(word => word.charAt(0)).join('');
     return initials.toUpperCase();
