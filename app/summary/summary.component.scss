@@ -2,7 +2,8 @@
     display: flex;
     gap: 200px;
     max-width: 1200px;
-    padding: 100px 0px 0px 150px;
+    height: calc(100vh - 90px);
+    padding: 25px 50px;
 
 
     .flex-column {
@@ -206,6 +207,13 @@
 }
 }
 
+@media (min-height: 1100px) {
+   #container {
+    padding: 100px 0px 0px 150px;
+    height: calc(100vh - 190px);
+} 
+}
+
 @media (max-width: 1500px) {
 
     #container {
@@ -222,14 +230,30 @@
     }
 }
 
+@media (max-width: 1000px) and (max-height: 750px) {
+    #summary-wrapper {
+        scale: 0.8 !important;
+    }
+}
+
 @media (max-width: 1000px) {
+    #container {
+        height: calc(100vh - 210px);
+        padding: 10px;
+    }
+
     #summary-wrapper {
         margin-top: 0 !important;
     }
 
     .flex-column {
         height: calc(100vh - 200px);
+        max-width: 100vw !important;
         justify-content: center;
+    }
+    
+    .second-row {
+        gap: inherit !important;
     }
 }
 
@@ -254,14 +278,63 @@
     }
 }
 
-@media (max-width: 630px) {
-    .flex-column {
-        height: 100vh !important
-    }
-}
+// @media (max-width: 630px) {
+//     .flex-column {
+//         height: 100vh !important
+//     }
+// }
 
-@media (max-width: 380px) {
+
+
+@media (max-width: 380px) and (max-height: 680px) {
+    #headline-container {
+        display: none !important;
+    }
+
     #summary-wrapper {
         scale: 0.7;
     }
+
+    .first-row-child, .third-row-child {
+        padding: 25px 0 !important;
+    }
+}
+
+@media (max-height: 750px) {
+
+    #container {
+        padding: 0 50px;
+    }
+
+    #summary-wrapper {
+        scale: .9;
+        gap: 15px !important;
+
+        .box-hover {
+            &:hover {
+                background-color: #2A3647 !important;
+                color: #fff;
+                scale: 1.05;
+                cursor: pointer;
+            }
+        }
+    }
+
+    #headline-container {
+        gap: 5px !important;
+    }
+
+    .first-row-child {
+        height: 140px !important;
+        gap: 0;
+    }
+
+    .third-row-child {
+        height: 140px !important;
+        width: 140px !important;
+        padding: 0;
+        gap: 0 !important;
+    }
+
+
 }

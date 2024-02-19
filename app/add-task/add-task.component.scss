@@ -148,7 +148,9 @@
             background-color: white;
             border-radius: 10px;
             width: 350px;
+            max-height: 350px;
             box-sizing: border-box;
+            overflow-y: scroll;
 
                 .selectable-user {
                     display: flex;
@@ -354,9 +356,15 @@
     }
 }
 
-@media (max-height: 1000px) {
+@media (max-height: 1000px) and (max-width: 1000px) {
     form {
         height: calc(100vh - 190px);
         overflow-y: scroll;
+    }
+}
+
+@media (max-height: 750px) {
+    .dropdown {
+        max-height: 150px;
     }
 }
