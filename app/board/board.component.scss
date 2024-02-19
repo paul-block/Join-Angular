@@ -1,5 +1,6 @@
 #container {
-    padding: 100px 0px 0px 150px;
+    padding: 25px 50px;
+    height: calc(100vh - 190px) ;
 }
 
 #upper-row {
@@ -23,6 +24,22 @@
             box-sizing: border-box;
             background: url('../../assets/img/search-icon.png') no-repeat 97%;
         }    
+
+        #add-task-mobile-btn {
+            color: white;
+            font-weight: 700;
+            font-size: 21px;
+            background: #2A3647;
+            border-radius: 10px;
+            cursor: pointer;
+            height: 50px;
+            width: 50px;
+            transition: 125ms;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 }
 
 #board-container {
@@ -40,6 +57,11 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
+                    h2 {
+                        height: 58px;
+                        width: 120px;
+                    }
 
                     .add-icon {
                         display: flex;
@@ -172,3 +194,47 @@
         width: 100%;
     }
 }
+
+@media (max-width: 1200px) {
+    #board-container {
+        flex-direction: column;
+        overflow-y: scroll;
+        overflow-x: hidden;
+           height: calc(100% - 100px);
+    }
+}
+
+@media (min-height: 1100px) and (min-width: 1200px) {
+    #container {
+     padding: 100px 0px 0px 150px;
+     height: calc(100vh - 190px);
+ } 
+ }
+
+ @media (max-width: 1000px) {
+
+  #container {
+            height: calc(100vh - 290px) ;
+    }
+
+    #upper-row {
+        flex-direction: column;
+
+        input {
+            width: 200px;
+        }
+
+        #add-task-desktop {
+            display: none;
+        }
+    }
+   
+ }
+
+ @media (min-width: 1000px) {
+    #add-task-mobile-btn {
+        display: none !important;
+    }
+ }
+
+//  @media (max-height: )

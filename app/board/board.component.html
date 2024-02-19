@@ -4,8 +4,10 @@
 
         <div>
             <input type="text" placeholder="find task" (input)="filterBoard(filterInput)" [(ngModel)]="filterInput">
-            <button class="buttonGlobalDark" (click)="openAddTaskDialog()">Add task +</button>
+            <button id="add-task-desktop" class="buttonGlobalDark" (click)="openAddTaskDialog()">Add task +</button>
+            <button id="add-task-mobile-btn" (click)="openAddTaskDialog()">+</button>
         </div>
+
     </div>
     <div id="board-container">
         <div class="board-column">
