@@ -25,6 +25,7 @@
                 font-size: 20px;
                  &:hover{
                     cursor: pointer;
+                    color: #29ABE2;
                  }
             }
         }
@@ -497,3 +498,38 @@
             width: 1px;
             background-color: #d1d1d1;
         }
+
+
+        @media (max-width: 600px) {
+            #details-wrapper {
+                width: unset !important;
+
+                    .input-wrapper {
+                        width: 100% !important;
+                    }
+
+                    input, textarea {
+                        width: 100% !important
+                    }
+
+                    .prio-btns {
+                        button {
+                            gap: 0 !important;
+                            height: 45px !important;
+                            padding: 5px !important;
+                        }
+                    }
+
+                    .dropdown {
+                        width: 100% !important;
+                    }
+
+                    #subtasks-edit-mode-wrapper {
+                        width: 100% !important;
+
+                        li {
+                            width: 100% !important;
+                        }
+                    }
+            }
+         }

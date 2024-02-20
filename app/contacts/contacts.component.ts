@@ -18,10 +18,6 @@ export class ContactsComponent implements OnInit, OnDestroy {
   currentUserContacts:any;
   contactsSubscription: Subscription | null = null;
 
-
-  lastSelectedContact!: Contact;
-  sameContact: boolean = false;
-
   firstLetters:any[] = [];
   renderedLetters = new Set<string>();
   contactsByFirstLetter:any;
@@ -30,14 +26,15 @@ export class ContactsComponent implements OnInit, OnDestroy {
   initials: any[] = [];
 
   mobileView: boolean = false;
-  showBackBtn: boolean = false
 
   @HostListener('window:resize', ['$event'])
   onResize(event: { target: { innerWidth: number; }; }) {
-    if (event.target.innerWidth < 1200) this.mobileView = true;
-    else this.mobileView = false;
-    if (event.target.innerWidth < 1000) this.showBackBtn = true;
-    else this.showBackBtn = false;
+    this.checkScreenSize()
+  }
+
+  @HostListener('window:DOMContentLoaded', ['$event'])
+  onDomContentLoaded(event: Event) {
+      this.checkScreenSize();
   }
 
   constructor(private dialog: MatDialog, public contactService: ContactService, private router: Router) {}
@@ -53,6 +50,11 @@ export class ContactsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.contactsSubscription?.unsubscribe();
     if(this.router.url !== '/contacts') this.contactService.showDetails = false;
+  }
+
+  checkScreenSize() {
+    if (window.innerWidth < 1200) this.mobileView = true;
+    else this.mobileView = false;
   }
 
   sortInitials(initials: string[]) {

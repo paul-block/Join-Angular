@@ -1,11 +1,14 @@
 <div id="container">
     <div id="upper-row">
-        <h1>Board</h1>
+        <div>
+            <h1>Board</h1>
+            <button id="add-task-mobile-btn" (click)="openAddTaskDialog()">+</button>
+        </div>
+
 
         <div>
             <input type="text" placeholder="find task" (input)="filterBoard(filterInput)" [(ngModel)]="filterInput">
             <button id="add-task-desktop" class="buttonGlobalDark" (click)="openAddTaskDialog()">Add task +</button>
-            <button id="add-task-mobile-btn" (click)="openAddTaskDialog()">+</button>
         </div>
 
     </div>
@@ -85,14 +88,16 @@
                     </div>
                     <div class="flex-row">
                         <div id="assigned-users-wrapper">
-                            <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
-                                [style.margin-left.px]="i > 0 ? -5 : 0">
-                                <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
-                                    *ngIf="user.marked && user.uid !== this.authService.userData.uid">
-                                    {{getInitials(user.name)}}</div>
+                            <ng-container>
+                                <div *ngFor="let user of todo.assignedUsers; let i = index"
+                                    [style.margin-left.px]="i > 0 ? -5 : 0">
+                                    <div *ngIf="i === 5" class="assigned-users-placeholder">...</div>
+                                    <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
+                                        *ngIf="user.uid !== this.authService.userData.uid && i < 5">
+                                        {{getInitials(user.name)}}</div>
+                                </div>
                             </ng-container>
                         </div>
-
                         <img class="prio"
                             [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
                             alt="">
@@ -132,8 +137,10 @@
                         <div id="assigned-users-wrapper">
                             <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
+                                <div *ngIf="i === 5" class="assigned-users-placeholder">...</div>
+                                <!-- Überprüfen der ngIf vorher user.marked noch dazu -->
                                 <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
-                                    *ngIf="user.marked && user.uid !== this.authService.userData.uid">
+                                    *ngIf="user.uid !== this.authService.userData.uid && i < 5">
                                     {{getInitials(user.name)}}</div>
                             </ng-container>
                         </div>
@@ -175,8 +182,10 @@
                         <div id="assigned-users-wrapper">
                             <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
+                                <div *ngIf="i === 5" class="assigned-users-placeholder">...</div>
+                                <!-- Überprüfen der ngIf vorher user.marked noch dazu -->
                                 <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
-                                    *ngIf="user.marked && user.uid !== this.authService.userData.uid">
+                                    *ngIf="user.uid !== this.authService.userData.uid && i < 5">
                                     {{getInitials(user.name)}}</div>
                             </ng-container>
                         </div>

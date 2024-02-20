@@ -79,8 +79,6 @@ getInitials(name: string) {
 openAddTaskDialog(){
   const dialogConfig = new MatDialogConfig();
   dialogConfig.panelClass ='dialog-style';
-  // dialogConfig.width = '500px';
-  // dialogConfig.height = '700px';
   this.dialog.closeAll();
   this.dialog.open(AddTaskComponent, dialogConfig);
 }

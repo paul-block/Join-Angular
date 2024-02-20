@@ -11,7 +11,14 @@
 
         div {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
             gap: 32px;
+
+            #add-task-desktop {
+                width: 160px;
+            }
         }
 
         input {
@@ -147,7 +154,7 @@
                         } 
 
                         #assigned-users-wrapper {
-                            display: flex;
+                            display: flex !important;
 
                             .assigned-users-placeholder {
                                 display: flex;
@@ -221,7 +228,7 @@
         flex-direction: column;
 
         input {
-            width: 200px;
+            width: 100%;
         }
 
         #add-task-desktop {
@@ -237,4 +244,3 @@
     }
  }
 
-//  @media (max-height: )

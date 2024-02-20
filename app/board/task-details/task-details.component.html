@@ -112,6 +112,8 @@
                 <li *ngFor="let subtask of taskObject.subtasks" (mouseover)="showSubtaskIcons = true"
                     (mouseleave)="showSubtaskIcons = false">
                     {{subtask.name}}
+
+                    <!-- Wenn mobilansicht immer anzeigen und inputs zum bearbeiten checken -->
                     <div id="edit-delete-wrapper" *ngIf="showSubtaskIcons">
                         <img (click)="deleteSubtask(subtask)" src="../../assets/img/delete.png" alt="">
                         <div class="middle-line"></div>
