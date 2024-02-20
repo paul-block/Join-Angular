@@ -14,7 +14,7 @@ export class SummaryComponent implements OnInit {
   mobileView:boolean = false;
 
   @HostListener('window:resize', ['$event'])
-onResize(event: { target: { innerWidth: number; }; }) {
+  onResize(event: { target: { innerWidth: number; }; }) {
   if (event.target.innerWidth < 1200) this.mobileView = true;
   else this.mobileView = false;
 }

@@ -56,6 +56,7 @@
                     </ng-container>
                 </div>
             </div>
+            <p *ngIf="!mobileView"><span id="required-sign">*</span> This field is required</p>
         </div>
 
         <div id="middle-line"></div>
@@ -157,10 +158,13 @@
                     </ul>
                 </div>
             </div>
-            <div id="btn-container" class="flex-row">
-                <button class="buttonGlobalWhite" (click)="clearTask()" type="button">Clear</button>
+            <div id="btn-container" class="flex-row" [ngClass]="{'mobile-btn-container': mobileView}">
+                <button *ngIf="!mobileView" class="buttonGlobalWhite" (click)="clearTask()" type="button">Clear
+                    <span>X</span></button>
+                <p *ngIf="mobileView"><span id="required-sign">*</span> This field is required</p>
                 <button class="buttonGlobalDark" type="submit" [class.disabled]="taskForm.invalid"
-                    [disabled]="taskForm.invalid">Create Task</button>
+                    [disabled]="taskForm.invalid">Create Task<img src="../../assets/img/check-icon-white.svg"
+                        alt=""></button>
             </div>
         </div>
     </div>

@@ -23,10 +23,11 @@ body {
     font-weight: 700;
     font-size: 21px;
     height: 51px;
+    white-space: nowrap;
     background: #2A3647;
     border-radius: 10px;
     cursor: pointer;
-    transition: 125ms;
+    transition: all 125ms linear;
     padding: 15px 24px;
     z-index: 4;
     display: flex;
@@ -37,7 +38,6 @@ body {
 .buttonGlobalDark:hover {
     background-color: #29ABE2;
     border-color: #29ABE2;
-    transition: 125ms;
 }
 
 .buttonGlobalWhite {
@@ -45,10 +45,11 @@ body {
     border: 1px solid #2A3647;
     font-size: 20px;
     height: 51px;
+    white-space: nowrap;
     background: white;
     border-radius: 10px;
     cursor: pointer;
-    transition: 125ms;
+    transition: all 125ms linear;
     padding: 15px;
     font-weight: normal;
     display: flex;
@@ -58,7 +59,6 @@ body {
 .buttonGlobalWhite:hover {
     border: 1px solid #29ABE2;
     color: #29ABE2;
-    transition: 125ms;
 }
 
 .d-none {

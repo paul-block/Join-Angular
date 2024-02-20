@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { ContactService } from 'src/services/contact.service';
@@ -37,6 +37,13 @@ export class AddTaskComponent {
 
   addedTask:boolean = false;
   showConfirmation:boolean = false;
+  mobileView:boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+  if (event.target.innerWidth < 1000) this.mobileView = true;
+  else this.mobileView = false;
+}
 
   constructor(private taskService: TaskService, private router: Router, public authService: AuthenticationService, public contactService: ContactService){
     this.today = new Date().toISOString().split('T')[0];
@@ -51,6 +58,8 @@ export class AddTaskComponent {
       this.showConfirmation = true;
     }, 4000);
   }
+
+
 
   // changeDateFormat() {
   //   let dueDateInMilliseconds = Date.parse(this.dueDate);
