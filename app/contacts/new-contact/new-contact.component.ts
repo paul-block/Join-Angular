@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { collection, updateDoc } from "firebase/firestore"; 
 import { Contact } from 'src/app/interfaces/contact';
@@ -22,7 +23,8 @@ export class NewContactComponent {
     this.dialog.closeAll();
   }
 
-  async addContact(){
+  async addContact(form: NgForm){
+    if (form.valid) {
     const contact: Contact = {
       name: this.name,
       email: this.email,
@@ -36,6 +38,7 @@ export class NewContactComponent {
      this.contactService.showDetails = true;
      this.showContactAddedConfirmation();
   }
+}
 
   showContactAddedConfirmation() {
     this.contactService.showContactAddedConfirmation = true;

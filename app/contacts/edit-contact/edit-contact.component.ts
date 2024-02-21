@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Contact } from 'src/app/interfaces/contact';
 import { ContactService } from 'src/services/contact.service';
@@ -13,9 +14,11 @@ export class EditContactComponent implements OnInit {
   email:string = '';
   phone?:number;
 
-  currentDetailsBeforeEdit: Contact = this.saveCurrentContactDetails();
+  contactObjectBeforeEdit: Contact = this.saveCurrentContactDetails();
 
-  currentContactArray:any[] = [];
+  // currentContactArray:any[] = [];
+  contactsSubscription: any;
+  currentUserContacts: any[] = [];
   
   constructor(private dialog: MatDialog,
               private contactService: ContactService,
@@ -23,9 +26,13 @@ export class EditContactComponent implements OnInit {
 
   ngOnInit() {
     this.setDataIntoInputs();
-    this.saveCurrentContactArrayLocal();
+    // this.saveCurrentContactArrayLocal();
     this.saveCurrentContactDetails()
-    console.log(this.currentDetailsBeforeEdit)
+    this.contactsSubscription = this.contactService.getContactsForCurrentUser()
+    .subscribe((contacts) =>{
+      this.currentUserContacts = contacts;
+    })
+    // console.log(this.currentContactArray)
   }
 
   saveCurrentContactDetails() {
@@ -33,14 +40,14 @@ export class EditContactComponent implements OnInit {
       name: this.contactData.name,
       email: this.contactData.email,
       phone: this.contactData.phone,
-      uid: this.contactData.id,
+      uid: this.contactData.uid,
       color: this.contactData.color
     }
   }
 
-  saveCurrentContactArrayLocal(){
-    this.currentContactArray = this.contactData.currentUserContacts;
-  }
+  // saveCurrentContactArrayLocal(){
+  //   this.currentContactArray = this.contactData.currentUserContacts;
+  // }
 
   setDataIntoInputs(){
     this.name = this.contactData.name;
@@ -52,23 +59,26 @@ export class EditContactComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  editContact() {
+  editContact(form: NgForm) {
+    if (form.valid) {
     let editedContact: Contact = {
       name: this.name,
       email: this.email,
       phone: this.phone,
-      uid: this.contactData.id,
+      uid: this.contactData.uid,
       color: this.contactData.color
     }
 
-    let index = this.currentContactArray.findIndex(contact => this.currentDetailsBeforeEdit.email === contact.email);
-    this.currentContactArray[index] = editedContact;
-
-    console.log(editedContact);
-    console.log(this.currentDetailsBeforeEdit)
-    this.contactService.editContact(this.currentContactArray)
+    let index = this.currentUserContacts.findIndex((contact: { uid: string; }) => this.contactObjectBeforeEdit.uid === contact.uid);
+    this.currentUserContacts[index] = editedContact;
+    console.log('index: ' + index);
+    console.log(this.currentUserContacts[index])
+    console.log('editedContact: ' + editedContact);
+    console.log('contactObjectBeforeEdit: ' + this.contactObjectBeforeEdit)
+    this.contactService.editContact(this.currentUserContacts)
     this.contactService.selectedContact = editedContact;
     this.closeDialog()
-  }
-
+  } 
+}
+  
 }

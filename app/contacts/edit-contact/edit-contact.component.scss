@@ -54,6 +54,14 @@
                     gap: 50px;
                     margin-left: 200px;
 
+                    .input-wrapper {
+
+                        p {
+                            margin: 0;
+                            padding: 0;
+                            color: red;
+                        }
+
                         input {
                             box-sizing: border-box;
                             width: 440px;
@@ -76,12 +84,13 @@
                             background: url(../../../assets/img/call.png) no-repeat;
                             background-position: 97%;
                         }
+                    }
 
                         #button-container {
                             display: flex;
                             justify-self: flex-end;
                             gap: 20px;
                         }
-                }
+            }
         }
 }

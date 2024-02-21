@@ -14,18 +14,42 @@
             <img src="../../../assets/img/contact.png" alt="">
         </div>
 
-        <div class="flex-column">
-            <input id="name-input" type="text" placeholder="Name" [(ngModel)]="name">
+        <form class="flex-column" #editContactForm="ngForm" (ngSubmit)="editContact(editContactForm)">
+            <div class="input-wrapper">
+                <input required name="name" id="name-input" type="text" placeholder="Name" [(ngModel)]="name"
+                    pattern="^[a-zA-ZäöüÄÖÜß]+ [a-zA-ZäöüÄÖÜß]+$">
+                <p *ngIf="editContactForm.submitted && editContactForm.form.get('name')?.invalid">
+                    Please enter first and last name</p>
+            </div>
+            <div class="input-wrapper">
+                <input pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required name="email" id="mail-input" type="email"
+                    placeholder="Email" [(ngModel)]="email">
+                <p class="required" *ngIf="editContactForm.submitted && editContactForm.form.get('email')?.invalid">
+                    Please enter a valid email address</p>
+            </div>
+            <div class="input-wrapper">
+                <input required name="phone" id="phone-input" type="tel" placeholder="Phone" [(ngModel)]="phone"
+                    pattern="^[0-9]+$" minlength="8">
+                <p class="required" *ngIf="editContactForm.submitted && editContactForm.form.get('phone')?.invalid">
+                    Please enter a valid phone number</p>
+            </div>
+            <div id="button-container">
+                <button class="buttonGlobalWhite" type="button" (click)="closeDialog()">Delete</button>
+                <button class="buttonGlobalDark" type="submit">Save</button>
+            </div>
+        </form>
+        <!-- <div class="flex-column">
+            <input id="name-input" type="text" placeholder="Name" [(ngModel)]="name" pattern="^[a-zA-ZäöüÄÖÜß]+ [a-zA-ZäöüÄÖÜß]+$">
 
-            <input id="mail-input" type="text" placeholder="Email" [(ngModel)]="email">
+            <input id="mail-input" type="email" placeholder="Email" [(ngModel)]="email">
 
-            <input id="phone-input" type="number" placeholder="Phone" [(ngModel)]="phone">
+            <input id="phone-input" type="tel" placeholder="Phone" [(ngModel)]="phone" pattern="^[0-9]+$" minlength="8">
 
             <div id="button-container">
                 <button class="buttonGlobalWhite" (click)="closeDialog()">Delete</button>
                 <button class="buttonGlobalDark" (click)="editContact()">Save</button>
             </div>
-        </div>
+        </div> -->
 
 
 

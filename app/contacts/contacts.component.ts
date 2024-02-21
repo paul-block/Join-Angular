@@ -28,7 +28,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   mobileView: boolean = false;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: { target: { innerWidth: number; }; }) {
+  onResize() {
     this.checkScreenSize()
   }
 
@@ -90,6 +90,8 @@ export class ContactsComponent implements OnInit, OnDestroy {
       name: contact.name,
       email:contact.email,
       phone:contact.phone,
+      color: contact.color,
+      uid: contact.uid,
       currentUserContacts: this.currentUserContacts
     }
     this.dialog.closeAll();

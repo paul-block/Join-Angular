@@ -28,6 +28,7 @@ import { EditContactComponent } from './contacts/edit-contact/edit-contact.compo
 import { TaskDetailsComponent } from './board/task-details/task-details.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { InfoComponent } from './info/info.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
 
 
@@ -44,7 +45,8 @@ import { InfoComponent } from './info/info.component';
     NewContactComponent,
     EditContactComponent,
     TaskDetailsComponent,
-    InfoComponent  ],
+    InfoComponent,
+    LegalNoticeComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

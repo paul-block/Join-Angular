@@ -312,10 +312,11 @@
 }
 
 @media (max-width: 768px) {
-     #summary-wrapper {
-        scale: 0.8;
+
+            .amount {
+                font-size: 32px!important;
+            }
     }
-}
 
 // @media (max-width: 630px) {
 //     .flex-column {

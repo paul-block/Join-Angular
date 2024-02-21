@@ -5,26 +5,14 @@
         <a routerLink="/help"><img class="d-none-mobile" id="questionMark" src="../../assets/img/Vector.svg"></a>
         <div id="initials" (click)="toggleDropdown()">
             {{getInitials()}}</div>
-        <div id="logout" [class.d-none]="!showDropdown" (click)="signOut()">
+        <div id="dropdown" [class.d-none]="!showDropdown" (click)="signOut()">
+            <span *ngIf="mobileView">Legal notice</span>
             <span>Logout</span>
         </div>
     </div>
-
-
 </div>
+
 <div class="sideMenu">
-    <a class="legal-notice d-none-mobile" id="side-menu-link4" href="../Datenschutz/legalNoticeLogin.html">
-        <div class="menu-links">
-            <img class="side-menu-img" src="../../assets/img/legal-notice.png">
-            <div>Legal notice</div>
-        </div>
-    </a>
-    <a class="privacy-policy d-none-mobile" id="side-menu-link5" href="../Datenschutz/policyPrivacyLogin.html">
-        <div class="menu-links">
-            <img class="side-menu-img" src="../../assets/img/legal-notice.png">
-            <div>Privacy Policy</div>
-        </div>
-    </a>
     <img class="d-none-mobile" src="../../assets/img/Capa 1.svg">
 
     <div class="menu">
@@ -55,11 +43,20 @@
                 <div class="side-bar-text">Contacts</div>
             </div>
         </a>
+
+        <a routerLink="/legal-notice" routerLinkActive="active-link" class="legal-notice d-none-mobile"
+            id="side-menu-link4">
+            <div class="menu-links">
+                <img class="side-menu-img" src="../../assets/img/legal-notice.png">
+                <div>Legal notice</div>
+            </div>
+        </a>
+
     </div>
 </div>
 <!-- Auf angular umstellen -->
-<div id="mobileDropDown" class="d-none ">
+<!-- <div id="mobileDropDown" class="d-none ">
     <a href="../Datenschutz/policyPrivacyLogin.html">Privacy Policy</a>
     <a href="../Datenschutz/legalNoticeLogin.html">Legal notice</a>
     <a onclick="logout()">Logout</a>
-</div>
+</div> -->

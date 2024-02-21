@@ -15,31 +15,53 @@
             <img src="../../../assets/img/contact.png" alt="">
         </div>
 
-        <form class="flex-column" #addContactForm="ngForm">
+        <!-- <form class="flex-column" #addContactForm="ngForm">
             <div class="input-wrapper">
                 <input required name="name" id="name-input" type="text" placeholder="Name" [(ngModel)]="name"
                     pattern="^[a-zA-Z]+ [a-zA-Z]+$">
-                <p *ngIf="addContactForm.form.get('name')?.invalid && addContactForm.form.get('name')?.touched">
+                <p *ngIf="addContactForm.form.get('name')?.invalid">
                     Please enter for and last name</p>
             </div>
             <div class="input-wrapper">
                 <input required name="email" id="mail-input" type="email" placeholder="Email" [(ngModel)]="email">
-                <p class="required"
-                    *ngIf="addContactForm.form.get('email')?.invalid && addContactForm.form.get('email')?.touched">
+                <p class="required" *ngIf="addContactForm.form.get('email')?.invalid">
                     Please enter a valid email address</p>
             </div>
             <div class="input-wrapper">
                 <input required name="phone" id="phone-input" type="tel" placeholder="Phone" [(ngModel)]="phone"
                     pattern="^[0-9]+$" minlength="8">
-                <p class="required"
-                    *ngIf="addContactForm.form.get('phone')?.invalid && addContactForm.form.get('phone')?.touched">
+                <p class="required" *ngIf="addContactForm.form.get('phone')?.invalid">
                     Please enter a valid phone number</p>
             </div>
             <div id="button-container">
                 <button class="buttonGlobalWhite" (click)="closeDialog()">Cancel</button>
                 <button class="buttonGlobalDark" (click)="addContact()">Create contact</button>
             </div>
+        </form> -->
+        <form class="flex-column" #addContactForm="ngForm" (ngSubmit)="addContact(addContactForm)">
+            <div class="input-wrapper">
+                <input required name="name" id="name-input" type="text" placeholder="Name" [(ngModel)]="name"
+                    pattern="^[a-zA-ZäöüÄÖÜß]+ [a-zA-ZäöüÄÖÜß]+$">
+                <p *ngIf="addContactForm.submitted && addContactForm.form.get('name')?.invalid">
+                    Please enter first and last name</p>
+            </div>
+            <div class="input-wrapper">
+                <input required name="email" id="mail-input" type="email" placeholder="Email" [(ngModel)]="email">
+                <p class="required" *ngIf="addContactForm.submitted && addContactForm.form.get('email')?.invalid">
+                    Please enter a valid email address</p>
+            </div>
+            <div class="input-wrapper">
+                <input required name="phone" id="phone-input" type="tel" placeholder="Phone" [(ngModel)]="phone"
+                    pattern="^[0-9]+$" minlength="8">
+                <p class="required" *ngIf="addContactForm.submitted && addContactForm.form.get('phone')?.invalid">
+                    Please enter a valid phone number</p>
+            </div>
+            <div id="button-container">
+                <button class="buttonGlobalWhite" type="button" (click)="closeDialog()">Cancel</button>
+                <button class="buttonGlobalDark" type="submit">Create contact</button>
+            </div>
         </form>
+
 
 
 

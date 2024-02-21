@@ -11,7 +11,7 @@ export class AuthenticationService {
   currentUser:any;
   uid: string | undefined;
   userData: any;
-  // unsubTaskList: any;
+  greetingLoaded:boolean = false;
 
   private auth: Auth = inject(Auth);
   private firestore: Firestore = inject(Firestore);
@@ -48,7 +48,7 @@ export class AuthenticationService {
   }
 
   guestSignIn() {
-    signInWithEmailAndPassword(this.auth, 'guest@guest.de', 'guest123!')
+    signInWithEmailAndPassword(this.auth, 'guest@guest.de', 'Guest123!')
       .then(async userCredential => {
         this.uid = userCredential.user.uid;
         console.log(this.uid);
@@ -70,7 +70,8 @@ export class AuthenticationService {
           uid: userCredential.user.uid,
           email: userCredential.user.email,
           name: username,
-          color: this.getRandomColorHex()
+          color: this.getRandomColorHex(),
+          contacts: []
         };
         this.userData = userData;
         this.addUserToFirestore(userData);
@@ -86,6 +87,7 @@ export class AuthenticationService {
       this.uid = undefined;
       this.userData = null;
       localStorage.setItem('userData', 'null');
+      localStorage.setItem('greetingLoaded', 'false');
       this.isLoggedIn = false;
       this.router.navigate(['']);
     });
