@@ -79,8 +79,19 @@
             </div>
         </div>
     </div>
-    <div id="greeting-container">
-        <span>{{ greetingPhrase }},</span>
-        <span id="username">{{this.auth.userData.name}}</span>
-    </div>
+    <ng-container *ngIf="!mobileView; else mobileGreetingTemplate">
+        <div id="greeting-container">
+            <span>{{ greetingPhrase }} <span *ngIf="auth.userData.uid != 'BTzdSGe6nLNl6sxImFEwXD6S1zJ3'">,</span></span>
+            <span *ngIf="auth.userData.uid != 'BTzdSGe6nLNl6sxImFEwXD6S1zJ3'"
+                id="username">{{this.auth.userData.name}}</span>
+        </div>
+    </ng-container>
+    <ng-template #mobileGreetingTemplate>
+        <div *ngIf="!auth.greetingLoaded" id="greeting-container-mobile">
+            <span>{{ greetingPhrase }}<span *ngIf="auth.userData.uid != 'BTzdSGe6nLNl6sxImFEwXD6S1zJ3'">,</span></span>
+            <span *ngIf="auth.userData.uid != 'BTzdSGe6nLNl6sxImFEwXD6S1zJ3'"
+                id="username">{{this.auth.userData.name}}</span>
+        </div>
+    </ng-template>
+
 </div>

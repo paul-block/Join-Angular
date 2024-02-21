@@ -32,14 +32,10 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.checkScreenSize()
   }
 
-  @HostListener('window:DOMContentLoaded', ['$event'])
-  onDomContentLoaded(event: Event) {
-      this.checkScreenSize();
-  }
-
   constructor(private dialog: MatDialog, public contactService: ContactService, private router: Router) {}
 
   async ngOnInit() {
+    this.checkScreenSize();
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;

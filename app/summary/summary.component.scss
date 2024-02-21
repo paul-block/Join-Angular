@@ -19,12 +19,12 @@
                 h1 {
                     margin: 0;
                     padding: 0;
-                    font-size: 61px;
+                    font-size: 48px;
                     white-space: nowrap;
                 }
         
                 span {
-                    font-size: 27px;
+                    font-size: 26px;
                     white-space: nowrap;
                 }
         }
@@ -207,6 +207,47 @@
             color:#29ABE2;
         }
 }
+
+#greeting-container-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #F6F7F8;
+    animation: fade-out 2s linear forwards;
+
+        span {
+            font-size: 48px;
+        }
+
+        #username {
+            font-size: 61px;
+            font-weight: bold;
+            color:#29ABE2;
+        }
+}
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
 }
 
 @media (min-height: 1100px) {
@@ -267,10 +308,6 @@
 
     #container {
         justify-content: center;
-    }
-
-    #greeting-container {
-        display: none !important;
     }
 }
 

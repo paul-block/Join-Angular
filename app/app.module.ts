@@ -27,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditContactComponent } from './contacts/edit-contact/edit-contact.component';
 import { TaskDetailsComponent } from './board/task-details/task-details.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { InfoComponent } from './info/info.component';
 
 
 
@@ -42,7 +43,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ContactsComponent,
     NewContactComponent,
     EditContactComponent,
-    TaskDetailsComponent  ],
+    TaskDetailsComponent,
+    InfoComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -2,8 +2,7 @@
     <img class="logo-mobile" src="../../assets/img/Capa-dark.png">
     <p class="d-none-mobile">Kanban Project Management Tool</p>
     <div class="headerImg">
-        <a href="../Datenschutz/help.html"><img class="d-none-mobile" id="questionMark"
-                src="../../assets/img/Vector.svg"></a>
+        <a routerLink="/help"><img class="d-none-mobile" id="questionMark" src="../../assets/img/Vector.svg"></a>
         <div id="initials" (click)="toggleDropdown()">
             {{getInitials()}}</div>
         <div id="logout" [class.d-none]="!showDropdown" (click)="signOut()">

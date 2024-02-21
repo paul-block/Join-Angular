@@ -1,7 +1,7 @@
 <div id="container">
     <img id="fixedLogo" src="../../assets/img/join_logo.svg" alt="Logo">
 
-    <section id="signUpSection">
+    <section id="signUpSection" *ngIf="!showConfirmation">
 
         <a [routerLink]="''" id="backBtn"><img src="../../assets/img/arrow_back.png"
                 alt="back to login page button" /></a>
@@ -12,24 +12,26 @@
         </div>
 
         <form [formGroup]="accountForm" (ngSubmit)="signUp()">
-            <input formControlName="name" type="name" placeholder="Name" />
+            <input name="name" formControlName="name" type="name" placeholder="Name" />
             <span class="formError"
                 *ngIf="accountForm.get('name')?.touched && accountForm.get('name')?.errors?.['required']">Name
                 required</span>
-            <input formControlName="email" type="email" placeholder="Email" />
+            <input name="email" formControlName="email" type="email" placeholder="Email" />
             <span class="formError"
                 *ngIf="accountForm.get('email')?.touched && accountForm.get('email')?.errors?.['required'] || accountForm.get('email')?.errors?.['email']">Email
                 required</span>
-            <input formControlName="password" type="password" placeholder="Password" />
+            <input name="password" formControlName="password" type="password" placeholder="Password" />
             <span class="formError"
                 *ngIf="accountForm.get('password')?.touched && accountForm.get('password')?.errors?.['required']">Password
                 required</span>
-            <input formControlName="confirmPassword" type="password" placeholder="Confirm Password">
+            <input name="confirmPassword" formControlName="confirmPassword" type="password"
+                placeholder="Confirm Password">
             <span class="formError" *ngIf="passwordsDontMatch() && accountForm.get('confirmPassword')?.touched">Password
                 do not match</span>
             <div class="privacyPolicyContainer" id="privacyContainer">
                 <div class="checkmarkContainer">
-                    <input formControlName="acceptPrivacyPolicy" type="checkbox" id="acceptPrivacyPolicyInput" />
+                    <input name="privacyPolicy" formControlName="acceptPrivacyPolicy" type="checkbox"
+                        id="acceptPrivacyPolicyInput" />
                     <span>I accept the <a onclick="openPrivacyPolicy()" class="textHighlight">Privacy
                             Policy</a></span>
                 </div>

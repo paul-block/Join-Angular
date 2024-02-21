@@ -25,12 +25,16 @@ export class SummaryComponent implements OnInit {
 
   async ngOnInit() {
     if (this.auth.isLoggedIn) {
+      this.checkIfUserAlreadyGreeted();
       await this.taskService.getAllTasksForCurrentUser();
       this.taskService.filterTasksByCategory();
       console.log(this.taskService.tasks)
       this.getUpcomingDeadline()
     }
-    if (window.innerWidth < 1200) this.mobileView = true;
+    if (window.innerWidth < 1200){
+      this.mobileView = true;
+      this.userGreeted();
+    } 
   }
 
   getGreetingPhrase() {
@@ -57,5 +61,17 @@ export class SummaryComponent implements OnInit {
    return date;
   }
 
+  checkIfUserAlreadyGreeted() {
+    let greeted = localStorage.getItem('greetingLoaded');
+    if(greeted === 'true') this.auth.greetingLoaded = true;
+    else this.auth.greetingLoaded = false;
+  }
+
+  userGreeted(){
+    setTimeout(() => {
+      this.auth.greetingLoaded = true
+      localStorage.setItem('greetingLoaded', JSON.stringify(this.auth.greetingLoaded));
+    }, 2500);
+  }
 
 }

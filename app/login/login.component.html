@@ -20,13 +20,14 @@
             <div id="wrongLogin" *ngIf="loginError">Something went wrong. Please check your login credentials</div>
 
             <div class="checkmarkContainer">
-                <input required type="checkbox" id="rememberMe" />
+                <input [checked]="rememberMe" (change)="onCheckboxChange($event)" type="checkbox" id="rememberMe" />
                 <span>Remember me</span>
             </div>
 
             <div id="loginBtnContainer">
                 <button id="loginBtn" class="buttonGlobalDark" type="submit">Log in</button>
-                <button id="guestLoginBtn" class="buttonGlobalWhite" (click)="guestSignIn()">Guest Log in</button>
+                <button id="guestLoginBtn" class="buttonGlobalWhite" type="button" (click)="guestSignIn()">Guest Log
+                    in</button>
             </div>
         </form>
 

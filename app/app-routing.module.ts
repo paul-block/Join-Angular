@@ -7,8 +7,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { NewContactComponent } from './contacts/new-contact/new-contact.component';
-import { TaskDetailsComponent } from './board/task-details/task-details.component';
+import { InfoComponent } from './info/info.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent},
@@ -17,6 +16,7 @@ const routes: Routes = [
   {path: 'add-task', component: AddTaskComponent},
   {path: 'board', component: BoardComponent},
   {path: 'contacts', component: ContactsComponent},
+  {path: 'help', component: InfoComponent}
 
 ];
 

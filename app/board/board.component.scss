@@ -8,6 +8,12 @@
     align-items: center;
     justify-content: space-between;
     width: calc(100% - 200px);
+    margin-bottom: 3vh;
+
+        h1 {
+            font-size: 48px;
+            margin: 0;
+        }
 
         div {
             display: flex;
