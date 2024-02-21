@@ -3,50 +3,51 @@
 
     <section id="signUpSection" *ngIf="!showConfirmation">
 
-        <a [routerLink]="''" id="backBtn"><img src="../../assets/img/arrow_back.png"
-                alt="back to login page button" /></a>
+        <a routerLink="" id="backBtn"><img src="../../assets/img/arrow_back.png" alt="back to login page button" /></a>
 
         <div id="headline">
             <h1>Sign up</h1>
             <img src="../../assets/img/line.png" alt="blue-line">
         </div>
 
-        <form [formGroup]="accountForm" (ngSubmit)="signUp()">
-            <input name="name" formControlName="name" type="name" placeholder="Name" />
-            <span class="formError"
-                *ngIf="accountForm.get('name')?.touched && accountForm.get('name')?.errors?.['required']">Name
-                required</span>
-            <input name="email" formControlName="email" type="email" placeholder="Email" />
-            <span class="formError"
-                *ngIf="accountForm.get('email')?.touched && accountForm.get('email')?.errors?.['required'] || accountForm.get('email')?.errors?.['email']">Email
-                required</span>
-            <input name="password" formControlName="password" type="password" placeholder="Password" />
-            <span class="formError"
-                *ngIf="accountForm.get('password')?.touched && accountForm.get('password')?.errors?.['required']">Password
-                required</span>
-            <input name="confirmPassword" formControlName="confirmPassword" type="password"
+        <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
+            <input required [(ngModel)]="username" name="name" type="name" placeholder="Name"
+                pattern="^[a-zA-ZäöüÄÖÜß]+ [a-zA-ZäöüÄÖÜß]+$" />
+            <span class="formError" *ngIf="signUpForm.submitted && signUpForm.form.get('name')?.invalid">Please enter
+                your first and last name</span>
+            <input required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" [(ngModel)]="email" name="email" type="email"
+                placeholder="Email" />
+            <span class="formError" *ngIf="signUpForm.submitted && signUpForm.form.get('email')?.invalid">Please enter a
+                valid email address </span>
+            <input required minlength="6" [(ngModel)]="password" name="password" type="password"
+                placeholder="Password" />
+            <span class="formError" *ngIf="signUpForm.submitted && signUpForm.form.get('password')?.invalid">Password is
+                required and must be at least 6 characters long</span>
+            <input required minlength="6" [(ngModel)]="confirmationPassword" name="confirmationPassword" type="password"
                 placeholder="Confirm Password">
-            <span class="formError" *ngIf="passwordsDontMatch() && accountForm.get('confirmPassword')?.touched">Password
-                do not match</span>
+            <span class="formError"
+                *ngIf="signUpForm.submitted && signUpForm.form.get('confirmationPassword')?.invalid || signUpForm.submitted && !passwordsMatch()">Password
+                does not match or is too short</span>
             <div class="privacyPolicyContainer" id="privacyContainer">
                 <div class="checkmarkContainer">
-                    <input name="privacyPolicy" formControlName="acceptPrivacyPolicy" type="checkbox"
+                    <input [(ngModel)]="privacyPolicyAccepted" required name="privacyPolicy" type="checkbox"
                         id="acceptPrivacyPolicyInput" />
-                    <span>I accept the <a onclick="openPrivacyPolicy()" class="textHighlight">Privacy
+                    <span>I accept the <a routerLink="/legal-notice" class="textHighlight">Privacy
                             Policy</a></span>
                 </div>
-                <span class="formError"
-                    *ngIf="accountForm.get('acceptPrivacyPolicy')?.touched && accountForm.get('acceptPrivacyPolicy')?.errors?.['requiredTrue']">You
+                <span class="formError" *ngIf="signUpForm.submitted && !privacyPolicyAccepted">You
                     have to accept our privacy policy to register</span>
             </div>
-            <button class="buttonGlobalDark" type="submit">Sign up</button>
+            <button class="buttonGlobalDark"
+                [disabled]="!signUpForm.valid && !privacyPolicyAccepted && passwordsMatch() || !passwordsMatch()"
+                type="submit">Sign
+                up</button>
         </form>
     </section>
 
     <div id="sign-up-confirmation" *ngIf="showConfirmation">You signed up successfully</div>
 
     <section id="legal">
-        <a onclick="openPrivacyPolicy()">Privacy Policy</a>
-        <a onclick="openLegalNotice()">Legal notice</a>
+        <a routerLink="/legal-notice">Legal notice</a>
     </section>
 </div>

@@ -46,7 +46,8 @@
                     Please enter first and last name</p>
             </div>
             <div class="input-wrapper">
-                <input required name="email" id="mail-input" type="email" placeholder="Email" [(ngModel)]="email">
+                <input required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" name="email" id="mail-input" type="email"
+                    placeholder="Email" [(ngModel)]="email">
                 <p class="required" *ngIf="addContactForm.submitted && addContactForm.form.get('email')?.invalid">
                     Please enter a valid email address</p>
             </div>

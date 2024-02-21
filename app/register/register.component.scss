@@ -54,6 +54,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    button:disabled {
+        border: 1px solid transparent;
+        background-color: gray;
+    }
 }
 
 #signUpSection form input {
@@ -85,6 +90,7 @@
 
 .checkmarkContainer {
     display: flex;
+    justify-content: center;
     gap: 8px;
 
         span {
