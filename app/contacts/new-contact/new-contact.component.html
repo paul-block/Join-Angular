@@ -2,42 +2,22 @@
 
     <div id="left-side">
         <div id="headline">
-            <img src="../../../assets/img/Capa 2joinAddContact.png" alt="">
-            <h1>Add contact</h1>
-            <p>Tasks are better with a team!</p>
-            <div id="line"></div>
+            <img id="logo" src="../../../assets/img/Capa 2joinAddContact.png" alt="">
+            <div>
+                <h1>Add contact</h1>
+                <p>Tasks are better with a team!</p>
+            </div>
+            <img src="../../../assets/img/horizontal-line.png" alt="">
         </div>
     </div>
+
+
 
     <div id="right-side">
 
         <div id="profile">
             <img src="../../../assets/img/contact.png" alt="">
         </div>
-
-        <!-- <form class="flex-column" #addContactForm="ngForm">
-            <div class="input-wrapper">
-                <input required name="name" id="name-input" type="text" placeholder="Name" [(ngModel)]="name"
-                    pattern="^[a-zA-Z]+ [a-zA-Z]+$">
-                <p *ngIf="addContactForm.form.get('name')?.invalid">
-                    Please enter for and last name</p>
-            </div>
-            <div class="input-wrapper">
-                <input required name="email" id="mail-input" type="email" placeholder="Email" [(ngModel)]="email">
-                <p class="required" *ngIf="addContactForm.form.get('email')?.invalid">
-                    Please enter a valid email address</p>
-            </div>
-            <div class="input-wrapper">
-                <input required name="phone" id="phone-input" type="tel" placeholder="Phone" [(ngModel)]="phone"
-                    pattern="^[0-9]+$" minlength="8">
-                <p class="required" *ngIf="addContactForm.form.get('phone')?.invalid">
-                    Please enter a valid phone number</p>
-            </div>
-            <div id="button-container">
-                <button class="buttonGlobalWhite" (click)="closeDialog()">Cancel</button>
-                <button class="buttonGlobalDark" (click)="addContact()">Create contact</button>
-            </div>
-        </form> -->
         <form class="flex-column" #addContactForm="ngForm" (ngSubmit)="addContact(addContactForm)">
             <div class="input-wrapper">
                 <input required name="name" id="name-input" type="text" placeholder="Name" [(ngModel)]="name"
@@ -58,8 +38,9 @@
                     Please enter a valid phone number</p>
             </div>
             <div id="button-container">
-                <button class="buttonGlobalWhite" type="button" (click)="closeDialog()">Cancel</button>
-                <button class="buttonGlobalDark" type="submit">Create contact</button>
+                <button class="buttonGlobalWhite" type="button" (click)="closeDialog()">Cancel <span>X</span></button>
+                <button class="buttonGlobalDark" type="submit">Create contact<img
+                        src="../../assets/img/check-icon-white.svg" alt=""></button>
             </div>
         </form>
 

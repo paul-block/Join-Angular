@@ -5,9 +5,10 @@
         <a routerLink="/help"><img class="d-none-mobile" id="questionMark" src="../../assets/img/Vector.svg"></a>
         <div id="initials" (click)="toggleDropdown()">
             {{getInitials()}}</div>
-        <div id="dropdown" [class.d-none]="!showDropdown" (click)="signOut()">
-            <span *ngIf="mobileView">Legal notice</span>
-            <span>Logout</span>
+        <div id="dropdown" [class.d-none]="!showDropdown">
+            <span *ngIf="mobileView" routerLink="/legal-notice" (click)="toggleDropdown()">Legal notice</span>
+            <span *ngIf="mobileView" routerLink="/help" (click)="toggleDropdown()">Help</span>
+            <span (click)="signOut()">Logout</span>
         </div>
     </div>
 </div>

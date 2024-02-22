@@ -7,8 +7,7 @@
                 <label for="title-input">Title<span class="required">*</span></label>
                 <input [required]="!addedTask" name="title-input" class="input" type="text" id="title-input"
                     [(ngModel)]="title" placeholder="Enter title">
-                <p class="required"
-                    *ngIf="taskForm.form.get('title-input')?.invalid && taskForm.form.get('title-input')?.touched">
+                <p class="required" *ngIf="taskForm.form.get('title-input')?.invalid && taskForm.submitted">
                     This field is
                     required</p>
             </div>
@@ -66,8 +65,7 @@
                 <label for="due-date">Due date<span class="required">*</span></label>
                 <input [required]="!addedTask" name="due-date" type="date" [(ngModel)]="dueDate" id="due-date"
                     min="{{today}}">
-                <p class="required"
-                    *ngIf="taskForm.form.get('due-date')?.invalid && taskForm.form.get('due-date')?.touched">This
+                <p class="required" *ngIf="taskForm.form.get('due-date')?.invalid && taskForm.submitted">This
                     field
                     is required</p>
             </div>
@@ -95,14 +93,12 @@
                         [(ngModel)]="category" id="category">
                     <img src="../../assets/img/arrowDown.png" alt="">
                 </div>
-                <!-- Category DROPDOWN -->
                 <div *ngIf="showCategoryDropDown" class="dropdown">
                     <div class="selectable-user" *ngFor="let category of selectableCategories">
                         <span (click)="selectCategory(category)">{{category}}</span>
                     </div>
                 </div>
-                <p class="required"
-                    *ngIf="taskForm.form.get('category')?.invalid && taskForm.form.get('category')?.touched">This
+                <p class="required" *ngIf="taskForm.form.get('category')?.invalid && taskForm.submitted">This
                     field
                     is required</p>
             </div>
@@ -124,9 +120,6 @@
                     <ul>
                         <li *ngFor="let subtask of addedSubtasks">{{subtask.name}}
                             <div id="edit-delete-wrapper">
-                                <!-- <img (click)="deleteSubtask(subtask)" src="../../assets/img/delete.png" alt="">
-                                    <div class="middle-line"></div>
-                                    <img (click)="openEditInput(subtask)" src="../../assets/img/edit.png" alt=""> -->
                                 <svg (click)="deleteSubtask(subtask)" width="16" height="18" viewBox="0 0 16 18"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path

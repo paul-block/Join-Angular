@@ -90,6 +90,11 @@
                             display: flex;
                             justify-self: flex-end;
                             gap: 20px;
+
+                                button {
+                                    gap: 5px;
+                                    max-width: 120px;
+                                }
                         }
             }
         }

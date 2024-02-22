@@ -1,58 +1,71 @@
 #pop-up-container {
     display: flex;
+    justify-content: space-evenly;
     border-radius: 10px;
-    width: 1100px;
+    // width: 1100px;
     height: 450px;
-    // position: absolute;
-    // top: 0;
     z-index: 9999;
-    // transform: translate(50%, 50%);
+    gap: 50px;
 
         #left-side {
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #2A3647;
-            width: 40%;
-            height: 100%;
-            padding: 20px;
+            // width: 40%;
+            padding: 0 50px;
             border-radius: 10px 0px 0px 10px;
-
 
             #headline {
                 display: flex;
                 flex-direction: column;
-                gap: 5px;
+                gap: 20px;
                 color: #fff;
 
-                    img {
+                    #logo{
                         height: 50px;
                         width: 50px;
                     }       
+
+                    h1, p {
+                        margin: 0;
+                    }
+
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                    }
+
+                    img {
+                        width: fit-content;
+                    }
             }
         }
 
         #right-side {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             background-color: #fff;
-            width: 60%;
-            padding: 20px;
+            // width: 60%;
+            gap: 50px;
+            padding-right: 50px;
             position: relative;
             border-radius: 0px 10px 10px 0px;
 
 
-                #profile {
-                    position: absolute;
-                    left: 45px;
-                }
+            #profile {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
 
                 .flex-column {
                     display: flex;
                     flex-direction: column;
                     gap: 50px;
-                    margin-left: 200px;
 
                     .input-wrapper {
 
@@ -64,7 +77,7 @@
                     
                         input {
                             box-sizing: border-box;
-                            width: 440px;
+                            width: 100%;
                             padding: 12px;
                             border-radius: 10px;
                             border: 1px solid #d1d1d1;                
@@ -87,9 +100,49 @@
                     }
                         #button-container {
                             display: flex;
-                            justify-self: flex-end;
                             gap: 20px;
+
+                                button {
+                                    gap: 5px;
+                                    max-width: 200px;
+
+                                        span {
+                                            font-size: 16px;
+                                        }
+                                }
                         }
                     }                      
         }
+}
+
+@media (max-width: 768px) {
+    #pop-up-container {
+        flex-direction: column;
+        width: unset !important;
+        height: unset !important;
+        justify-content: space-between;
+        align-items: center;
+
+            #left-side {
+                padding: 20px 10px !important;
+                width: 100%;
+            }
+
+            #right-side {
+                padding: 20px 10px !important;
+                width: 100%;
+                flex-direction: column;
+                padding: 0;
+                gap: 0;
+            
+             form {
+                margin-left: 0 !important;
+                gap: 25px !important;
+
+                    input {
+                        width: 100% !important;
+                    }
+             }
+        }
+    }
 }

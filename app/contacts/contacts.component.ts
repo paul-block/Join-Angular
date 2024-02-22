@@ -79,6 +79,10 @@ export class ContactsComponent implements OnInit, OnDestroy {
   openAddNewContactDialog(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass ='dialog-style';
+    if (this.mobileView) {
+      dialogConfig.height = '75vh';
+
+    }
     this.dialog.closeAll();
     this.dialog.open(NewContactComponent, dialogConfig);
   }
