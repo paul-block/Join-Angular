@@ -1,7 +1,7 @@
 #container {
     padding: 25px 50px;
     height: calc(100vh - 190px) ;
-}
+
 
 #upper-row {
     display: flex;
@@ -198,6 +198,7 @@
                 }
             }
         }
+    }
 }
 
 @media (max-width: 2000px) {

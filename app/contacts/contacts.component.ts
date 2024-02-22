@@ -1,4 +1,4 @@
-import { Component, OnDestroy, HostListener, OnInit} from '@angular/core';
+import { Component, OnDestroy, HostListener, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewContactComponent } from './new-contact/new-contact.component';
 import { ContactService } from 'src/services/contact.service';
@@ -15,13 +15,13 @@ import { Router } from '@angular/router';
 export class ContactsComponent implements OnInit, OnDestroy {
 
   authService: any;
-  currentUserContacts:any;
+  currentUserContacts: any;
   contactsSubscription: Subscription | null = null;
 
-  firstLetters:any[] = [];
+  firstLetters: any[] = [];
   renderedLetters = new Set<string>();
-  contactsByFirstLetter:any;
-  showConfirmation:boolean = false;
+  contactsByFirstLetter: any;
+  showConfirmation: boolean = false;
   alreadyRenderedLetters: string[] = [];
   initials: any[] = [];
 
@@ -29,23 +29,23 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.checkScreenSize()
+    this.checkScreenSize();
   }
 
-  constructor(private dialog: MatDialog, public contactService: ContactService, private router: Router) {}
+  constructor(private dialog: MatDialog, public contactService: ContactService, private router: Router) { }
 
   async ngOnInit() {
     this.checkScreenSize();
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
-    .subscribe((contacts) =>{
-      this.currentUserContacts = contacts;
-      this.groupContactsByInitial();
-    })
+      .subscribe((contacts) => {
+        this.currentUserContacts = contacts;
+        this.groupContactsByInitial();
+      });
   }
 
   ngOnDestroy() {
     this.contactsSubscription?.unsubscribe();
-    if(this.router.url !== '/contacts') this.contactService.showDetails = false;
+    if (this.router.url !== '/contacts') this.contactService.showDetails = false;
   }
 
   checkScreenSize() {
@@ -54,46 +54,46 @@ export class ContactsComponent implements OnInit, OnDestroy {
   }
 
   sortInitials(initials: string[]) {
-    initials.sort((a: string,b: string) => {
-     return a.toUpperCase() < b.toUpperCase() ? -1 : a.toUpperCase() > b.toUpperCase() ? 1 : 0;
-    })
+    initials.sort((a: string, b: string) => {
+      return a.toUpperCase() < b.toUpperCase() ? -1 : a.toUpperCase() > b.toUpperCase() ? 1 : 0;
+    });
   }
 
   groupContactsByInitial() {
     const groupedContacts: any = [];
     const initials: any = [];
     this.currentUserContacts.forEach((contact: { name: string; }) => {
-        const initial = contact.name.charAt(0).toUpperCase();
-        if (groupedContacts[initial]) {
-            groupedContacts[initial].push(contact);
-        } else {
-            groupedContacts[initial] = [contact];
-            initials.push(initial);
-        }
+      const initial = contact.name.charAt(0).toUpperCase();
+      if (groupedContacts[initial]) {
+        groupedContacts[initial].push(contact);
+      } else {
+        groupedContacts[initial] = [contact];
+        initials.push(initial);
+      }
     });
     this.sortInitials(initials);
     this.initials = initials;
     this.currentUserContacts = groupedContacts;
-}
+  }
 
-  openAddNewContactDialog(){
+  openAddNewContactDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.panelClass ='dialog-style';
+    dialogConfig.panelClass = 'dialog-style';
     this.dialog.closeAll();
     this.dialog.open(NewContactComponent, dialogConfig);
   }
 
-  openEditContactDialog(contact: Contact){
+  openEditContactDialog(contact: Contact) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.panelClass ='dialog-style';
+    dialogConfig.panelClass = 'dialog-style';
     dialogConfig.data = {
       name: contact.name,
-      email:contact.email,
-      phone:contact.phone,
+      email: contact.email,
+      phone: contact.phone,
       color: contact.color,
       uid: contact.uid,
       currentUserContacts: this.currentUserContacts
-    }
+    };
     this.dialog.closeAll();
     this.dialog.open(EditContactComponent, dialogConfig);
   }

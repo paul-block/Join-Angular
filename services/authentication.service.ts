@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  currentUser:any;
+  currentUser: any;
   uid: string | undefined;
   userData: any;
-  greetingLoaded:boolean = false;
+  greetingLoaded: boolean = false;
 
   private auth: Auth = inject(Auth);
   private firestore: Firestore = inject(Firestore);
@@ -22,11 +22,10 @@ export class AuthenticationService {
     this.checkLocalStorageUserData();
   }
 
-  checkLocalStorageUserData(){
+  checkLocalStorageUserData() {
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData && storedUserData !== 'null') {
       this.userData = JSON.parse(storedUserData);
-      console.log('User data',this.userData);
       this.isLoggedIn = true;
     }
   }
@@ -35,12 +34,10 @@ export class AuthenticationService {
     signInWithEmailAndPassword(this.auth, email, password)
       .then(async userCredential => {
         this.uid = userCredential.user.uid;
-        console.log(this.uid);
         this.userData = await this.getUserData(userCredential.user.uid);
-        localStorage.setItem('userData', JSON.stringify(this.userData)); 
+        localStorage.setItem('userData', JSON.stringify(this.userData));
         this.isLoggedIn = true;
         this.router.navigate(['/summary']);
-        // this.getUserTasks(this.uid);
       })
       .catch(error => {
         console.error('SignIn Failed:', error);
@@ -51,12 +48,10 @@ export class AuthenticationService {
     signInWithEmailAndPassword(this.auth, 'guest@guest.de', 'Guest123!')
       .then(async userCredential => {
         this.uid = userCredential.user.uid;
-        console.log(this.uid);
         this.userData = await this.getUserData(userCredential.user.uid);
-        localStorage.setItem('userData', JSON.stringify(this.userData)); 
+        localStorage.setItem('userData', JSON.stringify(this.userData));
         this.isLoggedIn = true;
         this.router.navigate(['/summary']);
-        // this.getUserTasks(this.uid);
       })
       .catch(error => {
         console.error('SignIn Failed:', error);
@@ -92,8 +87,8 @@ export class AuthenticationService {
       this.router.navigate(['']);
     });
   }
-  
-  async getUserData(userId:any) {
+
+  async getUserData(userId: any) {
     const q = query(this.getUsersRef(), where('uid', '==', userId));
     try {
       const querySnapshot = await getDocs(q);
@@ -107,59 +102,39 @@ export class AuthenticationService {
       }
     } catch (error) {
       console.error('Fehler beim Abrufen der Dokumente: ', error);
-      return null
+      return null;
     }
   }
 
   getUsernameByUserId(id: string) {
-    const q = query(this.getUsersRef(), where('uid', '==', id))
+    const q = query(this.getUsersRef(), where('uid', '==', id));
     onSnapshot(q, doc => {
-      doc.forEach( user => {
-       const userData = user.data();
-        return userData["name"]
-      })
-    })
+      doc.forEach(user => {
+        const userData = user.data();
+        return userData["name"];
+      });
+    });
   }
-
-  // getUserTasks(userId: string) {
-  //   const q = query(this.getTasksRef(), where('assignedUsers', '==', userId));
-  
-  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //     if (!querySnapshot.empty) {
-  //       const tasks = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  //       console.log('Aufgaben gefunden:', tasks);
-  //     } else {
-  //       console.log('Keine Aufgaben gefunden!');
-  //     }
-  //   }, (error) => {
-  //     console.error('Fehler beim Abrufen der Aufgaben: ', error);
-  //   });
-  // 
-  //   // Optional: Rückgabe der Unsubscribe-Funktion, um das Abhören zu beenden
-  //   return unsubscribe;
-  // }
 
   getRandomColorHex(): string {
     const colors = [
-      '#3498db', 
-      '#e74c3c', 
-      '#f39c12', 
+      '#3498db',
+      '#e74c3c',
+      '#f39c12',
       '#2ecc71',
       '#f1c40f',
       '#9b59b6',
-      '#1abc9c', 
-      '#e5e8df'  
+      '#1abc9c',
+      '#e5e8df'
     ];
-  
+
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   }
-  
-  
-  addUserToFirestore(data:any) {
+
+  addUserToFirestore(data: any) {
     addDoc(this.getUsersRef(), data);
   }
-
 
   getUsersRef() {
     return collection(this.firestore, 'users');

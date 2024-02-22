@@ -10,28 +10,26 @@ import { ContactService } from 'src/services/contact.service';
   styleUrls: ['./edit-contact.component.scss']
 })
 export class EditContactComponent implements OnInit {
-  name:string = '';
-  email:string = '';
-  phone?:number;
+  name: string = '';
+  email: string = '';
+  phone?: number;
 
   contactObjectBeforeEdit: Contact = this.saveCurrentContactDetails();
 
   contactsSubscription: any;
   currentUserContacts: any[] = [];
-  
+
   constructor(private dialog: MatDialog,
-              private contactService: ContactService,
-              @Inject(MAT_DIALOG_DATA) public contactData: any){}
+    private contactService: ContactService,
+    @Inject(MAT_DIALOG_DATA) public contactData: any) { }
 
   ngOnInit() {
     this.setDataIntoInputs();
-    this.saveCurrentContactDetails()
+    this.saveCurrentContactDetails();
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
-    .subscribe((contacts) =>{
-      this.currentUserContacts = contacts;
-    })
-
-    console.log(this.contactData)
+      .subscribe((contacts) => {
+        this.currentUserContacts = contacts;
+      });
   }
 
   saveCurrentContactDetails() {
@@ -41,10 +39,10 @@ export class EditContactComponent implements OnInit {
       phone: this.contactData.phone,
       uid: this.contactData.uid,
       color: this.contactData.color
-    }
+    };
   }
 
-  setDataIntoInputs(){
+  setDataIntoInputs() {
     this.name = this.contactData.name;
     this.email = this.contactData.email;
     this.phone = this.contactData.phone;
@@ -64,19 +62,19 @@ export class EditContactComponent implements OnInit {
 
   editContact(form: NgForm) {
     if (form.valid) {
-    let editedContact: Contact = {
-      name: this.name,
-      email: this.email,
-      phone: this.phone,
-      uid: this.contactData.uid,
-      color: this.contactData.color
+      let editedContact: Contact = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        uid: this.contactData.uid,
+        color: this.contactData.color
+      };
+      let index = this.currentUserContacts.findIndex((contact: { uid: string; }) => this.contactObjectBeforeEdit.uid === contact.uid);
+      this.currentUserContacts[index] = editedContact;
+      this.contactService.editContact(this.currentUserContacts);
+      this.contactService.selectedContact = editedContact;
+      this.closeDialog();
     }
-    let index = this.currentUserContacts.findIndex((contact: { uid: string; }) => this.contactObjectBeforeEdit.uid === contact.uid);
-    this.currentUserContacts[index] = editedContact;
-    this.contactService.editContact(this.currentUserContacts)
-    this.contactService.selectedContact = editedContact;
-    this.closeDialog()
-  } 
-}
-  
+  }
+
 }

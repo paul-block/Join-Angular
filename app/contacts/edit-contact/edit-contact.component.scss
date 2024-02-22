@@ -52,12 +52,9 @@
             align-items: center;
             justify-content: space-between;
             background-color: #fff;
-            // width: 60%;
             gap: 50px;
             padding: 50px 50px 50px 0;
-            // position: relative;
             border-radius: 0px 10px 10px 0px;
-
 
             #profile {
                 display: flex;
@@ -123,7 +120,6 @@
     #pop-up-container {
         flex-direction: column;
         width: unset !important;
-        // height: unset !important;
         justify-content: space-between;
         align-items: center;
         gap: 0;
@@ -143,10 +139,6 @@
              form {
                 margin-left: 0 !important;
                 gap: 25px !important;
-
-                    // input {
-                    //     width: 100% !important;
-                    // }
              }
         }
     }

@@ -15,7 +15,6 @@ export class AddTaskComponent {
   title: string = '';
   description: string = '';
   contactInput: string = '';
-  // assignableUsers: any[] = this.getContacts();
   dueDate: string = '';
   prio: string = '';
   category: string = '';
@@ -59,7 +58,6 @@ export class AddTaskComponent {
       this.showConfirmation = true;
     }, 4000);
   }
-
 
   checkScreensize() {
     if(window.innerWidth <= 1000) this.mobileView = true;
@@ -116,7 +114,6 @@ export class AddTaskComponent {
     if (this.subtask.trim() != '' && this.addedSubtasks.length < 2) {
       this.addedSubtasks.push(subtask)
       this.subtask = '';
-      console.log(this.addedSubtasks)
     }
   }
 
@@ -135,7 +132,6 @@ export class AddTaskComponent {
     let index = this.addedSubtasks.findIndex(task => task.name === subtask.name);
     this.addedSubtasks[index].name = updatedSubtask;
     this.addedSubtasks[index].editMode = false;
-    console.log(this.addedSubtasks);
   }
 
   clearSubtaskInput() {
@@ -152,7 +148,6 @@ export class AddTaskComponent {
     if (event.target.checked) {
       selectedContact.marked = true;
       this.selectedContacts.push(selectedContact);
-      console.log(this.currentUserContacts)
     }
     else {
       let index = this.selectedContacts.findIndex(contact => contact.name === selectedContact.name)
@@ -168,19 +163,13 @@ export class AddTaskComponent {
   
   getInitials(name: string) {
     let initials = name.split(' ').map(word => word.charAt(0)).join('');
-    return initials
+    return initials;
   }
-
-  // getContacts() {
-  //   return this.authService.contacts;
-  // }
 
   filterContacts(name: string) {
     if (name.trim() !== '') {
       let filteredContacts = this.currentUserContacts.filter((contact: { name: string; }) => contact.name.toLowerCase().startsWith(name.trim().toLowerCase()));
       this.currentUserContacts = filteredContacts;
-      console.log(filteredContacts)
-      console.log('filtered contacts')
     }
     else {
      this.contactService.getContactsForCurrentUser()

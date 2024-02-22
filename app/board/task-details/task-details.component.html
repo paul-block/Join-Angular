@@ -10,7 +10,6 @@
         <input type="text" [(ngModel)]="taskObject.title">
     </div>
 
-
     <div id="description" *ngIf="!showEditMode">{{taskObject.description}}</div>
     <div id="description-edit-wrapper" *ngIf="showEditMode">
         <span>Description:</span>
@@ -40,7 +39,6 @@
                     [src]="this.taskObject.prio === 'low' ? '../../assets/img/prioLow-white.svg' : '../../assets/img/prioLow.svg'"></button>
         </div>
     </div>
-    <!-- assigned to -->
     <div id="assigned-to-wrapper" *ngIf="!showEditMode">
         <span>Assigned to:</span>
         <ng-container *ngFor="let user of taskObject.assignedUsers">
@@ -57,18 +55,14 @@
                 id="assigned-to" (input)="filterContacts(contactInput)">
             <img src="../../assets/img/arrowDown.png" alt="">
         </div>
-        <!-- DROPDOWN -->
         <div *ngIf="showAssignDropDown" class="dropdown">
             <div class="selectable-user">
                 <div class="initials" [ngStyle]="{'background-color': this.authService.userData.color}">
                     {{getInitials(this.authService.userData.name)}}
                 </div>
                 <span>{{this.authService.userData.name}} (You)</span>
-                <!-- <input type="checkbox" [checked]="this.authService.userData.marked === true"
-                    (change)="selectContact($event, this.authService.userData)"> -->
                 <input type="checkbox" checked disabled>
             </div>
-            <!-- <ng-container *ngFor="let contact of taskObject.assignedUsers"> -->
             <ng-container *ngFor="let contact of contactService.currentUserContacts">
                 <div class="selectable-user" *ngIf="contact.uid !== this.authService.userData.uid ">
                     <div class="initials" [ngStyle]="{'background-color': contact.color}">
@@ -79,7 +73,6 @@
                 </div>
             </ng-container>
         </div>
-        <!-- SELECTED USERS -->
         <div id="selected-contacts">
             <ng-container *ngFor="let contact of contactService.currentUserContacts">
                 <div *ngIf="markUser(contact.uid) && contact.uid !== this.authService.userData.uid" class="initials"
@@ -112,8 +105,6 @@
                 <li *ngFor="let subtask of taskObject.subtasks" (mouseover)="showSubtaskIcons = true"
                     (mouseleave)="showSubtaskIcons = false">
                     {{subtask.name}}
-
-                    <!-- Wenn mobilansicht immer anzeigen und inputs zum bearbeiten checken -->
                     <div id="edit-delete-wrapper" *ngIf="showSubtaskIcons">
                         <img (click)="deleteSubtask(subtask)" src="../../assets/img/delete.png" alt="">
                         <div class="middle-line"></div>

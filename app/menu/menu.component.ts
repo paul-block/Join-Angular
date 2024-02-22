@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
     else this.mobileView = false;
   }
 
-  constructor(public auth: AuthenticationService) {}
+  constructor(public auth: AuthenticationService) { }
 
   ngOnInit(): void {
     this.checkScreenSize();
@@ -24,11 +24,11 @@ export class MenuComponent implements OnInit {
 
   getInitials() {
     let initials = this.auth.userData.name.split(' ').map((word: string) => word.charAt(0)).join('');
-    return initials
+    return initials;
   }
 
   toggleDropdown() {
-    this.showDropdown =! this.showDropdown;
+    this.showDropdown = !this.showDropdown;
   }
 
   checkScreenSize() {

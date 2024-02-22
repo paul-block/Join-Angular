@@ -4,7 +4,7 @@
 <div id="container" [ngClass]="showLogin ? '' : 'd-none'">
     <div id="signUpContainer">
         <span>Not a Join user?</span>
-        <button [routerLink]="'/register'" class="buttonGlobalDark">Sign up</button>
+        <button routerLink="/register" class="buttonGlobalDark">Sign up</button>
     </div>
 
     <section id="loginSection">
@@ -37,7 +37,7 @@
     </div>
 
     <section id="legal">
-        <a href="../Datenschutz/legalNoticeNoLogin.html">Legal notice</a>
+        <a routerLink="/legal-notice">Legal notice</a>
     </section>
 
 </div>

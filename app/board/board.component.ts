@@ -16,8 +16,7 @@ export class BoardComponent implements OnInit {
 
  filterInput: string = '';
 
-constructor(public taskService: TaskService, private dialog: MatDialog, public authService: AuthenticationService) {
-}
+constructor(public taskService: TaskService, private dialog: MatDialog, public authService: AuthenticationService) {}
 
 async ngOnInit() {
   await this.taskService.getAllTasksForCurrentUser();
@@ -66,7 +65,6 @@ updateTaskCategoryFirestore(event: CdkDragDrop<Task[]>, listname: string) {
   }
 }
 
-
 filterBoard(value:string) {
   this.taskService.filterTasksByCharacters(value);
 }
@@ -101,13 +99,13 @@ openTaskDetailsDialog(task: Task){
   this.dialog.open(TaskDetailsComponent, dialogConfig);
 }
 
-  countDoneSubtasks(subtasks:any) {
-    let counter = 0;
-    subtasks.forEach((task: { done: boolean; }) => {
-      if (task.done) counter++; 
-    })
-    return counter;
-  }
+countDoneSubtasks(subtasks:any) {
+  let counter = 0;
+  subtasks.forEach((task: { done: boolean; }) => {
+  if (task.done) counter++; 
+  })
+  return counter;
+}
 
 }
 

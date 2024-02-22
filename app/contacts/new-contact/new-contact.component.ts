@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { collection, updateDoc } from "firebase/firestore"; 
+import { collection, updateDoc } from "firebase/firestore";
 import { Contact } from 'src/app/interfaces/contact';
 import { ContactService } from 'src/services/contact.service';
 
@@ -13,41 +13,41 @@ import { ContactService } from 'src/services/contact.service';
 })
 export class NewContactComponent {
 
-  name:string = '';
-  email:string = '';
-  phone:number | undefined;
-  
-  constructor(private dialog: MatDialog, private contactService: ContactService) {}
+  name: string = '';
+  email: string = '';
+  phone: number | undefined;
 
-  async addContact(form: NgForm){
+  constructor(private dialog: MatDialog, private contactService: ContactService) { }
+
+  async addContact(form: NgForm) {
     if (form.valid) {
-    const contact: Contact = {
-      name: this.name,
-      email: this.email,
-      phone: this.phone,
-      uid: this.generateRandomId(),
-      color: this.getRandomColorHex()
+      const contact: Contact = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        uid: this.generateRandomId(),
+        color: this.getRandomColorHex()
+      };
+      this.contactService.addContact(contact);
+      this.contactService.selectedContact = contact;
+      this.closeDialog();
+      this.contactService.showDetails = true;
+      this.showContactAddedConfirmation();
     }
-     this.contactService.addContact(contact);
-     this.contactService.selectedContact = contact;
-     this.closeDialog();
-     this.contactService.showDetails = true;
-     this.showContactAddedConfirmation();
   }
-}
 
-closeDialog() {
-  this.dialog.closeAll();
-}
+  closeDialog() {
+    this.dialog.closeAll();
+  }
 
   showContactAddedConfirmation() {
     this.contactService.showContactAddedConfirmation = true;
     setTimeout(() => {
-     this.contactService.showContactAddedConfirmation = false;
+      this.contactService.showContactAddedConfirmation = false;
     }, 1500);
   }
 
-   generateRandomId(): string {
+  generateRandomId(): string {
     const length = 28;
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomId = '';
@@ -58,21 +58,20 @@ closeDialog() {
     return randomId;
   }
 
-   getRandomColorHex(): string {
+  getRandomColorHex(): string {
     const colors = [
-      '#3498db', 
-      '#e74c3c', 
-      '#f39c12', 
+      '#3498db',
+      '#e74c3c',
+      '#f39c12',
       '#2ecc71',
       '#f1c40f',
       '#9b59b6',
-      '#1abc9c', 
-      '#e5e8df'  
+      '#1abc9c',
+      '#e5e8df'
     ];
-  
+
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   }
-  
-  
+
 }

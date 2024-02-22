@@ -28,8 +28,8 @@
             <span class="formError"
                 *ngIf="signUpForm.submitted && signUpForm.form.get('confirmationPassword')?.invalid || signUpForm.submitted && !passwordsMatch()">Password
                 does not match or is too short</span>
-            <div class="privacyPolicyContainer" id="privacyContainer">
-                <div class="checkmarkContainer">
+            <div id="privacyContainer">
+                <div id="checkmarkContainer">
                     <input [(ngModel)]="privacyPolicyAccepted" required name="privacyPolicy" type="checkbox"
                         id="acceptPrivacyPolicyInput" />
                     <span>I accept the <a routerLink="/legal-notice" class="textHighlight">Privacy

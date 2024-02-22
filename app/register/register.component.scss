@@ -30,11 +30,11 @@
     position: absolute;
     top: 70px;
     left: 90px;
-}
 
-#backBtn img {
-    height: 22px;
-    width: 22px;
+    img {
+        height: 22px;
+        width: 22px;
+    }
 }
 
 #headline {
@@ -42,12 +42,12 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
-}
 
-#headline h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 61px;
+    h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 61px;
+    }
 }
 
 #signUpSection form {
@@ -55,23 +55,23 @@
     flex-direction: column;
     align-items: center;
 
+    input {
+        display: flex;
+        width: 422px;
+        padding: 12px 21px;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 1px solid var(--lightgray, #D1D1D1);
+        cursor: pointer;
+     }
+
     button:disabled {
         border: 1px solid transparent;
         background-color: gray;
     }
 }
-
-#signUpSection form input {
-    display: flex;
-    width: 422px;
-    padding: 12px 21px;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    border: 1px solid var(--lightgray, #D1D1D1);
-    cursor: pointer;
- }
 
  .formError {
     color: #ff0000;
@@ -82,13 +82,17 @@
 
  #privacyContainer{
     padding: unset;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 0 0 39px;
+
+    #acceptPrivacyPolicyInput {
+        max-width: 20px;
+    }
  }
 
-#acceptPrivacyPolicyInput {
-    max-width: 20px;
-}
-
-.checkmarkContainer {
+#checkmarkContainer {
     display: flex;
     justify-content: center;
     gap: 8px;
@@ -121,53 +125,22 @@
     z-index: 999;
 }
 
-#mobileLogoContainer {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color:var(--darkblue);
-    height: 100vh;
-    width: 100vw;
-    z-index: 999;
-    animation: OpacityLogoMobileContainer 3s forwards; 
-}
-
-#mobileLogo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    height: 85px;
-    width: 75px;
-    animation: LogoMobileAnimation 2s forwards; 
-    z-index: 1000;
-}
-
-.privacyPolicyContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 0 0 0 39px;
-}
-
 #legal {
     display: flex;
     position: absolute;
     bottom: 5rem;
     gap: 25px;
     cursor: pointer;
-}
 
-#legal a {
-    text-decoration: none;
-    color: var(--darkgray);
+    a {
+        text-decoration: none;
+        color: var(--darkgray);
 
-}
-
-#legal a:hover {
-    font-weight: 700;
-    color: var(--lightblue);
+        &:hover {
+            font-weight: 700;
+            color: var(--lightblue);
+        }
+    }
 }
 
 @keyframes slide-in {
@@ -176,39 +149,6 @@
     }
     100% {
         bottom: 200px;
-    }
-}
-
-@keyframes OpacityLogoMobileContainer {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 1;
-    }
-    75% {
-        opacity: 0.9;
-    }   
-    100% {
-        opacity: 0;
-    }
-}
-
-@keyframes LogoMobileAnimation {
-    0% {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); 
-    }
-    25% {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); 
-    }
-    100% {
-        top: 30px;
-        left: 40px;
-        transform: translate(0, 0);
     }
 }
 
@@ -236,19 +176,19 @@
 
     #backBtn {
         left: 40px;
-    }
 
-    #backBtn img {
-        height: 18px;
-        width: 18px;
+        img {
+            height: 18px;
+            width: 18px;
+        }
     }
 
     #signUpSection form {
         width: 80%;
-    }
 
-    #signUpSection form input {
-        width: 100%;
+        input {
+            width: 100%;
+        }
     }
 
     #legal {
@@ -260,14 +200,14 @@
     #signUpSection {
         padding: 25px 35px;
         gap: 20px;
+
+        form {
+            gap: 15px;
+        }
     }
 
     #backBtn {
         top: 50px;
-    }
-
-    #signUpSection form {
-        gap: 15px;
     }
 
     #legal {
@@ -276,7 +216,6 @@
 }
 
 @media (max-height: 800px) and (min-width: 500px) {
-
     #fixedLogo {
         height: 80px;
         width: 100px;
@@ -289,10 +228,10 @@
     #signUpSection {
         padding: 20px 85px;
         gap: 24px;
-    }
 
-    #signUpSection h1 {
-        font-size: 48px;
+        h1 {
+            font-size: 48px;
+        }
     }
 
     #legal {

@@ -10,22 +10,21 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class RegisterComponent {
 
-  showConfirmation:boolean = false;
+  showConfirmation: boolean = false;
 
-  username:string = '';
-  email:string = '';
-  password:string = '';
-  confirmationPassword:string = '';
+  username: string = '';
+  email: string = '';
+  password: string = '';
+  confirmationPassword: string = '';
   privacyPolicyAccepted: boolean = false;
 
-  constructor (private authService: AuthenticationService, private router: Router) {}
-
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   signUp(form: NgForm) {
     if (form.valid && this.passwordsMatch() && this.privacyPolicyAccepted) {
       this.authService.signUp(this.email, this.password, this.username);
-      this.showConfirmationAnimation()
-    } 
+      this.showConfirmationAnimation();
+    }
   }
 
   passwordsMatch() {

@@ -66,10 +66,6 @@
                 }
         }
 
-        // #description {
-        
-        // }
-
         .flex-gap25 {
             display: flex;
             gap: 25px;
@@ -237,8 +233,6 @@
             }
         }
 
-    
-
         #subtasks-wrapper {
             display: flex;
             flex-direction: column;
@@ -267,8 +261,7 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-
-                    
+     
                     #edit-input {
                         position: absolute;
                         box-sizing: border-box;
@@ -291,7 +284,6 @@
                             }
                     }
                 }
-
             }
 
             .input-wrapper {
@@ -319,8 +311,6 @@
                         justify-content: space-between;
                         width: 50px;
 
-             
-    
                             .middle-line {
                                 height: 20px;
                                 width: 1px;
@@ -343,7 +333,7 @@
                                 cursor: pointer;
                             }
             }
-            }
+        }
 
                 ul {
                     display: flex;
@@ -386,8 +376,6 @@
                                 justify-content: space-between;
                                 width: 50px;
 
-                     
-            
                                     .middle-line {
                                         height: 20px;
                                         width: 1px;
@@ -401,7 +389,6 @@
                         }
 
                         &:hover {
-                            // padding: 5px;
                             background-color: #d1d1d1;
                             border-radius: 10px;
             
@@ -415,7 +402,6 @@
                                 justify-content: space-between;
                                 width: 50px;
                      
-            
                                     .middle-line {
                                         height: 20px;
                                         width: 1px;
@@ -425,111 +411,106 @@
                                     img {
                                         position: unset;
                                     }
-
                         }
                     }
                 }
-        
-}}
+    }
+}
 
-        #button-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
+#button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
                 
-            div {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
 
-                &:hover {
-                    cursor: pointer;
-                    color: #29ABE2;
+        &:hover {
+            cursor: pointer;
+            color: #29ABE2;
 
-                    svg {
+            svg {
                         path {
-                            fill:#29ABE2
-                        }
-                    }
+                    fill:#29ABE2
                 }
             }
         }
+    }
+}
 
-        #button-wrapper-edit{
-            display: flex;
-            justify-content: flex-end;
+#button-wrapper-edit{
+    display: flex;
+    justify-content: flex-end;
 
-            button {
-                display: flex;
-                background-color: #2A3647;
-                height: 50px;
-                border-radius: 10px;
-                border: none;
-                padding: 16px;
-                box-sizing: border-box;
-                gap: 4px;
-                color: #fff;
-                font-weight: 700;
-                font-size: 20px;
-                align-items: center;
+    button {
+        display: flex;
+        background-color: #2A3647;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        padding: 16px;
+        box-sizing: border-box;
+        gap: 4px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 20px;
+        align-items: center;
 
-                img {
-                    height: 20px;
-                    width: 20px;
-                }
-
-                    &:hover {
-                        cursor: pointer;
-                        background-color: #29ABE2;
-                    }
-
-          
-            }
+        &:hover {
+            cursor: pointer;
+            background-color: #29ABE2;
         }
 
-
-        .justify-flex-end {
-            justify-content: flex-end !important;
-        }
-
-        .middle-line {
+        img {
             height: 20px;
-            width: 1px;
-            background-color: #d1d1d1;
+            width: 20px;
+        }     
+    }
+}
+
+.justify-flex-end {
+    justify-content: flex-end !important;
+}
+
+.middle-line {
+    height: 20px;
+    width: 1px;
+    background-color: #d1d1d1;
+}
+
+@media (max-width: 600px) {
+    #details-wrapper {
+        width: unset !important;
+
+    .input-wrapper {
+        width: 100% !important;
+    }
+
+    input, textarea {
+        width: 100% !important
+    }
+
+    .prio-btns {
+        button {
+            gap: 0 !important;
+            height: 45px !important;
+            padding: 5px !important;
         }
+    }
 
+    .dropdown {
+        width: 100% !important;
+    }
 
-        @media (max-width: 600px) {
-            #details-wrapper {
-                width: unset !important;
+    #subtasks-edit-mode-wrapper {
+        width: 100% !important;
 
-                    .input-wrapper {
-                        width: 100% !important;
-                    }
-
-                    input, textarea {
-                        width: 100% !important
-                    }
-
-                    .prio-btns {
-                        button {
-                            gap: 0 !important;
-                            height: 45px !important;
-                            padding: 5px !important;
-                        }
-                    }
-
-                    .dropdown {
-                        width: 100% !important;
-                    }
-
-                    #subtasks-edit-mode-wrapper {
-                        width: 100% !important;
-
-                        li {
-                            width: 100% !important;
-                        }
-                    }
-            }
-         }
+        li {
+            width: 100% !important;
+        }
+    }
+    }
+}

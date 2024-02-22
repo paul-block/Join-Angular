@@ -1,8 +1,6 @@
 #pop-up-container {
     display: flex;
     border-radius: 10px;
-    // height: 450px;
-    // z-index: 9999;
     gap: 50px;
 
         #left-side {
@@ -10,7 +8,6 @@
             align-items: center;
             justify-content: center;
             background-color: #2A3647;
-            // width: 40%;
             padding: 50px;
             border-radius: 10px 0px 0px 10px;
 
@@ -46,12 +43,9 @@
             align-items: center;
             justify-content: space-between;
             background-color: #fff;
-            // width: 60%;
             gap: 50px;
             padding: 50px 50px 50px 0;
-            // position: relative;
             border-radius: 0px 10px 10px 0px;
-
 
             #profile {
                 display: flex;
@@ -117,7 +111,6 @@
     #pop-up-container {
         flex-direction: column;
         width: unset !important;
-        // height: unset !important;
         justify-content: space-between;
         align-items: center;
         gap: 0;
@@ -137,10 +130,6 @@
              form {
                 margin-left: 0 !important;
                 gap: 25px !important;
-
-                    // input {
-                    //     width: 100% !important;
-                    // }
              }
         }
     }

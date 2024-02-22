@@ -8,5 +8,4 @@ export interface Task {
     status: string;
     subtasks: [];
     id: string;
-    // assignedUserIDs: [];
 }

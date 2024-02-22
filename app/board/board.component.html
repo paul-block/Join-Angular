@@ -4,15 +4,13 @@
             <h1>Board</h1>
             <button id="add-task-mobile-btn" (click)="openAddTaskDialog()">+</button>
         </div>
-
-
         <div>
             <input type="text" placeholder="find task" (input)="filterBoard(filterInput)" [(ngModel)]="filterInput">
             <button id="add-task-desktop" class="buttonGlobalDark" (click)="openAddTaskDialog()">Add task +</button>
         </div>
-
     </div>
     <div id="board-container">
+
         <div class="board-column">
             <div class="task-status">
                 <h2>To do</h2>
@@ -43,19 +41,16 @@
                             <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
                                 <div *ngIf="i === 5" class="assigned-users-placeholder">...</div>
-                                <!-- Überprüfen der ngIf vorher user.marked noch dazu -->
                                 <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
                                     *ngIf="user.uid !== this.authService.userData.uid && i < 5">
                                     {{getInitials(user.name)}}</div>
                             </ng-container>
                         </div>
-
                         <img class="prio"
                             [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
                             alt="">
                     </div>
                 </div>
-
                 <div *ngIf="this.taskService.todo.length < 1" class="no-task-placeholder">No tasks to do</div>
             </div>
         </div>
@@ -138,7 +133,6 @@
                             <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
                                 <div *ngIf="i === 5" class="assigned-users-placeholder">...</div>
-                                <!-- Überprüfen der ngIf vorher user.marked noch dazu -->
                                 <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
                                     *ngIf="user.uid !== this.authService.userData.uid && i < 5">
                                     {{getInitials(user.name)}}</div>
@@ -183,13 +177,11 @@
                             <ng-container *ngFor="let user of todo.assignedUsers; let i = index"
                                 [style.margin-left.px]="i > 0 ? -5 : 0">
                                 <div *ngIf="i === 5" class="assigned-users-placeholder">...</div>
-                                <!-- Überprüfen der ngIf vorher user.marked noch dazu -->
                                 <div [ngStyle]="{'background-color': user.color}" class="assignedUsers"
                                     *ngIf="user.uid !== this.authService.userData.uid && i < 5">
                                     {{getInitials(user.name)}}</div>
                             </ng-container>
                         </div>
-
                         <img class="prio"
                             [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
                             alt="">

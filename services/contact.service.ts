@@ -9,51 +9,35 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ContactService {
-  currentUserDocId: string ='';
+  currentUserDocId: string = '';
   selectedContact!: Contact;
-  currentUserContacts:any;
+  currentUserContacts: any;
   contactsSubscription: any;
 
   showContactAddedConfirmation: boolean = false;
-  showDetails:boolean = false;
+  showDetails: boolean = false;
 
-  constructor(private auth: AuthenticationService, private router: Router) { 
+  constructor(private auth: AuthenticationService) {
     this.contactsSubscription = this.getContactsForCurrentUser()
-    .subscribe((contacts) =>{
-      this.currentUserContacts = contacts;
-    })
-    console.log(this.currentUserContacts)
+      .subscribe((contacts) => {
+        this.currentUserContacts = contacts;
+      });
   }
 
   getDocId() {
-      return new Promise<void>((resolve, reject) => {
-        const q = query(this.auth.getUsersRef(), where('uid', '==', this.auth.userData.uid));
-        onSnapshot(q, doc => {
-          doc.forEach(doc => {
-            this.currentUserDocId = doc.id;
-          });
-          console.log(this.currentUserDocId)
-          resolve();
-        }, error => {
-          console.error('Fehler beim Abrufen der Aufgaben: ', error);
-          reject(error);
+    return new Promise<void>((resolve, reject) => {
+      const q = query(this.auth.getUsersRef(), where('uid', '==', this.auth.userData.uid));
+      onSnapshot(q, doc => {
+        doc.forEach(doc => {
+          this.currentUserDocId = doc.id;
         });
+        resolve();
+      }, error => {
+        console.error('Fehler beim Abrufen der Aufgaben: ', error);
+        reject(error);
       });
-    }
-
-
-  // async getContactsForCurrentUser() {
-  //   const docRef = this.auth.getSingleRefDoc('users', this.currentUserDocId)
-  //   const docSnap = await getDoc(docRef);
-
-  //   if (docSnap.exists()) {
-  //     let docData = docSnap.data();
-  //     return docData["contacts"]
-  //   }
-  //   else {
-  //     console.log("No such document!");
-  //   }
-  // }
+    });
+  }
 
   getContactsForCurrentUser(): Observable<any> {
     return new Observable((observer) => {
@@ -66,8 +50,6 @@ export class ContactService {
           if (snapshot.exists()) {
             const docData = snapshot.data();
             const extractedData = docData["contacts"];
-
-            console.log(extractedData);
             observer.next(extractedData);
           } else {
             console.log("No such document!");
@@ -85,54 +67,22 @@ export class ContactService {
     });
   }
 
-
-  
-
   async deleteContact(contact: Contact | undefined) {
-    console.log('delete contact service ausgeführt')
-
     await updateDoc(this.auth.getSingleRefDoc('users', this.currentUserDocId), {
       contacts: arrayRemove(contact)
-    })
+    });
   }
 
   async editContact(contactArr: any[]) {
-    console.log('edit contact service ausgeführt')
-
     await updateDoc(this.auth.getSingleRefDoc('users', this.currentUserDocId), {
       contacts: contactArr
-    })
+    });
   }
-  
 
-  // getContactsForCurrentUser() {
-  //   return new Promise<any>((resolve, reject) => {
-  //     const docRef = this.auth.getSingleRefDoc('users', this.currentUserDocId);
-  
-  //     onSnapshot(docRef, snapshot => {
-  //       console.log('onSnapshot wurde aufgerufen');
-  
-  //       if (snapshot.exists()) {
-  //         const docData = snapshot.data();
-  //         const extractedData = docData["contacts"];
-  
-  //         console.log(extractedData);
-  //         resolve(extractedData);
-  //       } else {
-  //         console.log("No such document!");
-  //         reject("No such document!");
-  //       }
-  //     }, error => {
-  //       console.error('Fehler beim Abrufen des Dokuments: ', error);
-  //       reject(error);
-  //     });
-  //   });
-  // }
-  
-  async addContact(contact: Contact){
+  async addContact(contact: Contact) {
     await updateDoc(this.auth.getSingleRefDoc('users', this.currentUserDocId), {
       contacts: arrayUnion(contact)
-    })
+    });
   }
 
 }
