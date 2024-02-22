@@ -232,6 +232,11 @@
 
     #upper-row {
         flex-direction: column;
+        gap: 20px;
+
+        h1 {
+            font-size: 36px;
+        }
 
         input {
             width: 100%;
@@ -239,6 +244,11 @@
 
         #add-task-desktop {
             display: none;
+        }
+
+        #add-task-mobile-btn { 
+            width: 45px;
+            height: 45px;
         }
     }
    
@@ -250,3 +260,10 @@
     }
  }
 
+@media (max-height: 800px) {
+    #upper-row {
+        h1 {
+            font-size: 36px;
+        }
+    }
+}

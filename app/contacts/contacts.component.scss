@@ -254,10 +254,22 @@
                 left: 0;
                 right: 0;
                 z-index: 2;
-                height: calc(100vh - 190px);
-                max-width: unset;
+                padding: 25px 30px !important;
                 gap: 2vh !important;
                 background-color: #fff;
+
+                h1 {
+                    font-size: 36px !important;
+                }
+
+                p {
+                    font-size: 20px !important;
+                }
+        
+                .name-details {
+                    font-size: 32px !important;
+                }
+        
 
                     .first-row {
                         gap: 10px !important;
@@ -267,7 +279,7 @@
                         display: block !important;
                         position: absolute;
                         top: 25px;
-                        right: 25px;
+                        right: 0px;
                         cursor: pointer;
                     }
             }
@@ -279,4 +291,23 @@
         height: calc(100vh - 220px) !important;
         overflow-y: scroll;
     }
+}
+
+@media (max-height: 850px) {
+
+    #right-side {
+        h1 {
+            font-size: 36px !important;
+        }
+
+        p {
+            font-size: 20px !important;
+        }
+
+        .name-details {
+            font-size: 32px !important;
+        }
+    }
+  
+    
 }

@@ -1,7 +1,7 @@
     form {
         display: flex;
         flex-direction: column;
-        height: fit-content;
+        height: 100%;
         padding: 25px 50px;
 
         h1 {
@@ -63,12 +63,13 @@
 }
 
 .mobile-btn-container {
-    position: fixed;
-    bottom: 100px;
+    position: absolute;
+    bottom: -100px;
     left: 0;
     right: 0;
-    background-color: #F6F7F8;
+    // background-color: #F6F7F8;
     justify-content: space-between;
+    align-items: center;
     gap: 10px !important;
 
         button {
@@ -328,7 +329,10 @@
     box-sizing: border-box;
     // padding: 20px;
     gap: 25px
+}
 
+#right-side {
+    position: relative;
 }
 
 .disabled {
@@ -379,6 +383,11 @@
 
     form {
         align-items: center;
+        overflow-y: scroll;
+
+        h1 {
+            font-size: 36px;
+        }
 
         #btn-container {
             justify-content: center;
@@ -388,14 +397,31 @@
 
 @media (max-height: 1000px) and (max-width: 1000px) {
     form {
-        height: calc(100vh - 300px);
-        overflow-y: scroll;
+        height: calc(100vh - 250px);
         overflow-x: hidden;
     }
 }
 
-@media (max-height: 750px) {
+@media (max-height: 800px) {
+
+    form {
+        h1 {
+            font-size: 36px;
+        }
+    }
     .dropdown {
         max-height: 150px;
     }
 }
+
+// @media (max-width: 450px) {
+//     form {
+//         width: 98vw;
+//     }
+// }
+
+// @media (max-height: 800px) {
+//     form {
+//         height: 95vh;
+//     }
+// }

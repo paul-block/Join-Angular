@@ -50,6 +50,7 @@ export class AddTaskComponent {
   }
 
   ngOnInit(){
+    this.checkScreensize();
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;
@@ -60,12 +61,10 @@ export class AddTaskComponent {
   }
 
 
-
-  // changeDateFormat() {
-  //   let dueDateInMilliseconds = Date.parse(this.dueDate);
-  //   // let dueDateInCorrectFormat = new Date(dueDateInMilliseconds).toLocaleDateString('de-DE');
-  //   return dueDateInMilliseconds;
-  // }
+  checkScreensize() {
+    if(window.innerWidth <= 1000) this.mobileView = true;
+    else this.mobileView = false;
+  }
 
   createTaskObject() {
     const selectedUsersId = this.selectedContacts.map((contact) => contact.uid);
