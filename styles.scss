@@ -116,16 +116,16 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 2px;
+    width: 0;
 }
-::-webkit-scrollbar-thumb {
-    background: #b4b4b4;
-    border-radius: 16px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 16px;
-}
+// ::-webkit-scrollbar-thumb {
+//     background: transparent;
+//     border-radius: 16px;
+// }
+// ::-webkit-scrollbar-track {
+//     background: transparent;
+//     border-radius: 16px;
+// }
 
 @media (max-width: 1500px) {
     .container {

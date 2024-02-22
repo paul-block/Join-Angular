@@ -138,7 +138,13 @@
     }
 
     .email {
-        color: #29ABE2
+        color: #29ABE2;
+        text-decoration: none;
+    }
+
+    .phone {
+        text-decoration: none;
+        color: #000;
     }
 
 }

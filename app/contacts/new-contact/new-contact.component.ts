@@ -19,10 +19,6 @@ export class NewContactComponent {
   
   constructor(private dialog: MatDialog, private contactService: ContactService) {}
 
-  closeDialog() {
-    this.dialog.closeAll();
-  }
-
   async addContact(form: NgForm){
     if (form.valid) {
     const contact: Contact = {
@@ -38,6 +34,10 @@ export class NewContactComponent {
      this.contactService.showDetails = true;
      this.showContactAddedConfirmation();
   }
+}
+
+closeDialog() {
+  this.dialog.closeAll();
 }
 
   showContactAddedConfirmation() {

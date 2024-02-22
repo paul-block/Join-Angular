@@ -1,7 +1,7 @@
 <form name="task-form" #taskForm="ngForm" (ngSubmit)="addTask()">
     <h1>Add Task</h1>
 
-    <div id="wrapper">
+    <div id="wrapper" *ngIf="!addedTask">
         <div id="left-side">
             <div class="flex-column">
                 <label for="title-input">Title<span class="required">*</span></label>

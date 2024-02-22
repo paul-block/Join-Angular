@@ -86,12 +86,14 @@
 
                 <div class="email-container">
                     <h2>Email</h2>
-                    <span class="email">{{this.contactService.selectedContact.email}}</span>
+                    <a href="mailto:{{this.contactService.selectedContact.email}}"
+                        class="email">{{this.contactService.selectedContact.email}}</a>
                 </div>
 
                 <div class="phone-container">
                     <h2>Phone</h2>
-                    <span>{{this.contactService.selectedContact.phone}}</span>
+                    <a class="phone"
+                        href="tel:{{this.contactService.selectedContact.phone}}">{{this.contactService.selectedContact.phone}}</a>
                 </div>
 
                 <div id="added-contact-confirmation" *ngIf="contactService.showContactAddedConfirmation">Contact

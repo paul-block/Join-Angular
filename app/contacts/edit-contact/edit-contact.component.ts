@@ -16,7 +16,6 @@ export class EditContactComponent implements OnInit {
 
   contactObjectBeforeEdit: Contact = this.saveCurrentContactDetails();
 
-  // currentContactArray:any[] = [];
   contactsSubscription: any;
   currentUserContacts: any[] = [];
   
@@ -26,13 +25,13 @@ export class EditContactComponent implements OnInit {
 
   ngOnInit() {
     this.setDataIntoInputs();
-    // this.saveCurrentContactArrayLocal();
     this.saveCurrentContactDetails()
     this.contactsSubscription = this.contactService.getContactsForCurrentUser()
     .subscribe((contacts) =>{
       this.currentUserContacts = contacts;
     })
-    // console.log(this.currentContactArray)
+
+    console.log(this.contactData)
   }
 
   saveCurrentContactDetails() {
@@ -45,10 +44,6 @@ export class EditContactComponent implements OnInit {
     }
   }
 
-  // saveCurrentContactArrayLocal(){
-  //   this.currentContactArray = this.contactData.currentUserContacts;
-  // }
-
   setDataIntoInputs(){
     this.name = this.contactData.name;
     this.email = this.contactData.email;
@@ -57,6 +52,14 @@ export class EditContactComponent implements OnInit {
 
   closeDialog() {
     this.dialog.closeAll();
+  }
+
+  deleteContact() {
+    let index = this.currentUserContacts.findIndex((contact: { uid: string; }) => this.contactData.uid === contact.uid);
+    let contact = this.currentUserContacts[index];
+    this.contactService.deleteContact(contact);
+    this.contactService.showDetails = false;
+    this.closeDialog();
   }
 
   editContact(form: NgForm) {
@@ -68,13 +71,8 @@ export class EditContactComponent implements OnInit {
       uid: this.contactData.uid,
       color: this.contactData.color
     }
-
     let index = this.currentUserContacts.findIndex((contact: { uid: string; }) => this.contactObjectBeforeEdit.uid === contact.uid);
     this.currentUserContacts[index] = editedContact;
-    console.log('index: ' + index);
-    console.log(this.currentUserContacts[index])
-    console.log('editedContact: ' + editedContact);
-    console.log('contactObjectBeforeEdit: ' + this.contactObjectBeforeEdit)
     this.contactService.editContact(this.currentUserContacts)
     this.contactService.selectedContact = editedContact;
     this.closeDialog()

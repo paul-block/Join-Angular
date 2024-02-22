@@ -280,6 +280,9 @@
             
                                     img {
                                         position: unset;
+                                        &:hover {
+                                            cursor: pointer;
+                                        }
                                     }
                             }
                         }
@@ -410,7 +413,7 @@
         }
     }
     .dropdown {
-        max-height: 150px;
+        max-height: 150px !important; 
     }
 }
 
