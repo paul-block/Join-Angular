@@ -1,4 +1,5 @@
-<app-menu *ngIf="this.auth.isLoggedIn"></app-menu>
-<div [class.content]="userLoggedIn()">
+<app-menu *ngIf="showMenu()"></app-menu>
+
+<div [ngClass]="{'content': checkUrl()}">
     <router-outlet></router-outlet>
 </div>

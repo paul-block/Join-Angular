@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
@@ -16,10 +17,16 @@ export class MenuComponent implements OnInit {
     else this.mobileView = false;
   }
 
-  constructor(public auth: AuthenticationService) { }
+  constructor(public auth: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.checkScreenSize();
+  }
+
+  isLoggedIn() {
+    let userData = localStorage.getItem('userData');
+    if (userData !== 'null') return true;
+    else return false;
   }
 
   getInitials() {

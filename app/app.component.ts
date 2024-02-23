@@ -8,18 +8,16 @@ import { AuthenticationService } from 'src/services/authentication.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'join';
-  showMenu = false;
 
-  constructor(public auth: AuthenticationService, private router: Router) {}
+  constructor(public auth: AuthenticationService, public router: Router) { }
 
-  isLoggedIn() {
-    if (localStorage.getItem('curentUser') !== null || undefined) this.auth.isLoggedIn = true;
-    else this.auth.isLoggedIn = false;
-  }
-
-  userLoggedIn() {
+  checkUrl() {
     const currentRoute = this.router.url;
     return currentRoute !== '/' && currentRoute !== '/register';
+  }
+
+  showMenu() {
+    if (this.auth.isLoggedIn || this.router.url === '/legal-notice') return true;
+    else return false;
   }
 }

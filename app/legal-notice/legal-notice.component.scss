@@ -5,6 +5,19 @@
     padding: 30px 50px;
     height: calc(100vh - 160px);
     overflow-y: scroll;
+    position: relative;
+
+        #back-btn {
+            position: absolute;
+            right: 30px;
+            top: 50px;
+            height: 25px;
+            width: 25px;
+            
+                &:hover {
+                    cursor: pointer;
+                }
+        }
 }
 
 @media (max-width: 1000px) {
