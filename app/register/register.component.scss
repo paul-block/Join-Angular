@@ -67,6 +67,21 @@
         cursor: pointer;
      }
 
+     input[type="email"] {
+        background: url(../../assets/img/email_icon.png) no-repeat;
+        background-position: 97%;
+    }
+    
+    input[type="password"] {
+        background: url(../../assets/img/password_icon.png) no-repeat;
+        background-position: 97%;
+    }
+    
+    input[type="name"] {
+        background: url(../../assets/img/name_icon.png) no-repeat;
+        background-position: 97%;
+    }
+
     button:disabled {
         border: 1px solid transparent;
         background-color: gray;
