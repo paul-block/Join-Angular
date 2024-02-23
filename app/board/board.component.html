@@ -19,7 +19,7 @@
             <div class="task-container" cdkDropList #todoList="cdkDropList" [cdkDropListData]="this.taskService.todo"
                 [cdkDropListConnectedTo]="[inProgressList, feedbackList, doneList]"
                 (cdkDropListDropped)="drop($event,'todo')">
-                <div cdkDrag cdkDragPreviewContainer="parent" [cdkDragData]="todo" [id]="'todoList'" class="task-card"
+                <div cdkDrag cdkDragPreviewContainer="parent" [cdkDragData]=" todo" [id]="'todoList'" class="task-card"
                     *ngFor="let todo of this.taskService.todo" (click)="openTaskDetailsDialog(todo)">
                     <div class="category"
                         [ngStyle]="{'background-color': todo.category == 'User Story' ? '#0038FF' : '#1FD7C1'}">
