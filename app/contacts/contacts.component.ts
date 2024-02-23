@@ -48,17 +48,27 @@ export class ContactsComponent implements OnInit, OnDestroy {
     if (this.router.url !== '/contacts') this.contactService.showDetails = false;
   }
 
+  /**
+   * Checks the screen size to determine if the view is in mobile mode.
+   */
   checkScreenSize() {
     if (window.innerWidth < 1200) this.mobileView = true;
     else this.mobileView = false;
   }
 
+  /**
+   * Sorts an array of initials alphabetically.
+   * @param {string[]} initials - The array of initials to be sorted.
+   */
   sortInitials(initials: string[]) {
     initials.sort((a: string, b: string) => {
       return a.toUpperCase() < b.toUpperCase() ? -1 : a.toUpperCase() > b.toUpperCase() ? 1 : 0;
     });
   }
 
+  /**
+   * Groups contacts by their initial letters.
+   */
   groupContactsByInitial() {
     const groupedContacts: any = [];
     const initials: any = [];
@@ -76,6 +86,9 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.currentUserContacts = groupedContacts;
   }
 
+  /**
+   * Opens the dialog to add a new contact.
+   */
   openAddNewContactDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass = 'dialog-style';
@@ -83,6 +96,10 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.dialog.open(NewContactComponent, dialogConfig);
   }
 
+  /**
+   * Opens the dialog to edit a contact.
+   * @param {Contact} contact - The contact to be edited.
+   */
   openEditContactDialog(contact: Contact) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass = 'dialog-style';
@@ -98,16 +115,29 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.dialog.open(EditContactComponent, dialogConfig);
   }
 
+  /**
+   * Shows the details of a contact.
+   * @param {Contact} contact - The contact for which to display details.
+   */
   showContactDetails(contact: Contact) {
     this.contactService.selectedContact = contact;
     this.contactService.showDetails = true;
   }
 
+  /**
+   * Gets the initials from a name in uppercase.
+   * @param {string} name - The name from which to extract initials.
+   * @returns {string} The initials extracted from the name in uppercase.
+   */
   getInitials(name: string) {
     let initials = name.split(' ').map(word => word.charAt(0)).join('');
     return initials.toUpperCase();
   }
 
+  /**
+   * Deletes a contact.
+   * @param {Contact} contact - The contact to be deleted.
+   */
   deleteContact(contact: Contact) {
     this.contactService.deleteContact(contact);
     this.contactService.showDetails = false;

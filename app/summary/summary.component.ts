@@ -34,6 +34,10 @@ export class SummaryComponent implements OnInit {
     }
   }
 
+  /**
+   * Generates a greeting phrase based on the current time of the day.
+   * @returns {string} The greeting phrase.
+   */
   getGreetingPhrase() {
     let date = new Date();
     let currentHour = date.getHours();
@@ -43,6 +47,10 @@ export class SummaryComponent implements OnInit {
     else return "Good day";
   }
 
+  /**
+   * Retrieves the upcoming deadline date for urgent tasks.
+   * @returns {string} The upcoming deadline date formatted as 'Month Day, Year'.
+   */
   getUpcomingDeadline() {
     let urgentTasks = this.taskService.tasks.filter(task => task.prio === 'urgent');
     let dueDatesInMilliseconds = urgentTasks.map(task => Date.parse(task.dueDate));
@@ -55,12 +63,19 @@ export class SummaryComponent implements OnInit {
     return date;
   }
 
+  /**
+   * Checks if the user has already been greeted.
+   * Sets the 'greetingLoaded' flag in the authentication service accordingly.
+   */
   checkIfUserAlreadyGreeted() {
     let greeted = localStorage.getItem('greetingLoaded');
     if (greeted === 'true') this.auth.greetingLoaded = true;
     else this.auth.greetingLoaded = false;
   }
 
+  /**
+   * Sets the 'greetingLoaded' flag to true after a delay and updates the local storage accordingly.
+   */
   userGreeted() {
     setTimeout(() => {
       this.auth.greetingLoaded = true;

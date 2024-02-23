@@ -29,6 +29,10 @@ export class TaskService {
     });
   }
 
+  /**
+   * Retrieves all tasks assigned to the current user from Firestore and updates the tasks subject.
+   * Also filters tasks by category after retrieval.
+   */
   async getAllTasksForCurrentUser() {
     const q = query(this.authService.getTasksRef(), where('assignedUserIDs', 'array-contains', this.authService.userData.uid));
     onSnapshot(q, (querySnapshot: QuerySnapshot) => {
@@ -43,6 +47,9 @@ export class TaskService {
     });
   }
 
+  /**
+   * Counts the number of urgent tasks in the current tasks list.
+   */
   countUrgentTasks() {
     this.urgentTasks = 0;
     this.tasks.forEach(task => {
@@ -50,6 +57,9 @@ export class TaskService {
     });
   }
 
+  /**
+   * Clears the task board by resetting task arrays and counting urgent tasks.
+   */
   clearBoard() {
     this.todo = [];
     this.inProgress = [];
@@ -58,6 +68,9 @@ export class TaskService {
     this.countUrgentTasks();
   }
 
+  /**
+   * Filters tasks into respective categories (todo, inProgress, feedback, done).
+   */
   filterTasksByCategory() {
     this.clearBoard();
     this.tasks.filter((task) => {
@@ -68,6 +81,10 @@ export class TaskService {
     });
   }
 
+  /**
+   * Filters tasks by characters (title or description) and updates task arrays accordingly.
+   * @param {string} value - The value to filter tasks by.
+   */
   filterTasksByCharacters(value: string) {
     this.clearBoard();
     this.tasks.filter((task) => {
@@ -78,6 +95,10 @@ export class TaskService {
     });
   }
 
+  /**
+   * Adds a task to Firestore.
+   * @param {any} task - The task object to add.
+   */
   async addTask(task: any) {
     const docRef = await addDoc(this.authService.getTasksRef(), {
       assignedUsers: task.assignedUsers,
@@ -95,6 +116,10 @@ export class TaskService {
     });
   }
 
+  /**
+   * Updates a task in Firestore.
+   * @param {Task} task - The task object to update.
+   */
   async updateTask(task: Task) {
     await updateDoc(this.authService.getSingleRefDoc('tasks', task.id), {
       assignedUsers: task.assignedUsers,
@@ -109,12 +134,20 @@ export class TaskService {
     });
   }
 
+  /**
+   * Updates the category of a task in Firestore.
+   * @param {Task} task - The task object to update category for.
+   */
   async updateTaskCategory(task: Task) {
     await updateDoc(this.authService.getSingleRefDoc('tasks', task.id), {
       status: task.status
     });
   }
 
+  /**
+   * Deletes a task from Firestore.
+   * @param {Task} task - The task object to delete.
+   */
   async deleteTask(task: Task) {
     await deleteDoc(this.authService.getSingleRefDoc('tasks', task.id));
   }

@@ -21,7 +21,7 @@
                 <div class="input-wrapper" #assignInput (click)="toggleDropdown('assign')">
                     <input name="assigned-to" placeholder="Select contacts to assign" type="text"
                         [(ngModel)]="contactInput" id="assigned-to" (input)="filterContacts(contactInput)">
-                    <img src="../../assets/img/arrowDown.png" alt="">
+                    <img src="assets/img/arrowDown.png" alt="">
                 </div>
                 <div *ngIf="showAssignDropDown" class="dropdown" #assignDropDown>
                     <div class="selectable-user">
@@ -70,14 +70,14 @@
                 <div id="prio-btns" class="flex-row">
                     <button id="urgent-btn" (click)="setPriority('urgent')" [class.urgent]="this.prio === 'urgent'"
                         type="button" class="buttonGlobalWhite">Urgent<img
-                            [src]="this.prio === 'urgent' ? '../../assets/img/prioUrgent-white.svg' : '../../assets/img/prioUrgent.svg'">
+                            [src]="this.prio === 'urgent' ? 'assets/img/prioUrgent-white.svg' : 'assets/img/prioUrgent.svg'">
                     </button>
                     <button id="medium-btn" (click)="setPriority('medium')" [class.medium]="this.prio === 'medium'"
                         type="button" class="buttonGlobalWhite">Medium<img
-                            [src]="this.prio === 'medium' ? '../../assets/img/prioMedium-white.svg' : '../../assets/img/prioMedium.svg'"></button>
+                            [src]="this.prio === 'medium' ? 'assets/img/prioMedium-white.svg' : 'assets/img/prioMedium.svg'"></button>
                     <button id="low-btn" (click)="setPriority('low')" [class.low]="this.prio === 'low'" type="button"
                         class="buttonGlobalWhite">Low<img
-                            [src]="this.prio === 'low' ? '../../assets/img/prioLow-white.svg' : '../../assets/img/prioLow.svg'"></button>
+                            [src]="this.prio === 'low' ? 'assets/img/prioLow-white.svg' : 'assets/img/prioLow.svg'"></button>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                 <div class="input-wrapper" (click)="toggleDropdown('category')">
                     <input [required]="!addedTask" placeholder="Select task category" name="category" type="text"
                         [(ngModel)]="category" id="category">
-                    <img src="../../assets/img/arrowDown.png" alt="">
+                    <img src="assets/img/arrowDown.png" alt="">
                 </div>
                 <div *ngIf="showCategoryDropDown" class="dropdown">
                     <div class="selectable-user" *ngFor="let category of selectableCategories">
@@ -103,11 +103,11 @@
                 <div class="input-wrapper">
                     <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text"
                         [(ngModel)]="subtask" id="subtasks" placeholder="Add new subtask">
-                    <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="../../assets/img/add.png" alt="">
+                    <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="assets/img/add.png" alt="">
                     <div class="icons-wrapper" *ngIf="subtaskFocused">
-                        <img (click)="clearSubtaskInput()" src="../../assets/img/x.png" alt="">
+                        <img (click)="clearSubtaskInput()" src="assets/img/x.png" alt="">
                         <div class="middle-line"></div>
-                        <img (click)="addSubtask()" src="../../assets/img/check.svg" alt="">
+                        <img (click)="addSubtask()" src="assets/img/check.svg" alt="">
                     </div>
                 </div>
                 <div id="subtask-wrapper" *ngIf="addedSubtasks.length > 0">
@@ -131,10 +131,10 @@
                             <div id="edit-input-wrapper" *ngIf="subtask.editMode === true">
                                 <input name="editSubtask" id="edit-input" type="text" [(ngModel)]="editedSubtask">
                                 <div class="icons-wrapper">
-                                    <img (click)="subtask.editMode = false" src="../../assets/img/x.png" alt="">
+                                    <img (click)="subtask.editMode = false" src="assets/img/x.png" alt="">
                                     <div class="middle-line"></div>
-                                    <img (click)="updateSubtask(subtask, editedSubtask)"
-                                        src="../../assets/img/check.svg" alt="">
+                                    <img (click)="updateSubtask(subtask, editedSubtask)" src="assets/img/check.svg"
+                                        alt="">
                                 </div>
                             </div>
                         </li>
@@ -146,12 +146,11 @@
                     <span>X</span></button>
                 <p *ngIf="mobileView"><span id="required-sign">*</span> This field is required</p>
                 <button class="buttonGlobalDark" type="submit" [class.disabled]="taskForm.invalid"
-                    [disabled]="taskForm.invalid">Create Task<img src="../../assets/img/check-icon-white.svg"
-                        alt=""></button>
+                    [disabled]="taskForm.invalid">Create Task<img src="assets/img/check-icon-white.svg" alt=""></button>
             </div>
         </div>
     </div>
 </form>
 
-<div id="added-task-confirmation" *ngIf="addedTask">Task added to board <img src="../../assets/img/Vector (1).svg"
-        alt=""></div>
+<div id="added-task-confirmation" *ngIf="addedTask">Task added to board <img src="assets/img/Vector (1).svg" alt="">
+</div>

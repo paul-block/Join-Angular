@@ -10,6 +10,9 @@ export class LegalNoticeComponent {
 
   constructor(private location: Location) { }
 
+  /**
+   * Navigates back to the previous page in the browser history.
+   */
   backToLastPage() {
     this.location.back();
   }

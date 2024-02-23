@@ -200,7 +200,7 @@ input[type="checkbox"] {
     }
 
     #loginSection {
-        padding: 48px 35px;
+        padding: 15px;
     }
 
     #signUpContainer {
@@ -270,6 +270,7 @@ input[type="checkbox"] {
 
     #loginSection form {
         width: 100%;
+        gap: 20px;
 
         input {
             width: unset;

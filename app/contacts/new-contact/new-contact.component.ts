@@ -19,6 +19,10 @@ export class NewContactComponent {
 
   constructor(private dialog: MatDialog, private contactService: ContactService) { }
 
+  /**
+   * Adds a new contact.
+   * @param {NgForm} form - The form containing the contact data.
+   */
   async addContact(form: NgForm) {
     if (form.valid) {
       const contact: Contact = {
@@ -36,10 +40,16 @@ export class NewContactComponent {
     }
   }
 
+  /**
+   * Closes the dialog.
+   */
   closeDialog() {
     this.dialog.closeAll();
   }
 
+  /**
+   * Shows the contact added confirmation message.
+   */
   showContactAddedConfirmation() {
     this.contactService.showContactAddedConfirmation = true;
     setTimeout(() => {
@@ -47,6 +57,10 @@ export class NewContactComponent {
     }, 1500);
   }
 
+  /**
+   * Generates a random ID.
+   * @returns {string} The generated random ID.
+   */
   generateRandomId(): string {
     const length = 28;
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -58,6 +72,10 @@ export class NewContactComponent {
     return randomId;
   }
 
+  /**
+   * Gets a random color hex code.
+   * @returns {string} The randomly selected color hex code.
+   */
   getRandomColorHex(): string {
     const colors = [
       '#3498db',
@@ -69,7 +87,6 @@ export class NewContactComponent {
       '#1abc9c',
       '#e5e8df'
     ];
-
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   }

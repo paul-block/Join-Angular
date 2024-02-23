@@ -22,6 +22,9 @@ export class AuthenticationService {
     this.checkLocalStorageUserData();
   }
 
+  /**
+   * Checks if user data exists in local storage and sets user authentication status accordingly.
+   */
   checkLocalStorageUserData() {
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData && storedUserData !== 'null') {
@@ -30,6 +33,12 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Signs in a user with the provided email and password.
+   * If successful, sets user data in local storage, updates authentication status, and navigates to the summary page.
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   */
   signIn(email: string, password: string) {
     signInWithEmailAndPassword(this.auth, email, password)
       .then(async userCredential => {
@@ -44,6 +53,10 @@ export class AuthenticationService {
       });
   }
 
+  /**
+   * Signs in a user as a guest.
+   * If successful, sets user data in local storage, updates authentication status, and navigates to the summary page.
+   */
   guestSignIn() {
     signInWithEmailAndPassword(this.auth, 'guest@guest.de', 'Guest123!')
       .then(async userCredential => {
@@ -58,6 +71,13 @@ export class AuthenticationService {
       });
   }
 
+  /**
+   * Signs up a new user with the provided email, password, and username.
+   * If successful, sets user data in local storage, adds user to Firestore, and navigates to the home page.
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   * @param {string} username - The user's username.
+   */
   signUp(email: string, password: string, username: string) {
     createUserWithEmailAndPassword(this.auth, email, password)
       .then(userCredential => {
@@ -77,6 +97,10 @@ export class AuthenticationService {
       });
   }
 
+  /**
+   * Signs out the current user.
+   * Clears user data from local storage, updates authentication status, and navigates to the home page.
+   */
   signOut() {
     signOut(this.auth).then(() => {
       this.uid = undefined;
@@ -88,6 +112,11 @@ export class AuthenticationService {
     });
   }
 
+  /**
+   * Retrieves user data from Firestore based on the user ID.
+   * @param {any} userId - The user's ID.
+   * @returns {Promise<any>} A promise resolving to the user data.
+   */
   async getUserData(userId: any) {
     const q = query(this.getUsersRef(), where('uid', '==', userId));
     try {
@@ -106,6 +135,11 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Retrieves the username by user ID from Firestore.
+   * @param {string} id - The user's ID.
+   * @returns {string} The username.
+   */
   getUsernameByUserId(id: string) {
     const q = query(this.getUsersRef(), where('uid', '==', id));
     onSnapshot(q, doc => {
@@ -116,6 +150,11 @@ export class AuthenticationService {
     });
   }
 
+
+  /**
+   * Generates a random color hex code.
+   * @returns {string} A random color hex code.
+   */
   getRandomColorHex(): string {
     const colors = [
       '#3498db',
@@ -127,23 +166,40 @@ export class AuthenticationService {
       '#1abc9c',
       '#e5e8df'
     ];
-
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   }
 
+  /**
+   * Adds user data to Firestore.
+   * @param {any} data - The user data to be added.
+   */
   addUserToFirestore(data: any) {
     addDoc(this.getUsersRef(), data);
   }
 
+  /**
+   * Gets the reference to the 'users' collection in Firestore.
+   * @returns {CollectionReference<DocumentData>} The reference to the 'users' collection.
+   */
   getUsersRef() {
     return collection(this.firestore, 'users');
   }
 
+  /**
+   * Gets the reference to the 'tasks' collection in Firestore.
+   * @returns {CollectionReference<DocumentData>} The reference to the 'tasks' collection.
+   */
   getTasksRef() {
     return collection(this.firestore, 'tasks');
   }
 
+  /**
+   * Gets a reference to a single document in a collection in Firestore.
+   * @param {string} colId - The ID of the collection.
+   * @param {string} docId - The ID of the document.
+   * @returns {DocumentReference<DocumentData>} The reference to the specified document.
+   */
   getSingleRefDoc(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
   }

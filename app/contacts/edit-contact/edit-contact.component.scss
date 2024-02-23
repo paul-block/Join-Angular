@@ -143,3 +143,11 @@
         }
     }
 }
+
+@media (max-width: 600px) { 
+    #pop-up-container {
+        max-height: 450px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}

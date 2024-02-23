@@ -3,7 +3,7 @@
     <div id="left-side">
         <div class="buttonGlobalDark" id="add-contact-btn" (click)="openAddNewContactDialog()">
             <span>Add new contact</span>
-            <img src="../../assets/img/add-contact.png" alt="">
+            <img src="assets/img/add-contact.png" alt="">
         </div>
 
         <div id="contact-list">
@@ -36,16 +36,16 @@
                 <ng-container *ngIf="mobileView; else desktopLayout">
                     <h1>Contacts</h1>
                     <p>Better with a team</p>
-                    <img src="../../../assets/img/horizontal-line.png" alt="line">
+                    <img src="assets/img/horizontal-line.png" alt="line">
                 </ng-container>
                 <ng-template #desktopLayout>
                     <h1>Contacts</h1>
-                    <img src="../../../assets/img/Vector 5.png" alt="line">
+                    <img src="assets/img/Vector 5.png" alt="line">
                     <p>Better with a team</p>
                 </ng-template>
             </div>
 
-            <img (click)="this.contactService.showDetails = false" id="back-btn" src="../../assets/img/arrow-back.png"
+            <img (click)="this.contactService.showDetails = false" id="back-btn" src="assets/img/arrow-back.png"
                 alt="back-button">
 
             <div class="contact-details" *ngIf="contactService.showDetails">

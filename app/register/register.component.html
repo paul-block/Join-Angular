@@ -1,13 +1,13 @@
 <div id="container">
-    <img id="fixedLogo" src="../../assets/img/join_logo.svg" alt="Logo">
+    <img id="fixedLogo" src="assets/img/join_logo.svg" alt="Logo">
 
     <section id="signUpSection" *ngIf="!showConfirmation">
 
-        <a routerLink="" id="backBtn"><img src="../../assets/img/arrow_back.png" alt="back to login page button" /></a>
+        <a routerLink="" id="backBtn"><img src="assets/img/arrow_back.png" alt="back to login page button" /></a>
 
         <div id="headline">
             <h1>Sign up</h1>
-            <img src="../../assets/img/line.png" alt="blue-line">
+            <img src="assets/img/line.png" alt="blue-line">
         </div>
 
         <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">

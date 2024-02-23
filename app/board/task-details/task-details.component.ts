@@ -36,51 +36,86 @@ export class TaskDetailsComponent implements OnInit {
     this.today = new Date().toISOString().split('T')[0];
   }
 
-  markUser(uid: string) {
-    return this.taskObject.assignedUsers.some((user: { uid: string; }) => user.uid === uid);
-  }
-
-  changeDateFormat() {
-    let dueDateInMilliseconds = Date.parse(this.taskObject.dueDate);
-    let date = new Date(dueDateInMilliseconds).toLocaleDateString('de-DE');
-    return date.replaceAll('.', '/');
-  }
-
   ngOnInit() {
     this.taskObject = this.taskData;
-    // console.log(this.taskObject);
     this.contactService.getContactsForCurrentUser()
       .subscribe((contacts) => {
         this.allContacts = contacts;
       });
   }
 
+  /**
+   * Checks if a user is marked as assigned to the task.
+   * @param {string} uid - The user ID to check.
+   * @returns {boolean} True if the user is assigned, false otherwise.
+   */
+  markUser(uid: string) {
+    return this.taskObject.assignedUsers.some((user: { uid: string; }) => user.uid === uid);
+  }
+
+  /**
+   * Changes the date format to 'dd/mm/yyyy'.
+   * @returns {string} The date in 'dd/mm/yyyy' format.
+   */
+  changeDateFormat() {
+    let dueDateInMilliseconds = Date.parse(this.taskObject.dueDate);
+    let date = new Date(dueDateInMilliseconds).toLocaleDateString('de-DE');
+    return date.replaceAll('.', '/');
+  }
+
+  /**
+   * Checks or unchecks a subtask and updates the task accordingly.
+   * @param {any} subtask - The subtask to check or uncheck.
+   */
   checkSubtask(subtask: any) {
     subtask.done = !subtask.done;
     this.taskService.updateTask(this.taskObject);
   }
 
+  /**
+   * Closes the dialog.
+   */
   close() {
     this.dialog.closeAll();
   }
 
+  /**
+   * Sets the priority of the task.
+   * @param {string} priority - The priority value to be set.
+   */
   setPriority(priority: string) {
     this.taskData.prio = priority;
   }
 
+  /**
+   * Gets the initials from a name.
+   * @param {string} name - The name from which to extract initials.
+   * @returns {string} The initials extracted from the name.
+   */
   getInitials(name: string) {
     let initials = name.split(' ').map(word => word.charAt(0)).join('');
     return initials;
   }
 
+  /**
+   * Activates the edit mode.
+   */
   activateEditMode() {
     this.showEditMode = true;
   }
 
+  /**
+   * Toggles dropdown visibility.
+   * @param {string} dropDownName - The name of the dropdown to toggle.
+   */
   toggleDropdown(dropDownName: string) {
     if (dropDownName === 'assign') this.showAssignDropDown = !this.showAssignDropDown;
   }
 
+  /**
+   * Filters contacts based on the provided name.
+   * @param {string} name - The name to filter contacts.
+   */
   filterContacts(name: string) {
     if (name.trim() !== '') {
       let filtered = this.allContacts.filter((contact: { name: string; }) => contact.name.trim().toLowerCase().startsWith(name.trim().toLowerCase()));
@@ -95,6 +130,11 @@ export class TaskDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Selects or deselects a contact.
+   * @param {any} event - The event triggering the selection.
+   * @param {any} selectedContact - The contact to be selected or deselected.
+   */
   selectContact(event: any, selectedContact: any) {
     if (event.target.checked) {
       this.taskObject.assignedUsers.push(selectedContact);
@@ -105,34 +145,57 @@ export class TaskDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks if a contact is assigned to the task.
+   * @param {any} contact - The contact to check.
+   * @returns {boolean} True if the contact is assigned, false otherwise.
+   */
   contactIsAssigned(contact: any) {
     if (this.taskObject.assignedUsers.includes((user: { uid: string; }) => user.uid == contact.uid)) return true;
     else return false;
   }
 
+  /**
+   * Deletes a subtask.
+   * @param {string} subtask - The subtask to be deleted.
+   */
   deleteSubtask(subtask: string) {
     let index = this.taskData.subtasks.indexOf((subtask));
     this.taskData.subtasks.splice(index, 1);
   }
 
+  /**
+   * Opens the edit mode for a subtask.
+   * @param {any} subtask - The subtask to be edited.
+   */
   openEditInput(subtask: any) {
     let index = this.taskData.subtasks.indexOf(subtask);
     this.taskData.subtasks[index].editMode = true;
     this.editedSubtask = subtask.name;
   }
 
+  /**
+   * Updates a subtask.
+   * @param {any} subtask - The subtask to be updated.
+   * @param {string} updatedSubtask - The updated subtask value.
+   */
   updateSubtask(subtask: any, updatedSubtask: string) {
     let index = this.taskData.subtasks.findIndex((task: { name: string; }) => task.name === subtask.name);
     this.taskData.subtasks[index].name = updatedSubtask;
     this.taskData.subtasks[index].editMode = false;
-    console.log(this.taskData.subtasks);
   }
 
+  /**
+   * Clears the subtask input field.
+   */
   clearSubtaskInput() {
     this.subtaskFocused = false;
     this.subtask = '';
   }
 
+  /**
+   * Adds a subtask.
+   */
   addSubtask() {
     let subtask = {
       name: this.subtask.trim(),
@@ -141,15 +204,20 @@ export class TaskDetailsComponent implements OnInit {
     if (this.subtask.trim() != '' && this.taskData.subtasks.length < 2) {
       this.taskData.subtasks.push(subtask);
       this.subtask = '';
-      console.log(this.taskData.subtasks);
     }
   }
 
+  /**
+   * Saves changes made to the task.
+   */
   saveChanges() {
     this.taskService.updateTask(this.taskObject);
     this.dialog.closeAll();
   }
 
+  /**
+   * Deletes the task.
+   */
   deleteTask() {
     this.taskService.deleteTask(this.taskObject);
     this.dialog.closeAll();

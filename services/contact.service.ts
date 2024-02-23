@@ -24,6 +24,10 @@ export class ContactService {
       });
   }
 
+  /**
+   * Retrieves the document ID for the current user from Firestore.
+   * @returns {Promise<void>} A promise that resolves when the document ID is retrieved.
+   */
   getDocId() {
     return new Promise<void>((resolve, reject) => {
       const q = query(this.auth.getUsersRef(), where('uid', '==', this.auth.userData.uid));
@@ -39,13 +43,16 @@ export class ContactService {
     });
   }
 
+  /**
+   * Retrieves contacts for the current user from Firestore.
+   * @returns {Observable<any>} An observable that emits the contacts data.
+   */
   getContactsForCurrentUser(): Observable<any> {
     return new Observable((observer) => {
       this.getDocId().then(() => {
         const docRef = this.auth.getSingleRefDoc('users', this.currentUserDocId);
 
         onSnapshot(docRef, snapshot => {
-          console.log('onSnapshot wurde aufgerufen');
 
           if (snapshot.exists()) {
             const docData = snapshot.data();
@@ -67,18 +74,33 @@ export class ContactService {
     });
   }
 
+  /**
+   * Deletes a contact from Firestore for the current user.
+   * @param {Contact | undefined} contact - The contact to be deleted.
+   * @returns {Promise<void>} A promise that resolves when the contact is deleted.
+   */
   async deleteContact(contact: Contact | undefined) {
     await updateDoc(this.auth.getSingleRefDoc('users', this.currentUserDocId), {
       contacts: arrayRemove(contact)
     });
   }
 
+  /**
+   * Edits contacts for the current user in Firestore.
+   * @param {any[]} contactArr - The array of contacts to be edited.
+   * @returns {Promise<void>} A promise that resolves when contacts are edited.
+   */
   async editContact(contactArr: any[]) {
     await updateDoc(this.auth.getSingleRefDoc('users', this.currentUserDocId), {
       contacts: contactArr
     });
   }
 
+  /**
+   * Adds a contact to Firestore for the current user.
+   * @param {Contact} contact - The contact to be added.
+   * @returns {Promise<void>} A promise that resolves when the contact is added.
+   */
   async addContact(contact: Contact) {
     await updateDoc(this.auth.getSingleRefDoc('users', this.currentUserDocId), {
       contacts: arrayUnion(contact)

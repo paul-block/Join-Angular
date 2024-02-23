@@ -1,8 +1,8 @@
 <div class="header">
-    <img class="logo-mobile" src="../../assets/img/Capa-dark.png">
+    <img class="logo-mobile" src="assets/img/Capa-dark.png">
     <p class="d-none-mobile">Kanban Project Management Tool</p>
     <div *ngIf="isLoggedIn()" id="dropdown-container">
-        <a routerLink="/help"><img class="d-none-mobile" id="questionMark" src="../../assets/img/Vector.svg"></a>
+        <a routerLink="/help"><img class="d-none-mobile" id="questionMark" src="assets/img/Vector.svg"></a>
         <div id="initials" (click)="toggleDropdown()">
             {{getInitials()}}</div>
         <div id="dropdown" [ngClass]="{'d-none': !showDropdown}">
@@ -14,29 +14,29 @@
 </div>
 
 <div class="sideMenu">
-    <img class="d-none-mobile" src="../../assets/img/Capa 1.svg">
+    <img class="d-none-mobile" src="assets/img/Capa 1.svg">
     <div *ngIf="isLoggedIn()" class="menu">
         <a id="side-menu-link0" routerLink="/summary" routerLinkActive="active-link">
             <div class="menu-links">
-                <img class="side-menu-img" src="../../assets/img/uit_web-grid.svg">
+                <img class="side-menu-img" src="assets/img/uit_web-grid.svg">
                 <div class="side-bar-text">Summary</div>
             </div>
         </a>
         <a id="side-menu-link1" routerLink="/board" routerLinkActive="active-link">
             <div class="menu-links">
-                <img class="side-menu-img" src="../../assets/img/Vector (1).svg">
+                <img class="side-menu-img" src="assets/img/Vector (1).svg">
                 <div class="side-bar-text">Board</div>
             </div>
         </a>
         <a id="side-menu-link2" routerLink="/add-task" routerLinkActive="active-link">
             <div class="menu-links">
-                <img class="side-menu-img" src="../../assets/img/Write task icon.svg">
+                <img class="side-menu-img" src="assets/img/Write task icon.svg">
                 <div class="side-bar-text">Add Task</div>
             </div>
         </a>
         <a id="side-menu-link3" routerLink="/contacts" routerLinkActive="active-link">
             <div class="menu-links">
-                <img class="side-menu-img" src="../../assets/img/Vector (3).svg">
+                <img class="side-menu-img" src="assets/img/Vector (3).svg">
                 <div class="side-bar-text">Contacts</div>
             </div>
         </a>
@@ -44,7 +44,7 @@
     <a routerLink="/legal-notice" routerLinkActive="active-link" class="legal-notice d-none-mobile"
         id="side-menu-link4">
         <div class="menu-links">
-            <img class="side-menu-img" src="../../assets/img/legal-notice.png">
+            <img class="side-menu-img" src="assets/img/legal-notice.png">
             <div>Legal notice</div>
         </div>
     </a>

@@ -32,6 +32,10 @@ export class EditContactComponent implements OnInit {
       });
   }
 
+  /**
+   * Saves the current contact details.
+   * @returns {Object} The current contact details.
+   */
   saveCurrentContactDetails() {
     return {
       name: this.contactData.name,
@@ -42,16 +46,25 @@ export class EditContactComponent implements OnInit {
     };
   }
 
+  /**
+   * Sets data into the input fields.
+   */
   setDataIntoInputs() {
     this.name = this.contactData.name;
     this.email = this.contactData.email;
     this.phone = this.contactData.phone;
   }
 
+  /**
+   * Closes the dialog.
+   */
   closeDialog() {
     this.dialog.closeAll();
   }
 
+  /**
+   * Deletes the contact.
+   */
   deleteContact() {
     let index = this.currentUserContacts.findIndex((contact: { uid: string; }) => this.contactData.uid === contact.uid);
     let contact = this.currentUserContacts[index];
@@ -60,6 +73,10 @@ export class EditContactComponent implements OnInit {
     this.closeDialog();
   }
 
+  /**
+   * Edits the contact.
+   * @param {NgForm} form - The form containing the contact data.
+   */
   editContact(form: NgForm) {
     if (form.valid) {
       let editedContact: Contact = {

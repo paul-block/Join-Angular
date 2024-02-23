@@ -23,6 +23,11 @@ export class BoardComponent implements OnInit {
     this.taskService.filterTasksByCategory();
   }
 
+  /**
+   * Handles the drop event when a task is moved within or between lists.
+   * @param {CdkDragDrop<Task[]>} event - The drag and drop event.
+   * @param {string} listname - The name of the list where the task is dropped.
+   */
   drop(event: CdkDragDrop<Task[]>, listname: string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -33,12 +38,15 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      console.log(event);
-      console.log(event.item.data);
       this.updateTaskCategoryFirestore(event, listname);
     }
   }
 
+  /**
+   * Updates the task category in Firestore after it has been moved between lists.
+   * @param {CdkDragDrop<Task[]>} event - The drag and drop event.
+   * @param {string} listname - The name of the list where the task is dropped.
+   */
   updateTaskCategoryFirestore(event: CdkDragDrop<Task[]>, listname: string) {
     for (let index = 0; index < this.taskService.tasks.length; index++) {
       const task = this.taskService.tasks[index];
@@ -65,15 +73,27 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  /**
+   * Filters the board tasks based on the provided value.
+   * @param {string} value - The value to filter tasks by.
+   */
   filterBoard(value: string) {
     this.taskService.filterTasksByCharacters(value);
   }
 
+  /**
+   * Gets the initials from a name.
+   * @param {string} name - The name from which to extract initials.
+   * @returns {string} The initials extracted from the name.
+   */
   getInitials(name: string) {
     let initials = name.split(' ').map(word => word.charAt(0)).join('');
     return initials;
   }
 
+  /**
+   * Opens the add task dialog.
+   */
   openAddTaskDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass = 'dialog-style';
@@ -81,6 +101,10 @@ export class BoardComponent implements OnInit {
     this.dialog.open(AddTaskComponent, dialogConfig);
   }
 
+  /**
+   * Opens the task details dialog.
+   * @param {Task} task - The task for which to display details.
+   */
   openTaskDetailsDialog(task: Task) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.panelClass = 'dialog-style';
@@ -99,6 +123,11 @@ export class BoardComponent implements OnInit {
     this.dialog.open(TaskDetailsComponent, dialogConfig);
   }
 
+  /**
+   * Counts the number of completed subtasks.
+   * @param {any} subtasks - The array of subtasks to count.
+   * @returns {number} The count of completed subtasks.
+   */
   countDoneSubtasks(subtasks: any) {
     let counter = 0;
     subtasks.forEach((task: { done: boolean; }) => {

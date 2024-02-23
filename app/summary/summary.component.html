@@ -4,15 +4,13 @@
             <div id="headline-container" [ngClass]="{'headline-container-mobile': mobileView}">
                 <ng-container *ngIf="!mobileView; else mobileTemplate">
                     <h1>Join 360</h1>
-                    <img [src]="mobileView ? '../../../assets/img/horizontal-line.png' : '../../../assets/img/Vector 5.png'"
-                        alt="line">
+                    <img [src]="mobileView ? 'assets/img/horizontal-line.png' : 'assets/img/Vector 5.png'" alt="line">
                     <span>Key Metrics at a Glance</span>
                 </ng-container>
                 <ng-template #mobileTemplate>
                     <h1>Join 360</h1>
                     <span>Key Metrics at a Glance</span>
-                    <img [src]="mobileView ? '../../../assets/img/horizontal-line.png' : '../../../assets/img/Vector 5.png'"
-                        alt="line">
+                    <img [src]="mobileView ? 'assets/img/horizontal-line.png' : 'assets/img/Vector 5.png'" alt="line">
                 </ng-template>
             </div>
             <div class="first-row">
@@ -51,12 +49,12 @@
                 </div>
             </div>
             <div class="second-row box-hover" routerLink="/board">
-                <img src="../../../assets/img/urgent-button.png" alt="urgent-button">
+                <img src="assets/img/urgent-button.png" alt="urgent-button">
                 <div>
                     <span class="amount">{{this.taskService.urgentTasks}}</span>
                     <span>Urgent</span>
                 </div>
-                <img src="../../../assets/img/parting-line.png">
+                <img src="assets/img/parting-line.png">
                 <div>
                     <span id="deadline" *ngIf="this.taskService.urgentTasks > 0">{{getUpcomingDeadline()}}</span>
                     <span *ngIf="this.taskService.urgentTasks === 0">No urgent tasks</span>

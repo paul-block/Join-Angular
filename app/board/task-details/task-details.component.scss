@@ -405,7 +405,11 @@
                                 display: flex;
                                 align-items: center;
                                 justify-content: space-between;
-                                width: 50px;
+                                width: 50px;    
+
+                                &:hover {
+                                    cursor: pointer;
+                                }
                      
                                     .middle-line {
                                         height: 20px;
@@ -413,11 +417,13 @@
                                         background-color: #d1d1d1;
                                     }
             
-                                    img {
+                                    svg {
                                         position: unset;
 
                                         &:hover {
-                                            cursor: pointer;    
+                                            path {
+                                            fill: #29ABE2;
+                                    }
                                         }
                                       
                                     }
@@ -493,10 +499,22 @@
 
 @media (max-width: 600px) {
     #details-wrapper {
+        max-height: 450px;
         width: unset !important;
+        padding: 20px 40px;
+
+        #title {
+            font-size: 28px;
+        }
 
     .input-wrapper {
         width: 100% !important;
+    }
+
+    .subtask {
+        input {
+            width: unset !important;
+        }
     }
 
     input, textarea {
@@ -512,6 +530,10 @@
     }
 
     .dropdown {
+        width: 100% !important;
+    }
+
+    #edit-input-wrapper {
         width: 100% !important;
     }
 

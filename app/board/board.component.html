@@ -14,7 +14,7 @@
         <div class="board-column">
             <div class="task-status">
                 <h2>To do</h2>
-                <div class="add-icon">+</div>
+                <div routerLink="/add-task" class="add-icon">+</div>
             </div>
             <div class="task-container" cdkDropList #todoList="cdkDropList" [cdkDropListData]="this.taskService.todo"
                 [cdkDropListConnectedTo]="[inProgressList, feedbackList, doneList]"
@@ -47,7 +47,7 @@
                             </ng-container>
                         </div>
                         <img class="prio"
-                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
+                            [src]="todo.prio == 'urgent' ? 'assets/img/prioUrgent.svg' : todo.prio == 'medium' ? 'assets/img/prioMedium.svg' : 'assets/img/prioLow.svg'"
                             alt="">
                     </div>
                 </div>
@@ -58,7 +58,7 @@
         <div class="board-column">
             <div class="task-status">
                 <h2>In progress</h2>
-                <div class="add-icon">+</div>
+                <div routerLink="/add-task" class="add-icon">+</div>
             </div>
             <div class="task-container" cdkDropList #inProgressList="cdkDropList"
                 [cdkDropListData]="this.taskService.inProgress"
@@ -94,7 +94,7 @@
                             </ng-container>
                         </div>
                         <img class="prio"
-                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
+                            [src]="todo.prio == 'urgent' ? 'assets/img/prioUrgent.svg' : todo.prio == 'medium' ? 'assets/img/prioMedium.svg' : 'assets/img/prioLow.svg'"
                             alt="">
                     </div>
                 </div>
@@ -105,7 +105,7 @@
         <div class="board-column">
             <div class="task-status">
                 <h2>Await feedback</h2>
-                <div class="add-icon">+</div>
+                <div routerLink="/add-task" class="add-icon">+</div>
             </div>
             <div class="task-container" cdkDropList #feedbackList="cdkDropList"
                 [cdkDropListData]="this.taskService.feedback"
@@ -140,7 +140,7 @@
                         </div>
 
                         <img class="prio"
-                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
+                            [src]="todo.prio == 'urgent' ? 'assets/img/prioUrgent.svg' : todo.prio == 'medium' ? 'assets/img/prioMedium.svg' : 'assets/img/prioLow.svg'"
                             alt="">
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                             </ng-container>
                         </div>
                         <img class="prio"
-                            [src]="todo.prio == 'urgent' ? '../assets/img/prioUrgent.svg' : todo.prio == 'medium' ? '../assets/img/prioMedium.svg' : '../assets/img/prioLow.svg'"
+                            [src]="todo.prio == 'urgent' ? 'assets/img/prioUrgent.svg' : todo.prio == 'medium' ? 'assets/img/prioMedium.svg' : 'assets/img/prioLow.svg'"
                             alt="">
                     </div>
                 </div>

@@ -1,18 +1,18 @@
 <div id="pop-up-container">
     <div id="left-side">
         <div id="headline">
-            <img id="logo" src="../../../assets/img/Capa 2joinAddContact.png" alt="">
+            <img id="logo" src="assets/img/Capa 2joinAddContact.png" alt="">
             <div>
                 <h1>Add contact</h1>
                 <p>Tasks are better with a team!</p>
             </div>
-            <img src="../../../assets/img/horizontal-line.png" alt="">
+            <img src="assets/img/horizontal-line.png" alt="">
         </div>
     </div>
 
     <div id="right-side">
         <div id="profile">
-            <img src="../../../assets/img/contact.png" alt="">
+            <img src="assets/img/contact.png" alt="">
         </div>
         <form class="flex-column" #addContactForm="ngForm" (ngSubmit)="addContact(addContactForm)">
             <div class="input-wrapper">
@@ -35,8 +35,8 @@
             </div>
             <div id="button-container">
                 <button class="buttonGlobalWhite" type="button" (click)="closeDialog()">Cancel <span>X</span></button>
-                <button class="buttonGlobalDark" type="submit">Create contact<img
-                        src="../../assets/img/check-icon-white.svg" alt=""></button>
+                <button class="buttonGlobalDark" type="submit">Create contact<img src="assets/img/check-icon-white.svg"
+                        alt=""></button>
             </div>
         </form>
     </div>
