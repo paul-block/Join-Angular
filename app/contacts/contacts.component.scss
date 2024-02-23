@@ -189,7 +189,8 @@
                 height: 75px;
                 box-sizing: border-box;
                 border-radius: 10px;
-
+                user-select: none;
+                
                 &:hover {
                     background-color: lightgray;
                     cursor: pointer;
