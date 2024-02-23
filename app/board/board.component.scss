@@ -94,7 +94,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-                max-height: calc(100vh - 350px);
+                max-height: calc(100vh - 300px);
                 overflow-y: scroll;
                 overflow-x: hidden;
 
@@ -217,9 +217,7 @@
 @media (max-width: 1200px) {
     #board-container {
         flex-direction: column;
-        // overflow-y: scroll;
         overflow-x: hidden;
-        // height: calc(100% - 100px);
     }
 }
 
@@ -233,7 +231,6 @@
  @media (max-width: 1000px) {
 
   #container {
-        // height: calc(100vh - 290px);
         overflow-y: scroll;
 
         #upper-row {
@@ -266,7 +263,7 @@
     }
  }
 
-@media (max-height: 850px) {
+@media (max-width: 600px) and (max-height: 850px) {
     #upper-row {
         h1 {
             font-size: 36px;
