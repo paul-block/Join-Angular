@@ -89,6 +89,7 @@
             button {
                 display: flex;
                 gap: 10px;
+                align-items: center;
             }
 
             .urgent {
@@ -281,6 +282,10 @@
  
                             img {
                                 position: unset;
+                                
+                                &:hover {
+                                    cursor: pointer;
+                                }
                             }
                     }
                 }
@@ -410,6 +415,11 @@
             
                                     img {
                                         position: unset;
+
+                                        &:hover {
+                                            cursor: pointer;    
+                                        }
+                                      
                                     }
                         }
                     }
