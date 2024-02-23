@@ -65,6 +65,7 @@
                     border-radius: 30px;
                     gap: 18px;
                     box-sizing: border-box;
+                    transition: all 100ms ease-in-out;
 
                     .img-circle {
                         background-color: #2A3647;
@@ -125,6 +126,7 @@
             border-radius: 30px;
             gap: 61px;
             box-sizing: border-box;
+            transition: all 100ms ease-in-out;
 
                 div {
                     display: flex;
@@ -165,6 +167,7 @@
                     padding: 25px 0;
                     gap: 13px;
                     border-radius: 30px;
+                    transition: all 100ms ease-in-out;
 
                         .amount {
                             font-size: 61px;

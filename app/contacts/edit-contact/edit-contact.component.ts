@@ -20,7 +20,7 @@ export class EditContactComponent implements OnInit {
   currentUserContacts: any[] = [];
 
   constructor(private dialog: MatDialog,
-    private contactService: ContactService,
+    public contactService: ContactService,
     @Inject(MAT_DIALOG_DATA) public contactData: any) { }
 
   ngOnInit() {
@@ -53,6 +53,16 @@ export class EditContactComponent implements OnInit {
     this.name = this.contactData.name;
     this.email = this.contactData.email;
     this.phone = this.contactData.phone;
+  }
+
+  /**
+   * Gets the initials from a name in uppercase.
+   * @param {string} name - The name from which to extract initials.
+   * @returns {string} The initials extracted from the name in uppercase.
+   */
+  getInitials(name: string) {
+    let initials = name.split(' ').map(word => word.charAt(0)).join('');
+    return initials.toUpperCase();
   }
 
   /**
