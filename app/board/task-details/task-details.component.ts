@@ -22,6 +22,8 @@ export class TaskDetailsComponent implements OnInit {
   subtask: string = '';
   editedSubtask: string = '';
   showSubtaskIcons: boolean = false;
+  titleValidationErr: boolean = false;
+  dateValidationErr: boolean = false;
 
   allContacts: any;
 
@@ -106,10 +108,9 @@ export class TaskDetailsComponent implements OnInit {
 
   /**
    * Toggles dropdown visibility.
-   * @param {string} dropDownName - The name of the dropdown to toggle.
    */
-  toggleDropdown(dropDownName: string) {
-    if (dropDownName === 'assign') this.showAssignDropDown = !this.showAssignDropDown;
+  toggleDropdown() {
+    this.showAssignDropDown = !this.showAssignDropDown;
   }
 
   /**
@@ -211,8 +212,14 @@ export class TaskDetailsComponent implements OnInit {
    * Saves changes made to the task.
    */
   saveChanges() {
-    this.taskService.updateTask(this.taskObject);
-    this.dialog.closeAll();
+    if (this.taskObject.title == '') this.titleValidationErr = true;
+    if (this.taskObject.dueDate == '') this.dateValidationErr = true;
+    if (this.taskObject.title != '' && this.taskObject.dueDate != '') {
+      this.titleValidationErr = false;
+      this.dateValidationErr = false;
+      this.taskService.updateTask(this.taskObject);
+      this.dialog.closeAll();
+    }
   }
 
   /**

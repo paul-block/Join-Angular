@@ -6,22 +6,24 @@
 
     <div id="title" *ngIf="!showEditMode">{{taskObject.title}}</div>
     <div id="title-edit-wrapper" *ngIf="showEditMode">
-        <span>Title:</span>
+        <div>Title<span class="required">*</span></div>
         <input type="text" [(ngModel)]="taskObject.title">
+        <span *ngIf="titleValidationErr" class="required">This field is required</span>
     </div>
 
     <div id="description" *ngIf="!showEditMode">{{taskObject.description}}</div>
     <div id="description-edit-wrapper" *ngIf="showEditMode">
-        <span>Description:</span>
+        <span>Description</span>
         <textarea cols="30" rows="10" [(ngModel)]="taskObject.description"></textarea>
     </div>
     <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
-        <span>Due Date:</span>
+        <span>Due Date <span *ngIf="showEditMode" class="required">*</span></span>
         <span *ngIf="!showEditMode">{{changeDateFormat()}}</span>
         <input type="date" [(ngModel)]="taskObject.dueDate" *ngIf="showEditMode" min="{{today}}">
+        <span *ngIf="dateValidationErr" class="required">This field is required</span>
     </div>
     <div [ngClass]="{'flex-gap25' : !showEditMode, 'flex-column-gap5' : showEditMode}">
-        <span>Priority:</span>
+        <span>Priority</span>
         <span *ngIf="!showEditMode">{{taskObject.prio.charAt(0).toUpperCase()}}{{taskObject.prio.slice(1)}}
             <img [src]="taskObject.prio == 'urgent' ? 'assets/img/prioUrgent.svg' : taskObject.prio == 'medium' ? 'assets/img/prioMedium.svg' : 'assets/img/prioLow.svg'"
                 alt=""></span>
@@ -40,7 +42,7 @@
         </div>
     </div>
     <div id="assigned-to-wrapper" *ngIf="!showEditMode">
-        <span>Assigned to:</span>
+        <span>Assigned to</span>
         <ng-container *ngFor="let user of taskObject.assignedUsers">
             <div class="assigned-user flex-gap25" *ngIf="user.uid != this.authService.userData.uid">
                 <div class="initials" [ngStyle]="{'background-color': user.color}">{{getInitials(user.name)}}</div>
@@ -49,11 +51,22 @@
         </ng-container>
     </div>
     <div id="assigned-to-edit-wrapper" *ngIf="showEditMode">
-        <span>Assigned to:</span>
-        <div class="input-wrapper" (click)="toggleDropdown('assign')">
+        <span>Assigned to</span>
+        <div class="input-wrapper" (click)="toggleDropdown()">
             <input name="assigned-to" placeholder="Select contacts to assign" type="text" [(ngModel)]="contactInput"
                 id="assigned-to" (input)="filterContacts(contactInput)">
-            <img src="assets/img/arrowDown.png" alt="">
+            <svg [ngStyle]="{'transform': showAssignDropDown ? 'rotate(180deg)' : 'none'}" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_145889_4985" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                    height="24">
+                    <rect width="24" height="24" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_145889_4985)">
+                    <path
+                        d="M11.3 14.3L8.69998 11.7C8.38331 11.3833 8.31248 11.0208 8.48748 10.6125C8.66248 10.2042 8.97498 10 9.42498 10H14.575C15.025 10 15.3375 10.2042 15.5125 10.6125C15.6875 11.0208 15.6166 11.3833 15.3 11.7L12.7 14.3C12.6 14.4 12.4916 14.475 12.375 14.525C12.2583 14.575 12.1333 14.6 12 14.6C11.8666 14.6 11.7416 14.575 11.625 14.525C11.5083 14.475 11.4 14.4 11.3 14.3Z"
+                        fill="#2A3647" />
+                </g>
+            </svg>
         </div>
         <div *ngIf="showAssignDropDown" class="dropdown">
             <div class="selectable-user">
@@ -93,11 +106,26 @@
         <div class="input-wrapper">
             <input name="subtasks" (focus)="subtaskFocused = true" name="subtasks" type="text"
                 placeholder="Add new subtask" [(ngModel)]="subtask" id="subtasks">
-            <img (click)="subtaskFocused = true" *ngIf="!subtaskFocused" src="assets/img/add.png" alt="">
+            <svg (click)="subtaskFocused = true" *ngIf="!subtaskFocused" width="15" height="14" viewBox="0 0 15 14"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M6.24854 8H1.24854C0.965202 8 0.727702 7.90417 0.536035 7.7125C0.344368 7.52083 0.248535 7.28333 0.248535 7C0.248535 6.71667 0.344368 6.47917 0.536035 6.2875C0.727702 6.09583 0.965202 6 1.24854 6H6.24854V1C6.24854 0.716667 6.34437 0.479167 6.53604 0.2875C6.7277 0.0958333 6.9652 0 7.24854 0C7.53187 0 7.76937 0.0958333 7.96104 0.2875C8.1527 0.479167 8.24854 0.716667 8.24854 1V6H13.2485C13.5319 6 13.7694 6.09583 13.961 6.2875C14.1527 6.47917 14.2485 6.71667 14.2485 7C14.2485 7.28333 14.1527 7.52083 13.961 7.7125C13.7694 7.90417 13.5319 8 13.2485 8H8.24854V13C8.24854 13.2833 8.1527 13.5208 7.96104 13.7125C7.76937 13.9042 7.53187 14 7.24854 14C6.9652 14 6.7277 13.9042 6.53604 13.7125C6.34437 13.5208 6.24854 13.2833 6.24854 13V8Z"
+                    fill="#2A3647" />
+            </svg>
             <div class="icons-wrapper" *ngIf="subtaskFocused">
-                <img (click)="clearSubtaskInput()" src="assets/img/x.png" alt="">
+                <svg (click)="clearSubtaskInput()" width="14" height="13" viewBox="0 0 14 13" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M7.001 6.50008L12.244 11.7431M1.758 11.7431L7.001 6.50008L1.758 11.7431ZM12.244 1.25708L7 6.50008L12.244 1.25708ZM7 6.50008L1.758 1.25708L7 6.50008Z"
+                        stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
                 <div class="middle-line"></div>
-                <img (click)="addSubtask()" src="assets/img/check.svg" alt="">
+                <svg (click)="addSubtask()" width="16" height="12" viewBox="0 0 16 12" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M5.79923 9.15L14.2742 0.675C14.4742 0.475 14.7117 0.375 14.9867 0.375C15.2617 0.375 15.4992 0.475 15.6992 0.675C15.8992 0.875 15.9992 1.1125 15.9992 1.3875C15.9992 1.6625 15.8992 1.9 15.6992 2.1L6.49923 11.3C6.29923 11.5 6.0659 11.6 5.79923 11.6C5.53256 11.6 5.29923 11.5 5.09923 11.3L0.79923 7C0.59923 6.8 0.503397 6.5625 0.51173 6.2875C0.520064 6.0125 0.62423 5.775 0.82423 5.575C1.02423 5.375 1.26173 5.275 1.53673 5.275C1.81173 5.275 2.04923 5.375 2.24923 5.575L5.79923 9.15Z"
+                        fill="black" />
+                </svg>
             </div>
         </div>
         <div id="subtask-wrapper" *ngIf="taskObject.subtasks.length > 0">
@@ -105,7 +133,7 @@
                 <li *ngFor="let subtask of taskObject.subtasks" (mouseover)="showSubtaskIcons = true"
                     (mouseleave)="showSubtaskIcons = false">
                     {{subtask.name}}
-                    <div id="edit-delete-wrapper" *ngIf="showSubtaskIcons">
+                    <div id="edit-delete-wrapper">
                         <svg (click)="deleteSubtask(subtask)" width="16" height="18" viewBox="0 0 16 18" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path

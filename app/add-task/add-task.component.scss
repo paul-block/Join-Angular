@@ -56,6 +56,18 @@ form {
                                 cursor: pointer;
                             }
                         }
+
+                        svg, img {
+                            position: absolute;
+                            right: 15px;
+        
+                                &:hover {
+                                    path {
+                                        fill: #29ABE2;
+                                    }
+                                    cursor: pointer;
+                                }
+                            }       
         
                         .icons-wrapper {
                             position: absolute;
@@ -71,22 +83,19 @@ form {
                                     background-color: #d1d1d1;
                                 }
         
-                                img {
-                                    position: unset;
+                                svg {
+                                    position: unset;;
+                                    cursor: pointer;
+                                    
+                                    &:hover {
+                                        path {
+                                            fill: #29ABE2;
+                                            stroke: #29ABE2;
+                                        }
+                                        
+                                    }
                                 }
                         }
-                       
-                        img {
-                            position: absolute;
-                            right: 15px;
-                            padding: 5px;
-                            border-radius: 50%;
-        
-                                &:hover {
-                                    background-color: lightgray;
-                                    cursor: pointer;
-                                }
-                }
             }
                 textarea {
                     box-sizing: border-box;
@@ -204,10 +213,14 @@ form {
                                                 background-color: #d1d1d1;
                                             }
                     
-                                            img {
-                                                position: unset;
+                                            svg {
+                                                cursor: pointer;
+                                                
                                                 &:hover {
-                                                    cursor: pointer;
+                                                    path {
+                                                        fill: #29ABE2;
+                                                    }
+                                                    
                                                 }
                                             }
                                     }

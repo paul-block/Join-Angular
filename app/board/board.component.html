@@ -58,7 +58,6 @@
         <div class="board-column">
             <div class="task-status">
                 <h2>In progress</h2>
-                <div routerLink="/add-task" class="add-icon">+</div>
             </div>
             <div class="task-container" cdkDropList #inProgressList="cdkDropList"
                 [cdkDropListData]="this.taskService.inProgress"
@@ -105,7 +104,6 @@
         <div class="board-column">
             <div class="task-status">
                 <h2>Await feedback</h2>
-                <div routerLink="/add-task" class="add-icon">+</div>
             </div>
             <div class="task-container" cdkDropList #feedbackList="cdkDropList"
                 [cdkDropListData]="this.taskService.feedback"

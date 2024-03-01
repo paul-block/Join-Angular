@@ -26,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditContactComponent } from './contacts/edit-contact/edit-contact.component';
 import { TaskDetailsComponent } from './board/task-details/task-details.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { InfoComponent } from './info/info.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
@@ -46,7 +46,7 @@ import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
     EditContactComponent,
     TaskDetailsComponent,
     InfoComponent,
-    LegalNoticeComponent  ],
+    LegalNoticeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

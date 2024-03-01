@@ -172,15 +172,15 @@
                         }
                     }
     
-                    img {
+                    svg {
                         position: absolute;
                         right: 15px;
-                        padding: 5px;
-                        border-radius: 50%;
-    
+                    
                             &:hover {
-                                background-color: lightgray;
                                 cursor: pointer;
+                                path {
+                                    fill: #29ABE2;
+                                };
                             }
             }
             }
@@ -280,11 +280,14 @@
                         justify-content: space-between;
                         width: 50px;
  
-                            img {
-                                position: unset;
+                            svg {
+                                cursor: pointer;
                                 
                                 &:hover {
-                                    cursor: pointer;
+                                    path {
+                                        fill: #29ABE2;
+                                    }
+                                    
                                 }
                             }
                     }
@@ -322,20 +325,29 @@
                                 background-color: #d1d1d1;
                             }
     
-                            img {
+                            svg {
                                 position: unset;
+                                padding: 2px;
+                                &:hover {
+                                    cursor: pointer;
+                                    path {
+                                        fill: #29ABE2;
+                                        stroke: #29ABE2;
+                                    }
+                                }
                             }
                     }
     
-                    img {
+                    svg {
                         position: absolute;
                         right: 15px;
-                        padding: 5px;
-                        border-radius: 50%;
+                        padding: 2px;
     
                             &:hover {
-                                background-color: lightgray;
                                 cursor: pointer;
+                                path {
+                                    fill: #29ABE2;
+                                }
                             }
             }
         }
@@ -387,7 +399,7 @@
                                         background-color: #d1d1d1;
                                     }
             
-                                    img {
+                                    svg {
                                         position: unset;
                                     }
                             }
@@ -396,7 +408,10 @@
                         &:hover {
                             background-color: #d1d1d1;
                             border-radius: 10px;
-            
+                            
+                            .middle-line {
+                                background-color: #afafaf !important;
+                            }
                         }
 
                         #edit-delete-wrapper{
@@ -491,10 +506,8 @@
     justify-content: flex-end !important;
 }
 
-.middle-line {
-    height: 20px;
-    width: 1px;
-    background-color: #d1d1d1;
+.required {
+    color:#FF3D00;
 }
 
 @media (max-width: 600px) {

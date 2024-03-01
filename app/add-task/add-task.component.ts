@@ -4,6 +4,7 @@ import { AuthenticationService } from 'src/services/authentication.service';
 import { ContactService } from 'src/services/contact.service';
 import { TaskService } from 'src/services/task.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -44,7 +45,11 @@ export class AddTaskComponent {
     else this.mobileView = false;
   }
 
-  constructor(private taskService: TaskService, private router: Router, public authService: AuthenticationService, public contactService: ContactService) {
+  constructor(private taskService: TaskService,
+    private router: Router,
+    public authService: AuthenticationService,
+    public contactService: ContactService,
+    private dialog: MatDialog) {
     this.today = new Date().toISOString().split('T')[0];
   }
 
@@ -102,10 +107,10 @@ export class AddTaskComponent {
   async addTask() {
     this.addedTask = true;
     this.selectedContacts.push(this.authService.userData);
+    this.dialog.closeAll();
     await this.taskService.addTask(this.createTaskObject());
     this.clearTask();
     this.router.navigate(['/board']);
-
   }
 
   /**
