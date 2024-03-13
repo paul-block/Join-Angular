@@ -104,6 +104,7 @@ form {
                     border: 1px solid #d1d1d1;
                     resize: none;
                     font-family: 'Inter';
+                    font-size: 12px;
                 }
         
                 p {
@@ -380,7 +381,7 @@ form {
         }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
     #wrapper {
         flex-direction: column;
     }

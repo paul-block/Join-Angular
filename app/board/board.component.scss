@@ -216,9 +216,14 @@
 }
 
 @media (max-width: 1200px) {
+    #container {
+        overflow-y: scroll;
+    }
+
     #board-container {
         flex-direction: column;
         overflow-x: hidden;
+      
     }
 }
 

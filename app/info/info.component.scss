@@ -3,11 +3,12 @@
     flex-direction: column;
     padding: 25px 50px;
     gap: 10px;
+    height: calc(100% - 50px);
+    overflow-y: scroll;
 }
 
 @media (max-width: 1000px) {
     #container {
         height: calc(100vh - 250px);
-        overflow-y: scroll;
     }
 }
