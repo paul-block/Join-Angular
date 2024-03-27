@@ -1,3 +1,5 @@
+@import '../../shared/mixins.scss';
+
 form {
     display: flex;
     flex-direction: column;
@@ -42,7 +44,7 @@ form {
                     width: 345px;
                     padding: 12px;
                     border-radius: 10px;
-                    border: 1px solid #d1d1d1;
+                    border: 1px solid $lightgray;
                 }
         
                 .input-wrapper {
@@ -63,24 +65,22 @@ form {
         
                                 &:hover {
                                     path {
-                                        fill: #29ABE2;
+                                        fill: $lightblue;
                                     }
                                     cursor: pointer;
                                 }
                             }       
         
                         .icons-wrapper {
+                            @include dFlex($jc: space-between);
                             position: absolute;
                             right: 15px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
                             width: 50px;
                  
                                 .middle-line {
                                     height: 20px;
                                     width: 1px;
-                                    background-color: #d1d1d1;
+                                    background-color: $lightgray;
                                 }
         
                                 svg {
@@ -89,8 +89,8 @@ form {
                                     
                                     &:hover {
                                         path {
-                                            fill: #29ABE2;
-                                            stroke: #29ABE2;
+                                            fill: $lightblue;
+                                            stroke: $lightblue;
                                         }
                                         
                                     }
@@ -101,7 +101,7 @@ form {
                     box-sizing: border-box;
                     width: 345px;
                     padding: 12px;
-                    border: 1px solid #d1d1d1;
+                    border: 1px solid $lightgray;
                     resize: none;
                     font-family: 'Inter';
                     font-size: 12px;
@@ -113,7 +113,7 @@ form {
                 }
         
                 .dropdown {
-                    background-color: white;
+                    background-color: $white;
                     border-radius: 10px;
                     width: 345px;
                     max-height: 350px;
@@ -127,7 +127,7 @@ form {
                             position: relative;
         
                                 &:hover {
-                                    background-color: lightgray;
+                                    background-color: $lightgray;
                                     border-radius: 10px;
                                     cursor: pointer;
                                 }
@@ -146,15 +146,12 @@ form {
                 }
         
                 .initials {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background-color: blue;
+                    @include dFlex();
                     border-radius: 50%;
                     width: 35px;
                     height: 35px;
                     margin-right: 15px;
-                    color: #fff;
+                    color: $white;
                 }
         
                 #subtask-wrapper {
@@ -172,9 +169,7 @@ form {
                             position: relative;
         
                             li {
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
+                               @include dFlex($jc: space-between);
                                 position: relative;
                                 width: 345px;
                                 padding: 5px;
@@ -187,15 +182,12 @@ form {
                                     }
         
                                 #edit-input-wrapper {
+                                    @include dFlex($jc: space-between);
                                     width: 345px;
                                     height: 30px;
                                     position: absolute;
                                     left: 0;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-        
-                                    
+                                
                                     #edit-input {
                                         position: absolute;
                                     }
@@ -211,7 +203,7 @@ form {
                                             .middle-line {
                                                 height: 20px;
                                                 width: 1px;
-                                                background-color: #d1d1d1;
+                                                background-color: $lightgray;
                                             }
                     
                                             svg {
@@ -219,7 +211,8 @@ form {
                                                 
                                                 &:hover {
                                                     path {
-                                                        fill: #29ABE2;
+                                                        fill: $lightblue;
+                                                        stroke: $lightblue;
                                                     }
                                                     
                                                 }
@@ -244,16 +237,16 @@ form {
                                         .middle-line {
                                             height: 20px;
                                             width: 1px;
-                                            background-color: #d1d1d1;
+                                            background-color: $lightgray;
                                         }
                     
                                         svg {
-                                        transition: all 125ms ease-in-out;
+                                            transition: all 125ms ease-in-out;
         
                                             &:hover {
                                                 cursor: pointer;
                                                 path {
-                                                fill: #29ABE2;
+                                                fill: $lightblue;
                                                     }
                                                 }
                                             }
@@ -266,11 +259,11 @@ form {
         #middle-line {
             width: 2px;
             max-height: 447px;
-            background-color: lightgray;
+            background-color: $lightgray;
         }
 
         #required-sign {
-            color:#FF3D00;
+            color:$error_red;
         }
     }
 }
@@ -332,7 +325,7 @@ form {
 }
 
 .required {
-    color: #FF3D00;
+    color: $error_red;
 }
 
 .flex-row {
@@ -341,13 +334,11 @@ form {
 }
 
 .disabled {
-    background-color: gray;
+    background-color: #808080;
 }
 
 #added-task-confirmation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include dFlex();
     gap: 10px;
     position: absolute;
     bottom: 500px;
@@ -357,8 +348,8 @@ form {
     width: 326px;
     border-radius: 20px;
     box-shadow: 0px 0px 4px 0px #00000026;
-    background-color: #2A3647;
-    color: #fff;
+    background-color: $darkblue;
+    color: $white;
     font-size: 20px;
     animation: slide-in 255ms linear forwards;
 }

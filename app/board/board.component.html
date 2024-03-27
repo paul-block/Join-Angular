@@ -12,10 +12,7 @@
     <div id="board-container">
 
         <div class="board-column">
-            <div class="task-status">
-                <h2>To do</h2>
-                <div routerLink="/add-task" class="add-icon">+</div>
-            </div>
+            <h2>To do</h2>
             <div class="task-container" cdkDropList #todoList="cdkDropList" [cdkDropListData]="this.taskService.todo"
                 [cdkDropListConnectedTo]="[inProgressList, feedbackList, doneList]"
                 (cdkDropListDropped)="drop($event,'todo')">
@@ -56,9 +53,7 @@
         </div>
 
         <div class="board-column">
-            <div class="task-status">
-                <h2>In progress</h2>
-            </div>
+            <h2>In progress</h2>
             <div class="task-container" cdkDropList #inProgressList="cdkDropList"
                 [cdkDropListData]="this.taskService.inProgress"
                 [cdkDropListConnectedTo]="[todoList, feedbackList, doneList]"
@@ -102,9 +97,7 @@
         </div>
 
         <div class="board-column">
-            <div class="task-status">
-                <h2>Await feedback</h2>
-            </div>
+            <h2>Await feedback</h2>
             <div class="task-container" cdkDropList #feedbackList="cdkDropList"
                 [cdkDropListData]="this.taskService.feedback"
                 [cdkDropListConnectedTo]="[todoList, inProgressList, doneList]"
@@ -147,9 +140,7 @@
         </div>
 
         <div class="board-column">
-            <div class="task-status">
-                <h2>Done</h2>
-            </div>
+            <h2>Done</h2>
             <div class="task-container" cdkDropList #doneList="cdkDropList" [cdkDropListData]="this.taskService.done"
                 [cdkDropListConnectedTo]="[todoList, inProgressList, feedbackList]"
                 (cdkDropListDropped)="drop($event, 'done')">

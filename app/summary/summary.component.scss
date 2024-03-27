@@ -1,3 +1,5 @@
+@import '../../shared/mixins.scss';
+
 #container {
     display: flex;
     gap: 200px;
@@ -41,8 +43,8 @@
 
         .box-hover {
             &:hover {
-                background-color: #2A3647 !important;
-                color: #fff;
+                background-color: $darkblue !important;
+                color: $white;
                 scale: 1.1;
                 cursor: pointer;
             }
@@ -55,20 +57,17 @@
             width: 100%;
 
                 .first-row-child {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: white;
+                    @include dFlex($gap: 18px);
+                    background-color: $white;
                     width: 100%;
                     height: 168px;
                     padding: 38px 19px;
                     border-radius: 30px;
-                    gap: 18px;
                     box-sizing: border-box;
                     transition: all 100ms ease-in-out;
 
                     .img-circle {
-                        background-color: #2A3647;
+                        background-color: $darkblue;
                         border-radius: 50%;
                         padding: 15px;
 
@@ -84,12 +83,12 @@
                         }
 
                         .img-circle {
-                            background-color: #fff;
+                            background-color: $white;
                         }
                     }
                      
                     img {
-                        background-color: #2A3647;
+                        background-color: $darkblue;
                         border-radius: 50%;
                         height: 32px;
                         width: 32px;
@@ -97,11 +96,8 @@
                     }
 
                     div {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        gap: 10px;
-
+                        @include dFlex($direction: column, $jc: unset, $gap: 10px);
+            
                             .amount {
                                 font-size: 61px;
                                 font-weight: bold;
@@ -115,57 +111,45 @@
         }
 
         .second-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: white;
+            @include dFlex($gap: 61px);
+            background-color: $white;
             min-width: fit-content;
             width: 100%;
             height: 168px;
             padding: 38px 19px;
             border-radius: 30px;
-            gap: 61px;
             box-sizing: border-box;
             transition: all 100ms ease-in-out;
 
                 div {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 10px;
-        
-                        .amount {
-                            font-size: 61px;
-                            font-weight: bold;
-                        }
+                    @include dFlex($direction: column, $jc: unset, $gap: 10px);
 
-                        span {
-                            font-size: 20px;
-                        }
+                    .amount {
+                        font-size: 61px;
+                        font-weight: bold;
+                    }
 
-                        #deadline {
-                            font-weight: bold;
-                        }
+                    span {
+                        font-size: 20px;
+                   }
+
+                    #deadline {
+                        font-weight: bold;
+                    }
                 }
         }
 
         .third-row {
-            display: flex;
-            justify-content: space-between;
+            @include dFlex($ai: unset, $jc: space-between, $gap: 5%);
             width: 100%;
-            gap: 5%;
             
                 .third-row-child {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
+                    @include dFlex($direction: column, $gap: 13px);
                     box-sizing: border-box;
-                    background-color: white;
+                    background-color: $white;
                     height: 168px;
                     width: 100%;
                     padding: 25px 0;
-                    gap: 13px;
                     border-radius: 30px;
                     transition: all 100ms ease-in-out;
 
@@ -204,11 +188,7 @@
 }
 
 #greeting-container-mobile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3px;
+    @include dFlex($direction: column, $gap: 3px);
     position: absolute;
     top: 0;
     left: 0;
@@ -224,7 +204,7 @@
         #username {
             font-size: 61px;
             font-weight: bold;
-            color:#29ABE2;
+            color: $lightblue;
         }
 }
 }

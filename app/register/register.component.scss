@@ -1,8 +1,7 @@
+@import '../../shared/mixins.scss';
+
 #container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include dFlex($direction: column);
     height: 100vh;
 }
 
@@ -22,7 +21,7 @@
     align-items: center;
     gap: 32px;
     border-radius: 30px;
-    background: var(--white, #FFF);
+    background: $white;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 }
 
@@ -63,7 +62,7 @@
         gap: 10px;
         margin-bottom: 20px;
         border-radius: 10px;
-        border: 1px solid var(--lightgray, #D1D1D1);
+        border: 1px solid $lightgray;
         cursor: pointer;
      }
 
@@ -84,12 +83,12 @@
 
     button:disabled {
         border: 1px solid transparent;
-        background-color: gray;
+        background-color: $lightgray;
     }
 }
 
  .formError {
-    color: #ff0000;
+    color: $error_red;
     max-width: 500px;
     text-align: center;
     margin-bottom: 20px;
@@ -119,7 +118,7 @@
 
 .textHighlight {
     text-decoration: none;
-    color: var(--lightblue);
+    color: $lightblue;
     cursor: pointer;
 }
 
@@ -134,7 +133,7 @@
     border-radius: 20px;
     box-shadow: 0px 0px 4px 0px #00000026;
     background-color: #2A3647;
-    color: #fff;
+    color: $white;
     font-size: 20px;
     animation: slide-in 255ms linear forwards;
     z-index: 999;
@@ -149,11 +148,11 @@
 
     a {
         text-decoration: none;
-        color: var(--darkgray);
+        color: $darkgray;
 
         &:hover {
             font-weight: 700;
-            color: var(--lightblue);
+            color: $lightblue;
         }
     }
 }

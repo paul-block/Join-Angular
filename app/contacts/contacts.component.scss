@@ -1,3 +1,5 @@
+@import '../../shared/mixins.scss';
+
 #container {
     background-color: #F6F7F8;
     height: calc(100vh - 90px);
@@ -12,7 +14,6 @@
         
             .relative {
                 position: relative;
-
 
                 #back-btn {
                     display: none;
@@ -65,16 +66,14 @@
                         gap: 25px;
 
                             .initials-details {
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
+                                @include dFlex();
                                 border-radius: 50%;
                                 width: 120px;
                                 height: 120px;
                                 padding: 25px;
                                 box-sizing: border-box;
-                                border: 5px solid #fff;
-                                color: #fff;
+                                border: 5px solid $white;
+                                color: $white;
                                 font-size: 48px;
                             }
 
@@ -93,18 +92,15 @@
                                 }
 
                                 .icons-wrapper {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    gap: 10px;
+                                    @include dFlex($gap: 10px);
                         
                                     &:hover {
                                         cursor: pointer;
-                                        color: #29ABE2;
+                                        color: $lightblue;
                                        
                                         svg {
                                             path {
-                                                fill:#29ABE2;
+                                                fill: $lightblue;
                                             }
                                         }
                                     }
@@ -117,24 +113,22 @@
 
 
         #added-contact-confirmation {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            @include dFlex();
             position: absolute;
             bottom: -200px;
             height: 74px;
             width: 326px;
             border-radius: 20px;
             box-shadow: 0px 0px 4px 0px #00000026;
-            background-color: #2A3647;
-            color: #fff;
+            background-color: $darkblue;
+            color: $white;
             font-size: 20px;
             animation: slide-in 125ms linear;
         }
     }
 
     .email {
-        color: #29ABE2;
+        color: $lightblue;
         text-decoration: none;
     }
 
@@ -149,7 +143,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #fff;
+    background-color: $white;
     height: calc(100vh - 90px);
     min-width: 350px;
     max-width: 350px;
@@ -163,7 +157,7 @@
                 font-size: 20px;
             }
             &:hover {
-                background-color: #29ABE2;
+                background-color: $lightblue;
             }
     }
 
@@ -178,7 +172,7 @@
             .first-letter {
                 padding: 15px 24px;
                 font-size: 20px;
-                box-shadow: 0 2px 1px -1px lightgray;
+                box-shadow: 0 2px 1px -1px $lightgray;
             }
 
             .contact {
@@ -192,19 +186,17 @@
                 user-select: none;
                 
                 &:hover {
-                    background-color: lightgray;
+                    background-color: $lightgray;
                     cursor: pointer;
                 }
             
                 .initials {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
+                    @include dFlex();
                     border-radius: 50%;
                     padding: 10px;
                     width: 25px;
                     height: 25px;
-                    color: #fff;
+                    color: $white;
                 }
 
                 div {
@@ -218,14 +210,14 @@
 
                     .email {
                         font-size: 16px;
-                        color: #29ABE2;
+                        color: $lightblue;
                     }
                 }
             }
 
             .active {
-                background-color: #2A3647 !important; 
-                color: #fff;
+                background-color: $darkblue !important; 
+                color: $white;
             }
     }
 }
@@ -251,7 +243,7 @@
                 z-index: 2;
                 padding: 25px 30px !important;
                 gap: 2vh !important;
-                background-color: #fff;
+                background-color: $white;
 
                 h1 {
                     font-size: 36px !important;

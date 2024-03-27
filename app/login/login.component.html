@@ -13,10 +13,12 @@
         </div>
 
         <form (ngSubmit)="login()">
-            <input [(ngModel)]="email" name="email" required id="email" type="email" placeholder="Email" />
+            <input (ngModelChange)="resetErrorMsg()" [(ngModel)]="email" name="email" required id="email" type="email"
+                placeholder="Email" />
             <input [(ngModel)]="password" name="password" required id="password" type="password"
                 placeholder="Password" />
-            <div id="wrongLogin" *ngIf="loginError">Something went wrong. Please check your login credentials</div>
+            <div id="wrongLogin" *ngIf="authService.loginError">Something went wrong. Please check your login
+                credentials</div>
 
             <div class="checkmarkContainer">
                 <input [checked]="rememberMe" (change)="onCheckboxChange($event)" type="checkbox" id="rememberMe" />

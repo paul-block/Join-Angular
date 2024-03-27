@@ -1,0 +1,14 @@
+$error_red: #ff0000;
+$darkblue: #2A3647;
+$lightblue: #29ABE2;
+$darkgray: #A8A8A8;
+$lightgray: #D1D1D1;
+$white: #FFFFFF;
+
+@mixin dFlex($direction: row, $jc: center, $ai: center, $gap: 0px) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $jc;
+    align-items: $ai;
+    gap: $gap;
+}

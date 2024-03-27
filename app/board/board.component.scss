@@ -1,12 +1,12 @@
+@import '../../shared/mixins.scss';
+
 #container {
     padding: 25px 50px;
-    height: calc(100vh - 240px) ;
+    height: calc(100vh - 240px);
 
 
 #upper-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include dFlex($jc:space-between);
     width: calc(100% - 200px);
     margin-bottom: 3vh;
 
@@ -16,11 +16,8 @@
         }
 
         div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            @include dFlex($jc:space-between, $gap: 32px);
             width: 100%;
-            gap: 32px;
 
             #add-task-desktop {
                 width: 160px;
@@ -31,7 +28,7 @@
             width: 312px;
             height: 48px;
             border-radius: 10px;
-            border: 1px solid #a8a8a8;
+            border: 1px solid $darkgray;
             padding: 8px 16px;
             gap: 10px;
             box-sizing: border-box;
@@ -39,19 +36,17 @@
         }    
 
         #add-task-mobile-btn {
+            @include dFlex();
             color: white;
             font-weight: 700;
             font-size: 21px;
-            background: #2A3647;
+            background: $darkblue;
             border-radius: 10px;
             cursor: pointer;
             height: 50px;
             width: 50px;
             transition: 125ms;
             padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 }
 
@@ -66,29 +61,10 @@
             flex-direction: column;
             flex: 25%;
 
-            .task-status {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-
-                    h2 {
-                        height: 58px;
-                        width: 120px;
-                        white-space: nowrap;
-                    }
-
-                    .add-icon {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 24px;
-                        height: 24px;
-                        width: 24px;
-                        border: 2px solid black;
-                        padding: 3px;
-                        border-radius: 8px;
-                        cursor: pointer;
-                    }
+            h2 {
+                height: 58px;
+                width: 120px;
+                white-space: nowrap;
             }
 
             .task-container {
@@ -152,12 +128,12 @@
                                     width: 100px;
                                     height: 15px;
                                     border-radius: 10px;
-                                    background-color: lightgray;
+                                    background-color: $lightgray;
 
                                     .current-progress {
                                     height: 100%;
                                     border-radius: 10px;
-                                    background-color: blue;
+                                    background-color: #0000ff;
                                 }
                             }
                         } 
@@ -172,9 +148,7 @@
                         }
 
                         .assignedUsers {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
+                            @include dFlex();
                             width: 20px;
                             height: 20px;
                             border-radius: 50%;
@@ -185,18 +159,14 @@
                         }
 
                         .flex-row {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
+                            @include dFlex($jc: space-between);
                         }
                 }
 
                 .no-task-placeholder {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    @include dFlex();
                     background-color: #E7E7E7;
-                    color:#a8a8a8;
+                    color: $darkgray;
                     padding: 15px;
                     border-radius: 10px;
                 }

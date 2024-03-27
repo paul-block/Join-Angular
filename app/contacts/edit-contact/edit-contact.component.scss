@@ -1,3 +1,4 @@
+@import '../../../shared/mixins.scss';
 
 #pop-up-container {
     display: flex;
@@ -16,7 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #2A3647;
+            background-color: $darkblue;
             padding: 50px;
             border-radius: 10px 0px 0px 10px;
 
@@ -48,24 +49,20 @@
         }
 
         #right-side {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #fff;
+            @include dFlex($jc: space-between);
+            background-color: $white;
             gap: 50px;
             padding: 50px 50px 50px 0;
             border-radius: 0px 10px 10px 0px;
 
             #profile {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @include dFlex();
                 height: 120px;
                 width: 120px;
                 border-radius: 50%;
-                color: #fff;
+                color: $white;
                 font-size: 48px;
-                border: 5px solid #fff;
+                border: 5px solid $white;
             }
 
                 .flex-column {
@@ -78,7 +75,7 @@
                         p {
                             margin: 0;
                             padding: 0;
-                            color: red;
+                            color: $error_red;
                         }
                     
                         input {
@@ -86,7 +83,7 @@
                             width: 100%;
                             padding: 12px;
                             border-radius: 10px;
-                            border: 1px solid #d1d1d1;                
+                            border: 1px solid $lightgray;                
                         }
 
                         #name-input {

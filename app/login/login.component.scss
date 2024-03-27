@@ -1,9 +1,7 @@
+@import '../../shared/mixins.scss';
 
 #container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include dFlex($direction: column);
     height: 100vh;
 }
 
@@ -27,7 +25,7 @@
     align-items: center;
     gap: 32px;
     border-radius: 30px;
-    background: var(--white, #FFF);
+    background-color: $white;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 
     h1 {
@@ -48,7 +46,7 @@
             align-items: center;
             gap: 10px;
             border-radius: 10px;
-            border: 1px solid var(--lightgray, #D1D1D1);
+            border: 1px solid $lightgray;
             cursor: pointer;
          }
     }
@@ -75,7 +73,7 @@ input[type="checkbox"] {
 }
 
 #wrongLogin {
-    color: #ff0000;
+    color: $error_red;
 }
 
 .checkmarkContainer {
@@ -98,11 +96,11 @@ input[type="checkbox"] {
 
     a {
         text-decoration: none;
-        color: var(--darkgray);
+        color: $darkgray;
     
         &:hover {
             font-weight: 700;
-            color: var(--lightblue);
+            color: $lightblue;
         }
     }
 }
@@ -118,9 +116,7 @@ input[type="checkbox"] {
 }
 
 #signUpContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include dFlex();
     position: absolute;
     top: 50px;
     right: 100px;
@@ -149,9 +145,7 @@ input[type="checkbox"] {
 #msgBox {
     position: absolute;
     bottom: 15rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include dFlex();
     background-color: #2A3647;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     height: 4%;

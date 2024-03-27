@@ -12,11 +12,12 @@ export class AuthenticationService {
   uid: string | undefined;
   userData: any;
   greetingLoaded: boolean = false;
+  loginError: boolean = false;
+  isLoggedIn: boolean = false;
 
   private auth: Auth = inject(Auth);
   private firestore: Firestore = inject(Firestore);
 
-  isLoggedIn = false;
 
   constructor(private router: Router) {
     this.checkLocalStorageUserData();
@@ -50,6 +51,7 @@ export class AuthenticationService {
       })
       .catch(error => {
         console.error('SignIn Failed:', error);
+        this.loginError = true;
       });
   }
 

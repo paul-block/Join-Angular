@@ -8,12 +8,11 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   showLogin: boolean = false;
-  loginError: boolean = false;
   rememberMe: boolean = false;
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(public authService: AuthenticationService) { }
 
   ngOnInit() {
     this.clearStorage();
@@ -57,15 +56,23 @@ export class LoginComponent implements OnInit {
   }
 
   /**
+   * Hides the error message after wrong login on inputfield changes.
+   */
+  resetErrorMsg() {
+    this.authService.loginError = false;
+  }
+
+  /**
    * Initiates the login process using provided email and password.
    * If 'rememberMe' option is selected, stores login credentials in local storage.
    */
   login() {
     if (this.email.length > 0 && this.password.length > 0) {
+      this.authService.loginError = false;
       this.authService.signIn(this.email, this.password);
       if (this.rememberMe) localStorage.setItem('rememberMe', JSON.stringify({ 'rememberMe': 'true', 'email': this.email, 'password': this.password }));
     }
-    else this.loginError = true;
+    else this.authService.loginError = true;
   }
 
   /**
